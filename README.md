@@ -5,28 +5,36 @@
 ## 1. 主要功能
 ### 1.1 功能截图
 
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s1.jpg" height=400/>
-<p>主页（文件共享页）</p>
-
-
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg" height=400/>
-<p>扫码（手机扫码）或获取链接地址</p>
-
-
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
-<p>上传（可以选超大文件）</p>
-
-
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg" height=400/>
-<p>上传（上传页面）</p>
-
-
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg" height=400/>
-<p>主页（大文件上传成功）可点击在线浏览或下载</p>
-
-
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg" height=400/>
-<p>主页（管理文件）可点击删除</p>
+<table>
+<tr>
+<td>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s1.jpg" height=400/>
+    <p>主页（文件共享页）</p>
+</td>
+<td>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg" height=400/>
+    <p>扫码（手机扫码）或获取链接地址</p>
+</td>
+<td>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
+    <p>上传（可以选超大文件）</p>
+</td>
+</tr>
+<tr>
+<td>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg" height=400/>
+    <p>上传（上传页面）</p>
+</td>
+<td>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg" height=400/>
+    <p>主页（大文件上传成功）可点击在线浏览或下载</p>
+</td>
+<td>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg" height=400/>
+    <p>主页（管理文件）可点击删除</p>
+</td>
+</tr>
+</table>
 
 
 ## 2. 下载使用
