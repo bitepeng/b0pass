@@ -67,7 +67,7 @@ LAN large file transfer tool。
 - [b0pass_mac.dmg](https://github.com/bitepeng/b0pass/releases/download/v0.1.0/b0pass_mac.dmg)
 
 ### 2.2 Windows
-- [b0pass_win.exe](https://github.com/bitepeng/b0pass/releases/download/v0.1.0/b0pass_win32.exe)
+- [b0pass_win.exe](https://github.com/bitepeng/b0pass/releases/download/v0.1.1/b0pass_win32.exe)
 
 ## 3. 源码编译
 ```
