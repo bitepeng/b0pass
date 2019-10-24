@@ -17,7 +17,7 @@
 - ![上传（上传页面）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg)
 - 上传（上传页面）
 
-- ![主页（大文件上传成功）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg)
+- ![主页（大文件上传成功）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg)
 - 主页（大文件上传成功）可点击在线浏览或下载
 
 ## 2. 下载使用
