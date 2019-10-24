@@ -17,7 +17,7 @@
 </td>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg" height=400/>
-    <p>扫码（手机扫码）或获取链接地址</p>
+    <p>手机扫，或获取链接地址</p>
 </td>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s3.png" height=400/>
