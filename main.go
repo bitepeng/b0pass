@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "b0pass/boot"
+	"b0pass/library/openurl"
 	_ "b0pass/router"
 	"fmt"
 	"github.com/gogf/gf/frame/g"
@@ -14,12 +15,26 @@ import (
 )
 
 func main() {
-
 	/*
-		Lorca UI
+	Lorca UI
 	*/
+	//判断是否安装谷歌浏览器
+	ChromeExe:=lorca.ChromeExecutable()
+	if ChromeExe!=""{
+		execUI()
+	}else{
+		//打开浏览器
+		go func() {
+			time.Sleep(1000 * time.Millisecond)
+			_ = openurl.Open("http://127.0.0.1:"+g.Config().GetString("setting.port"))
+		}()
+		g.Wait()
+	}
+}
+
+func execUI(){
 	// Wait Server Run
-	time.Sleep(3 * time.Second)
+	time.Sleep(3*time.Second)
 
 	// Cli Args
 	var args []string
@@ -37,7 +52,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer func() {
-		_ = ui.Close()
+		_=ui.Close()
 	}()
 
 	// Load url
