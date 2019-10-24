@@ -20,6 +20,9 @@
 - ![主页（大文件上传成功）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg)
 - 主页（大文件上传成功）可点击在线浏览或下载
 
+- ![主页（管理文件）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg)
+- 主页（管理文件）可点击删除
+
 ## 2. 下载使用
 ### 2.1 Mac OS
 - [b0pass_mac.dmg](https://github.com/bitepeng/b0pass/blob/master/docs/release/v0.1/b0pass_mac.dmg)
