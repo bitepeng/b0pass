@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<title>欢迎页</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../assets/css/main.css?02">
+</head>
+
+<body>
+<div class="layui-fluid x-body" id="app" v-cloak>
+	<blockquote class="layui-elem-quote" style="text-align: center">
+		<div>手机电脑文件传输||局域网文件服务器</div>
+		<div v-for="ip in server_ip" class="home-index-tips">
+			<div class="home-index-tips-left">
+				<a v-on:click="openQrcode(ip)" title="手机扫码传输文件">
+				<b><i class="iconfont">&#xe6ec;</i> {{ip}}</b>
+				</a>
+			</div>
+			<div class="home-index-tips-right">
+			<a :href="'http://'+ip" target="_top" title="刷新">
+				<i class="layui-icon layui-icon-refresh-3"></i>
+			</a>
+			<a :href="'http://'+ip+'/files/'" target="iframe" title="列表形式">
+				<i class="iconfont">&#xe6b5;</i>
+			</a>
+			</div>
+		</div>
+	</blockquote>
+
+	<div class="layui-row layui-col-space15">
+	<div class="layui-col-xs6 layui-col-sm4 layui-col-md3 layui-col-lg2" v-for="(file,index) in file_lists">
+		<div class="layui-card bg-gray">
+			<div class="layui-card-header inline-text">
+				<b :title="file.name">{{ index+1 }}.{{ file.name }}</b>
+				&nbsp;
+				<span v-on:click="deleteFile(file.path)"
+					  class="layui-badge layui-bg-gray layuiadmin-badge inline-icon">x</span>
+			</div>
+			<div class="layui-card-body layuiadmin-card-list">
+				<p class="layuiadmin-big-font" style="text-align: center">
+					<a v-if="file.type=='img'" v-on:click="openView(file.name,file.path,file.type)">
+						<img :src="file.path" height="50">
+					</a>
+					<template v-if="file.type=='file'">
+					<a  v-on:click="openView(file.name,file.path,file.type)">
+						<div class="filebox">{{ (file.ext).toUpperCase() }}</div>
+					</a>
+					</template>
+				</p>
+				<p class="inline-small">
+					{{file.date}}
+					<span class="layuiadmin-span-color">{{(file.size/1024/1024).toFixed(1)}}M <i
+					class="layui-inline layui-icon layui-icon-save"></i></span>
+				</p>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</div>
+
+<script type="text/javascript" src="../js/libs/jquery.min.js "></script>
+<script type="text/javascript" src="../js/libs/layui/layui.js"></script>
+<script type="text/javascript" src="../js/libs/vue/vue.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../js/utils.js"></script>
+<script>
+	var APP = new Vue({
+		el: "#app",
+		data: {
+			now: new Date(),
+			server_ip:[],
+			file_lists: []
+		},
+		// 从后端获取数据
+		mounted: function () {
+			// 获取IP地址
+			httpGet("/api/sip", function (result) {
+				//alert(JSON.stringify(result));
+				//更新数据模型
+				APP.$data.server_ip=result.data;
+			});
+			// 获取文件数据
+			httpGet("/api/lists", function (result) {
+				//alert(JSON.stringify(result));
+				//更新数据模型
+				APP.$data.file_lists=result.data;
+			});
+		},
+		computed: {
+			curentTime: function () {
+				function formatNumber(num) {
+					return num <= 9 ? "0" + num : num;
+				}
+				var seperator1 = "-";
+				var seperator2 = ":";
+				return this.now.getFullYear() + seperator1
+					+ formatNumber(this.now.getMonth()) + seperator1
+					+ formatNumber(this.now.getDate()) + " "
+					+ formatNumber(this.now.getHours()) + seperator2
+					+ formatNumber(this.now.getMinutes()) + seperator2
+					+ formatNumber(this.now.getSeconds());
+			}
+		},
+		
+		methods: {
+			openQrcode: function(ip){
+				x_admin_open('手机扫码','./page/qrcode.html?f='+ip, 250, 320)
+			},
+			openView: function (t,f,mtype) {
+				if(mtype==="img"){
+					x_open_full(t, "image.html?name="+encodeURI(f))
+				}else{
+					//x_open_full(t, f)
+					window.open(f)
+				}
+			},
+			deleteFile: function (filepath) {
+				layer.confirm('确认要删除这个文件吗<br>'+filepath+'', {
+					btn : [ '确定', '取消' ]//按钮
+				}, function(index) {
+					if(index==1){
+						window.location.reload();
+						httpGet("/api/delete?f="+filepath, function (result) {
+							messageOk("删除成功");
+							window.location.reload();
+						});
+					}
+				});
+			}
+		}
+	});
+
+</script>
+</body>
+
+</html>

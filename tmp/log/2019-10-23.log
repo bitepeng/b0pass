@@ -1,0 +1,44 @@
+2019-10-23 21:16:22.934 [DEBU] [ghttp] SetServerRoot path: /Users/bitepeng/Workapps/b0cloud_app/b0golang/src/b0pass/public
+2019-10-23 21:16:22.942 8146: http server started listening on [:8899]
+2019-10-23 21:25:54.207 [DEBU] [ghttp] SetServerRoot path: /Users/bitepeng/Workapps/b0cloud_app/b0golang/src/b0pass/public
+2019-10-23 21:25:54.209 9028: http server started listening on [:8899]
+2019-10-23 21:38:42.697 [DEBU] [ghttp] SetServerRoot path: /Users/bitepeng/Workapps/b0cloud_app/b0golang/src/b0pass/public
+2019-10-23 21:38:42.706 9224: http server started listening on [:8899]
+2019-10-23 23:02:19.525 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:02:19.531 12856: http server started listening on [:8899]
+2019-10-23 23:03:14.748 12856: server shutting down by signal: interrupt
+2019-10-23 23:03:14.749 12856: all servers shutdown
+2019-10-23 23:07:42.623 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:07:42.647 13007: http server started listening on [:8899]
+2019-10-23 23:08:02.469 13007: server shutting down by signal: interrupt
+2019-10-23 23:08:02.470 13007: all servers shutdown
+2019-10-23 23:10:11.136 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:10:11.147 13043: http server started listening on [:8899]
+2019-10-23 23:10:41.062 13043: server shutting down by signal: interrupt
+2019-10-23 23:10:41.062 13043: all servers shutdown
+2019-10-23 23:10:41.062 13043: all servers shutdown
+2019-10-23 23:28:31.462 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:28:31.465 14037: http server started listening on [:8899]
+2019-10-23 23:28:43.544 14037: server shutting down by signal: interrupt
+2019-10-23 23:28:43.544 14037: all servers shutdown
+2019-10-23 23:28:43.544 14037: all servers shutdown
+2019-10-23 23:43:33.409 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:43:33.413 14629: http server started listening on [:8899]
+2019-10-23 23:43:44.478 14629: server shutting down by signal: interrupt
+2019-10-23 23:43:44.479 14629: all servers shutdown
+2019-10-23 23:43:44.479 14629: all servers shutdown
+2019-10-23 23:45:05.998 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:45:06.002 14668: http server started listening on [:8899]
+2019-10-23 23:45:19.775 14668: server shutting down by signal: interrupt
+2019-10-23 23:45:19.776 14668: all servers shutdown
+2019-10-23 23:45:19.776 14668: all servers shutdown
+2019-10-23 23:45:32.427 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:45:32.434 14685: http server started listening on [:8899]
+2019-10-23 23:46:46.839 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:46:46.841 14730: http server started listening on [:8899]
+2019-10-23 23:47:14.413 14730: server shutting down by signal: interrupt
+2019-10-23 23:47:14.413 14730: all servers shutdown
+2019-10-23 23:55:48.712 [DEBU] [ghttp] SetServerRoot path: public
+2019-10-23 23:55:48.717 15271: http server started listening on [:8899]
+2019-10-23 23:56:02.426 15271: server shutting down by signal: interrupt
+2019-10-23 23:56:02.426 15271: all servers shutdown

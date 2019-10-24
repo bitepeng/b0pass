@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+
+<div class="layui-fluid x-body" id="app">
+
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-hide">
+            <legend>选择上传</legend>
+            <div class="layui-field-box" style="text-align: center">
+                <div class="layui-upload">
+                    <div class="layui-upload-list" style="text-align: left">
+                        <table class="layui-table">
+                            <tbody id="test-upload-demoList">
+                            <tr :id="'upload-'+file.index" v-for="(file, index) in files">
+                                <td><b>{{ index+1 }}. {{ file.name }}</b><hr>
+                                    <button class="layui-btn layui-btn-xs test-upload-demo-reload"
+                                            v-if="file.success == false">重传
+                                    </button>
+                                    <button class="layui-btn layui-btn-xs layui-bg-red test-upload-demo-delete">
+                                        <i class="iconfont">&#xe69a;</i>
+                                    </button>
+
+                                    {{ file.size }} KB
+
+                                    <span v-if="file.status == 0">待上传</span>
+                                    <span v-else-if="file.status == 1"><span style="color: #5FB878;">上传成功</span></span>
+                                    <span v-else-if="file.status == -1"><span style="color: #FF5722;">上传失败</span></span>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="layui-btn layui-btn-normal" id="test-upload-testList">选择多文件</button>
+                    <button type="button" class="layui-btn layui-bg-orange" id="test-upload-testListAction">开始上传</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="layui-row" id="tzUpload">
+            <!-- 拖拽上传 -->
+            <fieldset class="layui-elem-field">
+                <legend>上传文件</legend>
+                <div class="layui-field-box" style="text-align: center">
+                    <div class="layui-upload-drag" id="upload-file">
+                        <i class="layui-icon "></i>
+                        <p>{{progress}}</p>
+                    </div>
+                </div>
+            </fieldset>
+    </div>
+
+</div>
+<script type="text/javascript" src="../js/libs/jquery.min.js "></script>
+<script type="text/javascript" src="../js/libs/layui/layui.js"></script>
+<script type="text/javascript" src="../js/libs/vue/vue.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../js/utils.js"></script>
+<script>
+    var APP = new Vue({
+        el: '#app',
+        data: {
+            // datas for normal function upload
+            normalUpload: {
+                success: true,
+                message: "上传失败."
+            },
+
+            // multiple image upload datas
+            multiUpload: {
+                imgs: []
+            },
+
+            // datas for advance function upload
+            files: [],
+
+            progress:"点击选择，开始上传"
+
+        },
+        methods: {
+            // 这里为了解决 vue 2.0 编译报错， 这个是 Vue 和传统 js 混用的一个 Bug
+            // method "upload" is not defined on the instance but referenced during render
+            // Vue 要求所有调用的方法都需要在 methods 定义，但是其实 upload 方法是 layui 的，通过原生方式调用并不会报错。
+            upload: function () {
+
+            }
+        }
+
+    });
+
+    layui.use(['upload'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            ,layer = layui.layer;
+
+        //拖拽上传
+        upload.render({
+            elem: '#upload-file'
+            , url: '/api/upload/'
+            , accept: 'file'
+            , multiple: true
+            , field : "upload-file"
+            ,before: function(obj){
+                //上传loading
+                layer.load();
+                APP.progress="正在上传，请稍候..."
+            }
+            , done: function (res) {
+                messageOk("上传成功");
+                console.log(res);
+                window.location.href="index.html";
+            },error: function(index, upload){
+                layer.msg('上传失败');
+            }
+        });
+
+        //多文件列表示例
+        var uploadListIns = upload.render({
+            elem: '#test-upload-testList'
+            , url: '/api/upload'
+            , accept: 'file'
+            , multiple: true
+            , field : "upload-file"
+            , auto: false
+            , bindAction: '#test-upload-testListAction'
+            , choose: function (obj) {
+
+                // keep the instance of obj
+                uploadListIns.obj = obj;
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function (index, file, result) {
+
+                    APP.$data.files.push({
+                        index: index,
+                        name: file.name,
+                        size: (file.size / 1014).toFixed(1),
+                        status: 0,
+                        success: true,
+                    });
+
+                    //等待视图渲染完成之后再绑定事件， 否则会找不到元素
+                    setTimeout(function () {
+                        $('#upload-' + index).find('.test-upload-demo-delete').on('click', function () {
+                            delete files[index]; //删除对应的文件
+                            removeDataByKey(APP.$data.files, "index", index);
+                            uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                        });
+                    }, 100);
+
+                });
+            }
+            , done: function (res, index, upload) {
+                if (res.err == "0") { //上传成功
+                    var item = getDataByKey(APP.$data.files, "index", index);
+                    item.status = 1;
+                    item.success = true;
+                    return delete this.files[index]; //删除文件队列已经上传成功的文件
+                }
+
+                this.error(index, upload);
+            }
+            , error: function (index, upload) {
+
+                // update the data model
+                var item = getDataByKey(APP.$data.files, "index", index);
+                item.status = -1;
+                item.success = false;
+                //绑定单个重传事件
+                var that = this;
+                setTimeout(function () {
+                    $('#upload-' + index).find('.test-upload-demo-reload').on('click', function () {
+                        uploadListIns.obj.upload(index, that.files[index]);
+                    });
+                }, 100);
+
+            }
+        });
+
+    });
+
+</script>
+</body>
+
+</html>

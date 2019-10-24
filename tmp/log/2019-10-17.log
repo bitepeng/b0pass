@@ -1,0 +1,301 @@
+2019-10-17 15:15:41.147 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |     ROUTE     |           HANDLER            | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api.v1/*     | b0pass/router.MiddlewareCORS | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------------|------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api.v1/order | b0pass/router.Order          |             
+|---------|---------|---------|--------|---|---------------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /upload       | b0pass/apps/file.Upload      |             
+|---------|---------|---------|--------|---|---------------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /upload/show  | b0pass/apps/file.UploadShow  |             
+|---------|---------|---------|--------|---|---------------|------------------------------|------------|
+
+2019-10-17 15:15:41.149 82784: http server started listening on [:8199]
+2019-10-17 15:16:45.770 82784: server shutting down by signal: interrupt
+2019-10-17 15:16:45.771 82784: all servers shutdown
+2019-10-17 15:16:47.843 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |     ROUTE      |           HANDLER            | MIDDLEWARE  
+|---------|---------|---------|--------|---|----------------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api.v1/*      | b0pass/router.MiddlewareCORS | MIDDLEWARE  
+|---------|---------|---------|--------|---|----------------|------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api.v1/order  | b0pass/router.Order          |             
+|---------|---------|---------|--------|---|----------------|------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api.v1/upload | b0pass/apps/file.UploadShow  |             
+|---------|---------|---------|--------|---|----------------|------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api.v1/upload | b0pass/apps/file.Upload      |             
+|---------|---------|---------|--------|---|----------------|------------------------------|------------|
+
+2019-10-17 15:16:47.844 82807: http server started listening on [:8199]
+2019-10-17 15:17:14.266 82807: server shutting down by signal: interrupt
+2019-10-17 15:17:14.266 82807: all servers shutdown
+2019-10-17 15:17:16.233 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 15:17:16.233 82832: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |  ROUTE  |           HANDLER            | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /*      | b0pass/router.MiddlewareCORS | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /order  | b0pass/router.Order          |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /upload | b0pass/apps/file.UploadShow  |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | POST   | 1 | /upload | b0pass/apps/file.Upload      |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+
+2019-10-17 15:24:25.069 82832: server shutting down by signal: interrupt
+2019-10-17 15:24:25.069 82832: all servers shutdown
+2019-10-17 15:24:27.136 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |  ROUTE  |           HANDLER           | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|-----------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /order  | b0pass/router.Order         |             
+|---------|---------|---------|--------|---|---------|-----------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /upload | b0pass/apps/file.UploadShow |             
+|---------|---------|---------|--------|---|---------|-----------------------------|------------|
+  default |  :8199  | default | POST   | 1 | /upload | b0pass/apps/file.Upload     |             
+|---------|---------|---------|--------|---|---------|-----------------------------|------------|
+
+2019-10-17 15:24:27.137 82888: http server started listening on [:8199]
+2019-10-17 15:25:10.385 82888: server shutting down by signal: interrupt
+2019-10-17 15:25:10.402 82888: all servers shutdown
+2019-10-17 15:25:12.337 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |  ROUTE  |           HANDLER            | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /*      | b0pass/router.MiddlewareCORS | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /order  | b0pass/router.Order          |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /upload | b0pass/apps/file.UploadShow  |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | POST   | 1 | /upload | b0pass/apps/file.Upload      |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+
+2019-10-17 15:25:12.338 82914: http server started listening on [:8199]
+2019-10-17 16:07:19.350 82914: server shutting down by signal: interrupt
+2019-10-17 16:07:19.350 82914: all servers shutdown
+2019-10-17 16:07:21.908 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:07:52.709 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:08:24.855 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |  ROUTE  |           HANDLER            | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /*      | b0pass/router.MiddlewareCORS | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /upload | b0pass/apps/file.UploadShow  |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+  default |  :8199  | default | POST   | 1 | /upload | b0pass/apps/file.Upload      |             
+|---------|---------|---------|--------|---|---------|------------------------------|------------|
+
+2019-10-17 16:08:24.857 83602: http server started listening on [:8199]
+2019-10-17 16:08:46.216 83602: server shutting down by signal: interrupt
+2019-10-17 16:08:46.216 83602: all servers shutdown
+2019-10-17 16:08:48.171 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:09:28.390 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:09:28.390 83641: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE     |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /*           | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index       | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /index/index | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /upload      | b0pass/apps/file.UploadShow           |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 1 | /upload      | b0pass/apps/file.Upload               |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+
+2019-10-17 16:09:51.592 83641: server shutting down by signal: interrupt
+2019-10-17 16:09:51.593 83641: all servers shutdown
+2019-10-17 16:09:53.556 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:09:53.557 83662: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |  ROUTE  |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /       | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|---------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|---------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index  | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|---------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 1 | /upload | b0pass/apps/file.UploadShow           |             
+|---------|---------|---------|--------|---|---------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 1 | /upload | b0pass/apps/file.Upload               |             
+|---------|---------|---------|--------|---|---------|---------------------------------------|------------|
+
+2019-10-17 16:11:19.010 83662: server shutting down by signal: interrupt
+2019-10-17 16:11:19.010 83662: all servers shutdown
+2019-10-17 16:11:20.965 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:11:20.966 83685: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE     |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /            | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /file/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /file/upload | b0pass/apps/file.UploadShow           |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /file/upload | b0pass/apps/file.Upload               |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index       | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|--------------|---------------------------------------|------------|
+
+2019-10-17 16:14:17.741 83685: server shutting down by signal: interrupt
+2019-10-17 16:14:17.741 83685: all servers shutdown
+2019-10-17 16:14:19.946 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 16:14:19.947 83718: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 16:43:53.823 83718: server shutting down by signal: interrupt
+2019-10-17 16:43:53.823 83718: all servers shutdown
+2019-10-17 16:43:56.062 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 16:43:56.064 84017: http server started listening on [:8199]
+2019-10-17 19:05:10.924 84017: server shutting down by signal: interrupt
+2019-10-17 19:05:10.924 84017: all servers shutdown
+2019-10-17 19:05:13.281 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 19:05:13.282 84515: http server started listening on [:8199]
+2019-10-17 19:05:49.214 84515: server shutting down by signal: interrupt
+2019-10-17 19:05:49.214 84515: all servers shutdown
+2019-10-17 19:05:51.140 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 19:05:51.141 84545: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/lists  | b0pass/apps/api.Lists                 |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 19:07:26.500 84545: server shutting down by signal: interrupt
+2019-10-17 19:07:26.501 84545: all servers shutdown
+2019-10-17 19:07:28.436 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/lists  | b0pass/apps/api.Lists                 |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 19:07:28.437 84573: http server started listening on [:8199]
+2019-10-17 19:10:15.286 84573: server shutting down by signal: interrupt
+2019-10-17 19:10:15.286 84573: all servers shutdown
+2019-10-17 19:10:17.309 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 19:10:17.310 84598: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/lists  | b0pass/apps/api.Lists                 |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 19:10:48.421 84598: server shutting down by signal: interrupt
+2019-10-17 19:10:48.422 84598: all servers shutdown
+2019-10-17 19:10:50.402 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+2019-10-17 19:10:50.403 84619: http server started listening on [:8199]
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/lists  | b0pass/apps/api.Lists                 |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 19:13:19.362 84619: server shutting down by signal: interrupt
+2019-10-17 19:13:19.362 84619: all servers shutdown
+2019-10-17 19:13:21.361 [DEBU] [ghttp] SetServerRoot path: /Users/liyapeng/WorkSpace/Golang/goframe/src/b0pass/public
+
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |    ROUTE    |                HANDLER                | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /           | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /api/*      | b0pass/router.MiddlewareCORS          | MIDDLEWARE  
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/lists  | b0pass/apps/api.Lists                 |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | GET    | 2 | /api/upload | b0pass/apps/api.UploadShow            |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | POST   | 2 | /api/upload | b0pass/apps/api.Upload                |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+  default |  :8199  | default | ALL    | 1 | /index      | b0pass/apps/index.(*Controller).Index |             
+|---------|---------|---------|--------|---|-------------|---------------------------------------|------------|
+
+2019-10-17 19:13:21.362 84653: http server started listening on [:8199]

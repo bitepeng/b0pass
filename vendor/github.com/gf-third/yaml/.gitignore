@@ -1,0 +1,16 @@
+.buildpath
+.hgignore.swp
+.project
+.orig
+.swp
+.idea/
+.settings/
+.vscode/
+vender/
+composer.lock
+gitpush.sh
+pkg/
+bin/
+cbuild
+**/.DS_Store
+.vscode/
