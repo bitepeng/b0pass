@@ -780,3 +780,7 @@ img {
 [v-cloak]{
     display: none !important;
 }
+.text-small{
+    font-size: 12px;
+    color: #999;
+}
