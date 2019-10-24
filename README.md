@@ -60,10 +60,13 @@ LAN large file transfer tool。
 
 
 ## 2. 下载使用
-### 2.1 Mac OS（系统最好先安装了谷歌浏览器）
+
+-  为了流畅使用UI界面，<span style="color:red">最好先安装了谷歌浏览器</span>
+
+### 2.1 Mac OS
 - [b0pass_mac.dmg](https://github.com/bitepeng/b0pass/releases/download/v0.1.0/b0pass_mac.dmg)
 
-### 2.2 Windows（系统最好先安装了谷歌浏览器）
+### 2.2 Windows
 - [b0pass_win.exe](https://github.com/bitepeng/b0pass/releases/download/v0.1.0/b0pass_wn32.exe)
 
 ## 3. 源码编译
