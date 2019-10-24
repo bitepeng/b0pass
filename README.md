@@ -5,23 +5,29 @@
 ## 1. 主要功能
 ### 1.1 功能截图
 
-- ![主页（文件共享页）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s1.jpg)
-- 主页（文件共享页）
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s1.jpg" height=400/>
+<p>主页（文件共享页）</p>
 
-- ![扫码（手机扫码或获取链接地址）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg)
-- 扫码（手机扫码）或获取链接地址
 
-- ![上传（可以选超大文件）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg)
-- 上传（可以选超大文件）
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg" height=400/>
+<p>扫码（手机扫码）或获取链接地址</p>
 
-- ![上传（上传页面）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg)
-- 上传（上传页面）
 
-- ![主页（大文件上传成功）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg)
-- 主页（大文件上传成功）可点击在线浏览或下载
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
+<p>上传（可以选超大文件）</p>
 
-- ![主页（管理文件）](https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg)
-- 主页（管理文件）可点击删除
+
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg" height=400/>
+<p>上传（上传页面）</p>
+
+
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg" height=400/>
+<p>主页（大文件上传成功）可点击在线浏览或下载</p>
+
+
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg" height=400/>
+<p>主页（管理文件）可点击删除</p>
+
 
 ## 2. 下载使用
 ### 2.1 Mac OS
