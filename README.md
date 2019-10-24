@@ -3,11 +3,20 @@
 基于Go的高性能“手机电脑超大文件传输神器”、“局域网共享文件服务器”，只需一个文件双击开启。
 
 ## 1. 主要功能
-### 1.1 功能截图
 
+### 1.1 功能描述
 
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
-    <p>上传（可以选超大文件）</p>
+- [x] 文件共享服务器
+- [x] 简单的单个可执行文件
+- [x] 共享文件界面（只要在同一局域网或WIFI下，可以传输超大文件）
+- [x] 上传文件界面（支持点选和拖拽）
+- [x] 二维码扫码界面（支持手机传输，支持其它电脑输入网址）
+- [x] 共享文件在线管理界面（可删除）
+- [ ] 端口如果被使用，可以自行开启其它端口 
+- [ ] 开发linux可部署版本
+- [ ] 更简洁高效的操作界面
+
+### 1.2 功能截图
 
 <table width="100%">
 <tr>
@@ -39,6 +48,9 @@
 </td>
 </tr>
 </table>
+
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
+    <p>上传超大文件</p>
 
 
 ## 2. 下载使用
