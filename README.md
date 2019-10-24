@@ -1,6 +1,6 @@
 # 百灵快传（B0Pass）
 
-LAN large file transfer tool
+LAN large file transfer tool。
 
 基于Go语言的高性能 “手机电脑超大文件传输神器”、“局域网共享文件服务器”。
 
