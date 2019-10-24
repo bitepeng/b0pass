@@ -5,7 +5,11 @@
 ## 1. 主要功能
 ### 1.1 功能截图
 
-<table>
+
+<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
+    <p>上传（可以选超大文件）</p>
+
+<table width="100%">
 <tr>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s1.jpg" height=400/>
@@ -16,18 +20,18 @@
     <p>扫码（手机扫码）或获取链接地址</p>
 </td>
 <td>
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" height=400/>
-    <p>上传（可以选超大文件）</p>
+    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s3.png" height=400/>
+    <p>上传（上传页面）</p>
 </td>
 </tr>
 <tr>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg" height=400/>
-    <p>上传（上传页面）</p>
+    <p>上传（上传过程页面）</p>
 </td>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg" height=400/>
-    <p>主页（大文件上传成功）可点击在线浏览或下载</p>
+    <p>可点击在线浏览或下载</p>
 </td>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg" height=400/>
