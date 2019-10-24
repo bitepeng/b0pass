@@ -17,7 +17,7 @@
 </td>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg" height=400/>
-    <p>手机扫，或获取链接地址</p>
+    <p>手机扫码，或获取链接地址</p>
 </td>
 <td>
     <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s3.png" height=400/>
@@ -47,3 +47,15 @@
 
 ### 2.2 Windows
 - [b0pass_win.exe](https://github.com/bitepeng/b0pass/blob/master/docs/release/v0.1/b0pass_wn32.exe)
+
+## 3. 源码编译
+```
+# 下载代码，推荐使用go mod模式管理依赖
+git clone https://github.com/bitepeng/b0pass.git
+
+# 配置Goland支持go mod，更新依赖
+cd docs/script && chomd +x ./do-vendor && ./do-vendor
+
+# 编译运行开发版本
+cd docs/script && chomd +x build-develop.sh && build-develop.sh
+```
