@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>欢迎页</title>
+	<title>百灵快传</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="renderer" content="webkit|ie-comp|ie-stand" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -126,8 +126,7 @@
 				layer.confirm('确认要删除这个文件吗<br>'+filepath+'', {
 					btn : [ '确定', '取消' ]//按钮
 				}, function(index) {
-					if(index==1){
-						window.location.reload();
+					if(index>0){
 						httpGet("/api/delete?f="+filepath, function (result) {
 							messageOk("删除成功");
 							window.location.reload();

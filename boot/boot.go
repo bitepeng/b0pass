@@ -18,7 +18,6 @@ var (
 func init() {
 
 	go func() {
-		fmt.Println("<<<new cli text>>>")
 		v := g.View()
 		c := g.Config()
 		s := g.Server()

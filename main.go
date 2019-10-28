@@ -33,7 +33,7 @@ func main() {
 	}
 }
 
-func execUI() {
+ func execUI() {
 	// Wait Server Run
 	time.Sleep(3 * time.Second)
 
