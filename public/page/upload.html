@@ -128,9 +128,9 @@
                 APP.progress="正在上传，请稍候..."
             }
             , done: function (res) {
-                messageOk("上传成功");
+                //messageOk("上传成功");
                 console.log(res);
-                window.location.href="index.html";
+                window.top.location.href="/?"+(new Date()).valueOf();
             },error: function(index, upload){
                 layer.msg('上传失败');
             }

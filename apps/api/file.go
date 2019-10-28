@@ -7,10 +7,6 @@ import (
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/util/gconv"
 	"os"
-	"path"
-	"path/filepath"
-	"strconv"
-	"strings"
 )
 
 // 执行文件上传处理，上传到系统临时目录 /tmp
@@ -32,35 +28,8 @@ func Upload(r *ghttp.Request) {
 // Lists
 func Lists(r *ghttp.Request) {
 	fp := fileinfos.GetRootPath() + "/files/*"
-	files, _ := filepath.Glob(fp)
 	var ret []map[string]string
-	for _, file := range files {
-		fileInfo, _ := os.Stat(file)
-		//filename
-		mfile := filepath.Base(file)
-		if string(mfile[0]) == "." {
-			continue
-		}
-		//filetype
-		mtype := "file"
-		if fileinfos.IfImage(mfile) {
-			mtype = "img"
-		}
-		//fileext
-		mext := strings.ToUpper(path.Ext(mfile))
-		if fileInfo.IsDir() {
-			mext = "目录"
-		}
-		//map
-		m := make(map[string]string)
-		m["name"] = mfile
-		m["ext"] = mext
-		m["size"] = strconv.Itoa(int(fileInfo.Size()))
-		m["date"] = fileInfo.ModTime().Format("01-02")
-		m["path"] = "/files/" + mfile
-		m["type"] = mtype
-		ret = append(ret, m)
-	}
+	ret = fileinfos.ListDirData(fp)
 	response.JSON(r, 0, "ok", ret)
 }
 

@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/os/gres"
 	"time"
 )
 
@@ -18,6 +19,12 @@ var (
 func init() {
 
 	go func() {
+
+		// 根目录
+		PathRoot = fileinfos.GetRootPath()
+		fmt.Println("ROOT:", PathRoot)
+		gres.Dump()
+
 		v := g.View()
 		c := g.Config()
 		s := g.Server()
@@ -25,10 +32,6 @@ func init() {
 		// 模板引擎配置
 		_ = v.AddPath("template")
 		v.SetDelimiters("${", "}")
-
-		// 根目录
-		PathRoot = fileinfos.GetRootPath()
-		fmt.Println("ROOT:", PathRoot)
 
 		// glog配置
 		logpath := c.GetString("setting.logpath")
@@ -47,7 +50,7 @@ func init() {
 		//s.SetErrorLogEnabled(true)
 		//s.SetAccessLogEnabled(true)
 		s.SetPort(c.GetInt("setting.port"))
-		s.SetDumpRouteMap(false)
+		//s.SetDumpRouteMap(false)
 
 		// 文件根目录
 		filePath := PathRoot + "/files"

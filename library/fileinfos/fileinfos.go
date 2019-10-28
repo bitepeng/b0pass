@@ -3,8 +3,10 @@ package fileinfos
 import (
 	"log"
 	"os"
+	"path"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 )
 
@@ -63,4 +65,41 @@ func PathExists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+// List Dir Data
+func ListDirData(fp string) []map[string]string {
+	files, _ := filepath.Glob(fp)
+	var ret []map[string]string
+	var indexs=0
+	for _, file := range files {
+		fileInfo, _ := os.Stat(file)
+		//filename
+		mfile := filepath.Base(file)
+		if string(mfile[0]) == "." {
+			continue
+		}
+		//filetype
+		mtype := "file"
+		if IfImage(mfile) {
+			mtype = "img"
+		}
+		//fileext
+		mext := strings.ToUpper(path.Ext(mfile))
+		if fileInfo.IsDir() {
+			mext = "目录"
+		}
+		indexs++
+		//map
+		m := make(map[string]string)
+		m["name"] = mfile
+		m["ext"] = mext
+		m["size"] = strconv.Itoa(int(fileInfo.Size()))
+		m["date"] = fileInfo.ModTime().Format("01-02")
+		m["path"] = "/files/" + mfile
+		m["type"] = mtype
+		m["indexs"]=strconv.Itoa(indexs)
+		ret = append(ret, m)
+	}
+	return ret
 }

@@ -45,14 +45,16 @@
 			</div>
 			<div class="layui-card-body layuiadmin-card-list">
 				<p class="layuiadmin-big-font" style="text-align: center">
-					<a v-if="file.type=='img'" v-on:click="openView(file.name,file.path,file.type)">
+
+					<a v-on:click="openView(file.name,file.path,file.type)">
+						<template v-if="file.type=='img'" >
 						<img :src="file.path" height="50">
+						</template>
+						<template v-else>
+							<div class="filebox">{{ (file.ext).toUpperCase() }}</div>
+						</template>
 					</a>
-					<template v-if="file.type=='file'">
-					<a  v-on:click="openView(file.name,file.path,file.type)">
-						<div class="filebox">{{ (file.ext).toUpperCase() }}</div>
-					</a>
-					</template>
+
 				</p>
 				<p class="inline-small">
 					{{file.date}}
