@@ -63,8 +63,9 @@
 				</p>
 				<p class="inline-small">
 					${.date}
-					<span class="layuiadmin-span-color">${.size} <i
-					class="layui-inline layui-icon layui-icon-save"></i></span>
+                    <span class="layuiadmin-span-color">
+                    ${.sizes}
+                    <i class="layui-inline layui-icon layui-icon-save"></i></span>
 				</p>
 			</div>
 		</div>
@@ -81,16 +82,18 @@
 <script>
 
 	function openQrcode(ip){
-		x_admin_open('手机扫码','./page/qrcode.html?f='+ip, 250, 320)
+		x_admin_open('手机扫码','./page/qrcode.html?f='+ip, 250, 320);
 	}
+
 	function openView(t,f,mtype) {
 		if(mtype=="img"){
-			x_open_full(t, "./page/image.html?name="+encodeURI(f))
+			x_open_full(t, "./page/image.html?name="+encodeURI(f));
 		}else{
 			//x_open_full(t, f)
-			window.open(f)
+			window.open(f);
 		}
 	}
+
 	function deleteFile(filepath) {
 		layer.confirm('确认要删除这个文件吗<br>'+filepath+'', {
 			btn : [ '确定', '取消' ]//按钮

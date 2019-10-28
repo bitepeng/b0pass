@@ -1,6 +1,7 @@
 package fileinfos
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path"
@@ -67,6 +68,27 @@ func PathExists(path string) (bool, error) {
 	return false, err
 }
 
+
+// GetSize
+func GetSize(fileBytes uint64) string {
+	var (
+		units []string
+		size  string
+		i     int
+	)
+	units = []string{"B", "K", "M", "G", "T", "P"}
+	i = 0
+	for {
+		i++
+		fileBytes = fileBytes / 1024
+		if fileBytes < 1024 {
+			size = fmt.Sprintf("%d", fileBytes) + units[i]
+			break
+		}
+	}
+	return size
+}
+
 // List Dir Data
 func ListDirData(fp string) []map[string]string {
 	files, _ := filepath.Glob(fp)
@@ -89,12 +111,14 @@ func ListDirData(fp string) []map[string]string {
 		if fileInfo.IsDir() {
 			mext = "目录"
 		}
+		//index
 		indexs++
 		//map
 		m := make(map[string]string)
 		m["name"] = mfile
 		m["ext"] = mext
 		m["size"] = strconv.Itoa(int(fileInfo.Size()))
+		m["sizes"] = GetSize(uint64(fileInfo.Size()))
 		m["date"] = fileInfo.ModTime().Format("01-02")
 		m["path"] = "/files/" + mfile
 		m["type"] = mtype
