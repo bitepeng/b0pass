@@ -61,15 +61,7 @@ func init() {
 		}
 		s.AddStaticPath("/files", filePath)
 
-		//打开浏览器
-		/*go func() {
-			time.Sleep(1000 * time.Millisecond)
-			_ = openurl.Open("http://127.0.0.1:"+c.GetString("setting.port"))
-		}()*/
-
-		/**
-		Web server
-		*/
+		// Run Server
 		g.Server().Run()
 	}()
 
