@@ -56,7 +56,11 @@
 				</p>
 				<p class="inline-small">
 					{{file.date}}
-					<span class="layuiadmin-span-color">{{(file.size/1024/1024).toFixed(1)}}M <i
+					<span class="layuiadmin-span-color">{{
+						(file.size/1024/1024).toFixed(1)<100
+						?(file.size/1024/1024).toFixed(1)+"M"
+						:(file.size/1024/1024/1024).toFixed(1)+"G"
+						}} <i
 					class="layui-inline layui-icon layui-icon-save"></i></span>
 				</p>
 			</div>
@@ -136,7 +140,6 @@
 			}
 		}
 	});
-
 </script>
 </body>
 
