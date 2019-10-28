@@ -16,25 +16,26 @@ import (
 
 func main() {
 	/*
-	Lorca UI
+		Lorca UI
 	*/
 	//判断是否安装谷歌浏览器
-	ChromeExe:=lorca.ChromeExecutable()
-	if ChromeExe!=""{
+	ChromeExe := lorca.ChromeExecutable()
+	if ChromeExe != "" {
+		//打开UI界面
 		execUI()
-	}else{
+	} else {
 		//打开浏览器
 		go func() {
 			time.Sleep(1000 * time.Millisecond)
-			_ = openurl.Open("http://127.0.0.1:"+g.Config().GetString("setting.port"))
+			_ = openurl.Open("http://127.0.0.1:" + g.Config().GetString("setting.port"))
 		}()
 		g.Wait()
 	}
 }
 
-func execUI(){
+func execUI() {
 	// Wait Server Run
-	time.Sleep(3*time.Second)
+	time.Sleep(3 * time.Second)
 
 	// Cli Args
 	var args []string
@@ -52,7 +53,7 @@ func execUI(){
 		log.Fatal(err)
 	}
 	defer func() {
-		_=ui.Close()
+		_ = ui.Close()
 	}()
 
 	// Load url

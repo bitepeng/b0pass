@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>欢迎页</title>
-	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,7 +27,7 @@
 			<a :href="'http://'+ip" target="_top" title="刷新">
 				<i class="layui-icon layui-icon-refresh-3"></i>
 			</a>
-			<a :href="'http://'+ip+'/files/'" target="iframe" title="列表形式">
+			<a :href="'http://'+ip+'/files/'" target="_top" title="列表形式">
 				<i class="iconfont">&#xe6b5;</i>
 			</a>
 			</div>
