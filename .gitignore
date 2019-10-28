@@ -2,3 +2,4 @@
 .idea
 tmp
 *.log
+boot/resource.go
