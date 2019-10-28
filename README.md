@@ -64,10 +64,10 @@ LAN large file transfer tool。
 -  为了流畅使用UI界面，<span style="color:red">最好先安装了谷歌浏览器</span>
 
 ### 2.1 Mac OS
-- [b0pass_mac.dmg](https://github.com/bitepeng/b0pass/releases/download/v0.1.0/b0pass_mac.dmg)
+- [b0pass_mac.dmg v0.1.2](https://github.com/bitepeng/b0pass/releases/download/v0.1.2/b0pass_OSX.dmg)
 
 ### 2.2 Windows
-- [b0pass_win.exe](https://github.com/bitepeng/b0pass/releases/download/v0.1.1/b0pass_win32.exe)
+- [b0pass_win.exe v0.1.2](https://github.com/bitepeng/b0pass/releases/download/v0.1.2/b0pass_win32.exe)
 
 ## 3. 源码编译
 ```
