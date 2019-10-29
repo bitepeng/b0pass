@@ -68,11 +68,11 @@ LAN large file transfer tool。
 - [b0pass_mac.dmg v0.1.3 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases/v0.1.3)
 
 ### 2.2 Windows
-- [b0pass_win.exe v0.1.3](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_win32.exe)
+- [b0pass_win.exe v0.1.3 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_win32.exe)
 - [b0pass_win.exe v0.1.3 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases/v0.1.3)
 
 ### 2.3 Linux Amd64
-- [b0pass_linux_cli v0.1.3](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_linux_cli)
+- [b0pass_linux_cli v0.1.3 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_linux_cli)
 - [b0pass_linux_cli v0.1.3 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases/v0.1.3)
 
 ## 3. 源码编译
