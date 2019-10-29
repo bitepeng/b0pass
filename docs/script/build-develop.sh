@@ -14,12 +14,12 @@ cd src/${APPNAME}
 
 # 打包可执行文件
 ##### mac os #####
-# CGO_ENABLED="0" GOARCH="amd64" GOOS="darwin" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_mac_cli cli.go
+CGO_ENABLED="0" GOARCH="amd64" GOOS="darwin" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_mac_cli cli.go
 
 ##### win32 os ##### -ldflags "-H windowsgui"
 CGO_ENABLED="0" GOARCH="386" GOOS="windows" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_wn32_cli.exe  cli.go
 
 ##### linux os #####
-# CGO_ENABLED="0" GOARCH="amd64" GOOS="linux" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_linux_cli cli.go
+CGO_ENABLED="0" GOARCH="amd64" GOOS="linux" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_linux_cli cli.go
 
 find ${GOPATH}/bin/${APPNAME}
