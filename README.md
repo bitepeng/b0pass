@@ -66,6 +66,7 @@ linux/amd64版本发行版
 ## 2. 下载使用
 
 -  为了流畅使用UI界面，<span style="color:red">最好先安装了谷歌浏览器</span>
+-  已编译版本支持Mac OS、Windows、Linux/amd64等平台
 
 ### 2.1 Mac OS
 - [b0pass_mac.dmg v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_OSX.dmg)
@@ -79,7 +80,36 @@ linux/amd64版本发行版
 - [b0pass_linux_cli v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_linux_cli)
 - [b0pass_linux_cli v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
 
-## 3. 源码编译
+### 更多版本下载地址
+
+- https://gitee.com/b0cloud/b0pass/releases （国内用户建议访问）
+- https://github.com/bitepeng/b0pass/releases
+
+
+## 3. 代码库
+
+- https://github.com/bitepeng/b0pass   欢迎到github star
+- https://gitee.com/b0cloud/b0pass     欢迎到gitee  star
+
+
+## 4. 使用场景
+- ***手机电脑共享文件***
+
+    电脑上双击执行 --> 手机扫码 --> 手机上的大文件传到电脑、或者电脑传文件到手机。
+
+- ***电脑之间共享文件***
+
+    电脑A上双击执行 --> 电脑B上浏览器输入A的地址 --> 电脑A上的大文件传到电脑B、或者电脑B传文件到电脑A。
+
+- ***虚拟机和电脑之间共享文件***
+
+    电脑上双击执行 --> 虚拟机上浏览器输入电脑的地址 --> 虚拟机上的大文件传到电脑、或者电脑传文件到虚拟机。
+
+- ***更多使用场景***
+
+    也可以用作“家庭影音中心”、“办公室文件共享”、“产品原型服务器”等。总之走局域网的HTTP协议，和是不是iPhone、iOS、安卓、虚拟机等都没有关系，跨平台共享文件。
+
+## 5. 源码编译
 ```
 # 下载代码，推荐使用go mod模式管理依赖
 git clone https://github.com/bitepeng/b0pass.git
