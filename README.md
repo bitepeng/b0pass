@@ -57,6 +57,10 @@ LAN large file transfer tool。
 
 <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s4.jpg" width=100%/>
     <p>上传超大文件</p>
+    
+![linux/amd64版本发行版](https://images.gitee.com/uploads/images/2019/1029/165512_c182287e_77462.png "b0pass_linux_cli.png")
+
+linux/amd64版本发行版
 
 
 ## 2. 下载使用
@@ -64,16 +68,16 @@ LAN large file transfer tool。
 -  为了流畅使用UI界面，<span style="color:red">最好先安装了谷歌浏览器</span>
 
 ### 2.1 Mac OS
-- [b0pass_mac.dmg v0.1.3 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_OSX.dmg)
-- [b0pass_mac.dmg v0.1.3 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases/v0.1.3)
+- [b0pass_mac.dmg v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_OSX.dmg)
+- [b0pass_mac.dmg v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
 
 ### 2.2 Windows
-- [b0pass_win.exe v0.1.3 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_win32.exe)
-- [b0pass_win.exe v0.1.3 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases/v0.1.3)
+- [b0pass_win.exe v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_win32.exe)
+- [b0pass_win.exe v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
 
 ### 2.3 Linux Amd64
-- [b0pass_linux_cli v0.1.3 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.3/b0pass_linux_cli)
-- [b0pass_linux_cli v0.1.3 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases/v0.1.3)
+- [b0pass_linux_cli v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_linux_cli)
+- [b0pass_linux_cli v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
 
 ## 3. 源码编译
 ```
