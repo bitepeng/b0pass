@@ -6,14 +6,13 @@ import (
 	_ "b0pass/router"
 	"fmt"
 	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/os/gres"
 )
 
 func main() {
 	/*
 		Wait Server
 	*/
-	gres.Dump()
 	fmt.Println(ipaddress.GetIP())
+	fmt.Println(g.Config().GetInt("setting.port"))
 	g.Wait()
 }

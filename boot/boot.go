@@ -7,7 +7,6 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/os/glog"
-	"github.com/gogf/gf/os/gres"
 	"time"
 )
 
@@ -19,11 +18,11 @@ var (
 func init() {
 
 	go func() {
-
+		time.Sleep(1000 * time.Millisecond)
 		// 根目录
 		PathRoot = fileinfos.GetRootPath()
 		fmt.Println("ROOT:", PathRoot)
-		gres.Dump()
+		//gres.Dump()
 
 		v := g.View()
 		c := g.Config()
