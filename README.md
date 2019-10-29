@@ -27,35 +27,35 @@ LAN large file transfer tool。
 <table width="100%">
 <tr>
 <td width="33%">
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s1.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s1.jpg" width="100%"/>
     <p>主页（文件共享页）</p>
 </td>
 <td width="33%">
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s2.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s2.jpg" width="100%"/>
     <p>手机扫码，或获取链接地址</p>
 </td>
 <td width="33%">
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s3.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s3.png" width="100%"/>
     <p>上传（上传页面）</p>
 </td>
 </tr>
 <tr>
 <td width="33%">
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s5.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s5.jpg" width="100%"/>
     <p>上传（上传过程页面）</p>
 </td>
 <td width="33%">
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s6.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s6.jpg" width="100%"/>
     <p>可点击在线浏览或下载</p>
 </td>
 <td width="33%">
-    <img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s15.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s15.jpg" width="100%"/>
     <p>主页（管理文件）可点击删除</p>
 </td>
 </tr>
 </table>
 
-<img src="https://raw.githubusercontent.com/bitepeng/b0pass/master/docs/images/s4.jpg" width=100%/>
+<img src="https://gitee.com/b0cloud/b0pass/raw/master/docs/images/s4.jpg" width=100%/>
     <p>上传超大文件</p>
 
 
