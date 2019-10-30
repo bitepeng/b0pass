@@ -2,7 +2,7 @@ package boot
 
 import (
 	"b0pass/library/fileinfos"
-	"fmt"
+	"flag"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gfile"
@@ -12,21 +12,35 @@ import (
 
 var (
 	PathRoot string
+	ServPort int
 )
+
+func ExecArgs(){
+	flag.Parse()
+	if ServPort<=0{
+		ServPort=g.Config().GetInt("setting.port")
+	}
+}
 
 // 用于应用初始化。
 func init() {
 
-	go func() {
-		time.Sleep(1000 * time.Millisecond)
-		// 根目录
-		PathRoot = fileinfos.GetRootPath()
-		fmt.Println("ROOT:", PathRoot)
-		//gres.Dump()
+	// 分析CLI参数
+	flag.IntVar(&ServPort,"p",8899,"-p for Server Port(default=8899)")
+	ExecArgs()
 
+	// 资源根目录
+	PathRoot = fileinfos.GetRootPath()
+
+	go func() {
+
+		// APP核心引擎
 		v := g.View()
 		c := g.Config()
 		s := g.Server()
+
+		// 加载动作缓冲
+		time.Sleep(3000 * time.Millisecond)
 
 		// 模板引擎配置
 		_ = v.AddPath("template")
@@ -35,20 +49,20 @@ func init() {
 		// glog配置
 		logpath := c.GetString("setting.logpath")
 		_ = glog.SetPath(logpath)
-		//glog.SetStdoutPrint(true)
+		glog.SetStdoutPrint(true)
 
 		// Web Server配置
 		s.SetIndexFolder(true)
 		s.SetServerRoot("public")
 		s.SetLogPath(logpath)
-		s.SetReadTimeout(3 * 60 * time.Second)
-		s.SetWriteTimeout(3 * 60 * time.Second)
-		s.SetIdleTimeout(3 * 60 * time.Second)
-		s.SetMaxHeaderBytes(1024 * 1024 * 200)
+		s.SetReadTimeout(6 * 60 * time.Second)
+		s.SetWriteTimeout(6 * 60 * time.Second)
+		s.SetIdleTimeout(6 * 60 * time.Second)
+		s.SetMaxHeaderBytes(1024 * 1024 * 1024)
 		s.SetNameToUriType(ghttp.URI_TYPE_ALLLOWER)
-		//s.SetErrorLogEnabled(true)
-		//s.SetAccessLogEnabled(true)
-		s.SetPort(c.GetInt("setting.port"))
+		s.SetErrorLogEnabled(true)
+		s.SetAccessLogEnabled(true)
+		s.SetPort(ServPort)
 		s.SetDumpRouteMap(false)
 
 		// 文件根目录

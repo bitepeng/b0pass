@@ -16,7 +16,7 @@ cd src/${APPNAME}
 APP="${GOPATH}/bin/${APPNAME}/${APPNAME}_OSX/${APPNAME}.app"
 mkdir -p ${APP}/Contents/{MacOS,Resources}
 ##### mac os #####
-CGO_ENABLED="0" GOARCH="amd64" GOOS="darwin" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_mac cli.go
+#CGO_ENABLED="0" GOARCH="amd64" GOOS="darwin" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_mac cli.go
 CGO_ENABLED="0" GOARCH="amd64" GOOS="darwin" go build -mod=vendor -o ${APP}/Contents/MacOS/${APPNAME}_mac_ui main.go
 
 cat > ${APP}/Contents/Info.plist << EOF

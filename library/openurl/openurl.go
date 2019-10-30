@@ -26,6 +26,6 @@ func Open(uri string) error {
 	cmds := strings.Split(run, " ")
 	cmd := exec.Command(cmds[0], cmds[1:]...)
 	//cmd.Start
-	fmt.Println("OPEN:", cmds)
+	fmt.Println("[CommandAs]", cmds)
 	return cmd.Start()
 }

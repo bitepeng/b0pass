@@ -1,6 +1,7 @@
 package main
 
 import (
+	"b0pass/boot"
 	_ "b0pass/boot"
 	"b0pass/library/openurl"
 	_ "b0pass/router"
@@ -11,13 +12,18 @@ import (
 	"os"
 	"os/signal"
 	"runtime"
+	"strconv"
 	"time"
 )
 
 func main() {
-	/*
-		Lorca UI
-	*/
+
+	//处理命令行参数
+	boot.ExecArgs()
+	fmt.Printf("[ServerUrl] http://127.0.0.1:%d\n",boot.ServPort)
+	fmt.Printf("[Work-Path] %s\n",boot.PathRoot)
+
+	//是否开启GUI模式
 	//判断是否安装谷歌浏览器
 	ChromeExe := lorca.ChromeExecutable()
 	if ChromeExe != "" {
@@ -27,7 +33,7 @@ func main() {
 		//打开浏览器
 		go func() {
 			time.Sleep(1000 * time.Millisecond)
-			_ = openurl.Open("http://127.0.0.1:" + g.Config().GetString("setting.port"))
+			_ = openurl.Open("http://127.0.0.1:" + strconv.Itoa(boot.ServPort))
 		}()
 		g.Wait()
 	}
@@ -41,6 +47,9 @@ func main() {
 	var args []string
 	if runtime.GOOS == "linux" {
 		args = append(args, "--class=Lorca")
+	}
+	if runtime.GOOS == "windows" {
+		args = append(args, "-ldflags '-H windowsgui'")
 	}
 
 	// New Lorca UI
