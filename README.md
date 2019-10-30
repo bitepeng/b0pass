@@ -82,9 +82,8 @@ linux/amd64版本发行版
 
 ### 更多版本下载地址
 
-- https://gitee.com/b0cloud/b0pass/releases （国内用户建议访问）
 - https://github.com/bitepeng/b0pass/releases
-
+- https://gitee.com/b0cloud/b0pass/releases （国内用户推荐访问）
 
 ## 3. 代码库
 
