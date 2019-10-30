@@ -76,17 +76,15 @@ linux/amd64版本发行版
 - [b0pass_win.exe v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_win32.exe)
 - [b0pass_win.exe v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
 
-### 2.3 Linux Amd64
+### 2.3 Linux amd64
 - [b0pass_linux_cli v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_linux_cli)
 - [b0pass_linux_cli v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
 
 ### 更多版本下载地址
-
 - https://github.com/bitepeng/b0pass/releases
 - https://gitee.com/b0cloud/b0pass/releases （国内用户推荐访问）
 
 ## 3. 代码库
-
 - https://github.com/bitepeng/b0pass   欢迎到github star
 - https://gitee.com/b0cloud/b0pass     欢迎到gitee  star
 
