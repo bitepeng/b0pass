@@ -111,6 +111,9 @@ func ListDirData(fp string) []map[string]string {
 		if fileInfo.IsDir() {
 			mext = "目录"
 		}
+		if mext==""{
+			mext = "file"
+		}
 		//index
 		indexs++
 		//map
