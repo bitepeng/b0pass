@@ -73,8 +73,8 @@ linux/amd64版本发行版
 -  如果要自定义端口，可以在命令行附加“ ****-p=1234**** ”自定义服务端口为1234
 
 ### 最新版下载地址
-- https://github.com/bitepeng/b0pass/releases
-- https://gitee.com/b0cloud/b0pass/releases （<--国内用户推荐）
+- https://github.com/bitepeng/b0pass/releases （直接下载，无需注册）
+- https://gitee.com/b0cloud/b0pass/releases    <-国内推荐（虽需注册，但下载速度快）
 
 ## 3. 代码仓库
 - https://github.com/bitepeng/b0pass   GitHub（主库）   欢迎star支持
