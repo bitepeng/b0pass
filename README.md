@@ -66,19 +66,19 @@ linux/amd64版本发行版
 
 ## 2. 发行版下载使用
 
-### 下载说明
+### 下载前请阅读
 -  为了流畅使用UI界面，最好先安装了***谷歌浏览器***
 -  已编译好***Mac OS、Windows、Linux/amd64***等平台的可执行文件（exe）
--  只需下载到电脑，双击开启即可可是使用
+-  只需下载到电脑，双击开启即可使用
 -  如果要自定义端口，可以在命令行附加“ ****-p=1234**** ”自定义服务端口为1234
 
 ### 最新版下载地址
 - https://github.com/bitepeng/b0pass/releases
-- https://gitee.com/b0cloud/b0pass/releases （国内用户推荐）
+- https://gitee.com/b0cloud/b0pass/releases （<--国内用户推荐）
 
-## 3. 代码库
-- https://github.com/bitepeng/b0pass   欢迎到github star
-- https://gitee.com/b0cloud/b0pass     欢迎到gitee  star
+## 3. 代码仓库
+- https://github.com/bitepeng/b0pass   GitHub（主库）   欢迎star支持
+- https://gitee.com/b0cloud/b0pass     GitEE（国内同步） 欢迎star支持
 
 
 ## 4. 使用场景
