@@ -17,6 +17,7 @@ LAN large file transfer tool。
 - [x] 二维码扫码界面（支持手机传输，支持其它电脑输入网址）
 - [x] 共享文件在线管理界面（可删除）
 - [x] 开发linux可部署版本
+- [x] 支持命令行端口自定义
 - [ ] 端口如果被使用，可以自行开启其它端口 
 - [ ] 使用WebSocket实时通知文件变更
 - [ ] 更简洁高效的操作界面
@@ -63,26 +64,17 @@ LAN large file transfer tool。
 linux/amd64版本发行版
 
 
-## 2. 下载使用
+## 2. 发行版下载使用
 
--  为了流畅使用UI界面，<span style="color:red">最好先安装了谷歌浏览器</span>
--  已编译版本支持Mac OS、Windows、Linux/amd64等平台
+### 下载说明
+-  为了流畅使用UI界面，最好先安装了***谷歌浏览器***
+-  已编译好***Mac OS、Windows、Linux/amd64***等平台的可执行文件（exe）
+-  只需下载到电脑，双击开启即可可是使用
+-  如果要自定义端口，可以在命令行附加“ ****-p=1234**** ”自定义服务端口为1234
 
-### 2.1 Mac OS
-- [b0pass_mac.dmg v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_OSX.dmg)
-- [b0pass_mac.dmg v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
-
-### 2.2 Windows
-- [b0pass_win.exe v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_win32.exe)
-- [b0pass_win.exe v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
-
-### 2.3 Linux amd64
-- [b0pass_linux_cli v0.1.4 @ github](https://github.com/bitepeng/b0pass/releases/download/v0.1.4/b0pass_linux_cli)
-- [b0pass_linux_cli v0.1.4 @ gitee 国内链接](https://gitee.com/b0cloud/b0pass/releases)
-
-### 更多版本下载地址
+### 最新版下载地址
 - https://github.com/bitepeng/b0pass/releases
-- https://gitee.com/b0cloud/b0pass/releases （国内用户推荐访问）
+- https://gitee.com/b0cloud/b0pass/releases （国内用户推荐）
 
 ## 3. 代码库
 - https://github.com/bitepeng/b0pass   欢迎到github star
