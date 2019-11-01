@@ -378,6 +378,17 @@ func (a *StrArray) Slice() []string {
 	return array
 }
 
+// Interfaces returns current array as []interface{}.
+func (a *StrArray) Interfaces() []interface{} {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	array := make([]interface{}, len(a.array))
+	for k, v := range a.array {
+		array[k] = v
+	}
+	return array
+}
+
 // Clone returns a new array, which is a copy of current array.
 func (a *StrArray) Clone() (newArray *StrArray) {
 	a.mu.RLock()
@@ -592,7 +603,7 @@ func (a *StrArray) Join(glue string) string {
 	defer a.mu.RUnlock()
 	buffer := bytes.NewBuffer(nil)
 	for k, v := range a.array {
-		buffer.WriteString(`"` + gstr.QuoteMeta(v, `"\`) + `"`)
+		buffer.WriteString(v)
 		if k != len(a.array)-1 {
 			buffer.WriteString(glue)
 		}
@@ -611,9 +622,20 @@ func (a *StrArray) CountValues() map[string]int {
 	return m
 }
 
-// String returns current array as a string.
+// String returns current array as a string, which implements like json.Marshal does.
 func (a *StrArray) String() string {
-	return "[" + a.Join(",") + "]"
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	buffer := bytes.NewBuffer(nil)
+	buffer.WriteByte('[')
+	for k, v := range a.array {
+		buffer.WriteString(`"` + gstr.QuoteMeta(v, `"\`) + `"`)
+		if k != len(a.array)-1 {
+			buffer.WriteByte(',')
+		}
+	}
+	buffer.WriteByte(']')
+	return buffer.String()
 }
 
 // MarshalJSON implements the interface MarshalJSON for json.Marshal.

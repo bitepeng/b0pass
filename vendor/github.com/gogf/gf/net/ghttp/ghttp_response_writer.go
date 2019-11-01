@@ -16,9 +16,15 @@ import (
 
 // Custom ResponseWriter, which is used for controlling the output buffer.
 type ResponseWriter struct {
-	Status int                 // HTTP status.
-	writer http.ResponseWriter // The underlying ResponseWriter.
-	buffer *bytes.Buffer       // The output buffer.
+	Status      int                 // HTTP status.
+	writer      http.ResponseWriter // The underlying ResponseWriter.
+	buffer      *bytes.Buffer       // The output buffer.
+	wroteHeader bool                // Is header wrote, avoiding error: superfluous/multiple response.WriteHeader call.
+}
+
+// RawWriter returns the underlying ResponseWriter.
+func (w *ResponseWriter) RawWriter() http.ResponseWriter {
+	return w.writer
 }
 
 // Header implements the interface function of http.ResponseWriter.Header.
@@ -44,8 +50,12 @@ func (w *ResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 
 // OutputBuffer outputs the buffer to client.
 func (w *ResponseWriter) OutputBuffer() {
-	if w.Status != 0 {
+	if w.Status != 0 && !w.wroteHeader {
 		w.writer.WriteHeader(w.Status)
+	}
+	// Default status text output.
+	if w.Status != http.StatusOK && w.buffer.Len() == 0 {
+		w.buffer.WriteString(http.StatusText(w.Status))
 	}
 	if w.buffer.Len() > 0 {
 		w.writer.Write(w.buffer.Bytes())

@@ -66,15 +66,6 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	defer func() {
 		// 设置请求完成时间
 		request.LeaveTime = gtime.Microsecond()
-		// 如果没有产生异常状态，那么设置返回状态为200
-		if request.Response.Status == 0 {
-			if request.Middleware.served || request.Response.buffer.Len() > 0 {
-				request.Response.Status = http.StatusOK
-			} else {
-				request.Response.WriteStatus(http.StatusNotFound)
-			}
-		}
-
 		// error log
 		if request.error != nil {
 			s.handleErrorLog(request.error, request)
@@ -84,7 +75,6 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 				s.handleErrorLog(gerror.Newf("%v", exception), request)
 			}
 		}
-
 		// access log
 		s.handleAccessLog(request)
 	}()
@@ -104,12 +94,10 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 动态服务检索
-	if serveFile == nil || serveFile.dir {
-		request.handlers, request.hasHookHandler, request.hasServeHandler = s.getHandlersWithCache(request)
-	}
+	request.handlers, request.hasHookHandler, request.hasServeHandler = s.getHandlersWithCache(request)
 
 	// 判断最终对该请求提供的服务方式
-	if serveFile != nil && serveFile.dir && request.handlers != nil {
+	if serveFile != nil && serveFile.dir && request.hasServeHandler {
 		request.isFileRequest = false
 	}
 
@@ -122,7 +110,7 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 			// 静态服务
 			s.serveFile(request, serveFile)
 		} else {
-			if request.hasServeHandler {
+			if len(request.handlers) > 0 {
 				// 动态服务
 				request.Middleware.Next()
 			} else {
@@ -133,7 +121,7 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 					if len(request.Response.Header()) == 0 &&
 						request.Response.Status == 0 &&
 						request.Response.BufferLength() == 0 {
-						request.Response.WriteStatus(http.StatusNotFound)
+						request.Response.WriteHeader(http.StatusNotFound)
 					}
 				}
 			}
@@ -149,6 +137,25 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	if !request.IsExited() {
 		s.callHookHandler(HOOK_BEFORE_OUTPUT, request)
 	}
+
+	// HTTP status checking.
+	if request.Response.Status == 0 {
+		if request.Middleware.served || request.Response.buffer.Len() > 0 {
+			request.Response.WriteHeader(http.StatusOK)
+		} else {
+			request.Response.WriteHeader(http.StatusNotFound)
+		}
+	}
+	// HTTP status handler.
+	if request.Response.Status != http.StatusOK {
+		if f := s.getStatusHandler(request.Response.Status, request); f != nil {
+			// Call custom status handler.
+			niceCallFunc(func() {
+				f(request)
+			})
+		}
+	}
+
 	// 设置Session Id到Cookie中
 	if request.Session.IsDirty() && request.Session.Id() != request.GetSessionId() {
 		request.Cookie.SetSessionId(request.Session.Id())
@@ -167,18 +174,18 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 
 // 查找静态文件的绝对路径
 func (s *Server) searchStaticFile(uri string) *staticServeFile {
-	// 优先查找URI映射关系
 	var file *gres.File
 	var path string
 	var dir bool
+	// Firstly search the StaticPaths mapping.
 	if len(s.config.StaticPaths) > 0 {
 		for _, item := range s.config.StaticPaths {
 			if len(uri) >= len(item.prefix) && strings.EqualFold(item.prefix, uri[0:len(item.prefix)]) {
-				// 防止类似 /static/style 映射到 /static/style.css 的情况
+				// To avoid case like: /static/style -> /static/style.css
 				if len(uri) > len(item.prefix) && uri[len(item.prefix)] != '/' {
 					continue
 				}
-				// 优先检索资源管理器
+				// Firstly searching resource manager.
 				file = gres.GetWithIndex(item.path+uri[len(item.prefix):], s.config.IndexFiles)
 				if file != nil {
 					return &staticServeFile{
@@ -186,7 +193,7 @@ func (s *Server) searchStaticFile(uri string) *staticServeFile {
 						dir:  file.FileInfo().IsDir(),
 					}
 				}
-				// 其次检索文件系统
+				// Secondly searching the file system.
 				path, dir = gspath.Search(item.path, uri[len(item.prefix):], s.config.IndexFiles...)
 				if path != "" {
 					return &staticServeFile{
@@ -242,7 +249,8 @@ func (s *Server) serveFile(r *Request, f *staticServeFile, allowIndex ...bool) {
 			}
 		} else {
 			info := f.file.FileInfo()
-			http.ServeContent(r.Response.Writer, r.Request, info.Name(), info.ModTime(), f.file)
+			r.Response.wroteHeader = true
+			http.ServeContent(r.Response.Writer.RawWriter(), r.Request, info.Name(), info.ModTime(), f.file)
 		}
 		return
 	}
@@ -253,6 +261,11 @@ func (s *Server) serveFile(r *Request, f *staticServeFile, allowIndex ...bool) {
 		return
 	}
 	defer file.Close()
+
+	// Clear the response buffer before file serving.
+	// It ignores all custom buffer content and uses the file content.
+	r.Response.ClearBuffer()
+
 	info, _ := file.Stat()
 	if info.IsDir() {
 		if s.config.IndexFolder || (len(allowIndex) > 0 && allowIndex[0]) {
@@ -261,7 +274,8 @@ func (s *Server) serveFile(r *Request, f *staticServeFile, allowIndex ...bool) {
 			r.Response.WriteStatus(http.StatusForbidden)
 		}
 	} else {
-		http.ServeContent(r.Response.Writer, r.Request, info.Name(), info.ModTime(), file)
+		r.Response.wroteHeader = true
+		http.ServeContent(r.Response.Writer.RawWriter(), r.Request, info.Name(), info.ModTime(), file)
 	}
 }
 

@@ -10,14 +10,13 @@ github.com/fsnotify/fsnotify
 github.com/gf-third/mysql
 # github.com/gf-third/yaml v1.0.1
 github.com/gf-third/yaml
-# github.com/gogf/gf v1.9.7
+# github.com/gogf/gf v1.9.10
 github.com/gogf/gf/frame/g
 github.com/gogf/gf/net/ghttp
 github.com/gogf/gf/os/gfile
 github.com/gogf/gf/util/gconv
 github.com/gogf/gf/frame/gmvc
 github.com/gogf/gf/os/glog
-github.com/gogf/gf/os/gres
 github.com/gogf/gf/container/gvar
 github.com/gogf/gf/database/gdb
 github.com/gogf/gf/database/gredis
@@ -27,6 +26,7 @@ github.com/gogf/gf/internal/empty
 github.com/gogf/gf/net/gtcp
 github.com/gogf/gf/net/gudp
 github.com/gogf/gf/os/gcfg
+github.com/gogf/gf/os/gres
 github.com/gogf/gf/os/gview
 github.com/gogf/gf/util/gutil
 github.com/gogf/gf/container/garray
@@ -56,14 +56,14 @@ github.com/gogf/gf/internal/utilstr
 github.com/gogf/gf/internal/cmdenv
 github.com/gogf/gf/os/gfpool
 github.com/gogf/gf/os/grpool
-github.com/gogf/gf/container/gtree
-github.com/gogf/gf/encoding/gcompress
-github.com/gogf/gf/internal/utilbytes
 github.com/gogf/gf/container/gring
 github.com/gogf/gf/container/gset
 github.com/gogf/gf/util/grand
 github.com/gogf/gf/os/gfsnotify
 github.com/gogf/gf/container/gpool
+github.com/gogf/gf/container/gtree
+github.com/gogf/gf/encoding/gcompress
+github.com/gogf/gf/internal/utilbytes
 github.com/gogf/gf
 github.com/gogf/gf/encoding/ghash
 github.com/gogf/gf/os/gfcache

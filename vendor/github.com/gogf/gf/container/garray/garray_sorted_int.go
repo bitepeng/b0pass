@@ -328,6 +328,17 @@ func (a *SortedIntArray) Slice() []int {
 	return array
 }
 
+// Interfaces returns current array as []interface{}.
+func (a *SortedIntArray) Interfaces() []interface{} {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	array := make([]interface{}, len(a.array))
+	for k, v := range a.array {
+		array[k] = v
+	}
+	return array
+}
+
 // Contains checks whether a value exists in the array.
 func (a *SortedIntArray) Contains(value int) bool {
 	return a.Search(value) != -1
@@ -535,7 +546,7 @@ func (a *SortedIntArray) CountValues() map[int]int {
 	return m
 }
 
-// String returns current array as a string.
+// String returns current array as a string, which implements like json.Marshal does.
 func (a *SortedIntArray) String() string {
 	return "[" + a.Join(",") + "]"
 }

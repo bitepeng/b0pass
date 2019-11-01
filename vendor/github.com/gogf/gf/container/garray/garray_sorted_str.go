@@ -329,6 +329,17 @@ func (a *SortedStrArray) Slice() []string {
 	return array
 }
 
+// Interfaces returns current array as []interface{}.
+func (a *SortedStrArray) Interfaces() []interface{} {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	array := make([]interface{}, len(a.array))
+	for k, v := range a.array {
+		array[k] = v
+	}
+	return array
+}
+
 // Contains checks whether a value exists in the array.
 func (a *SortedStrArray) Contains(value string) bool {
 	return a.Search(value) != -1
@@ -517,7 +528,7 @@ func (a *SortedStrArray) Join(glue string) string {
 	defer a.mu.RUnlock()
 	buffer := bytes.NewBuffer(nil)
 	for k, v := range a.array {
-		buffer.WriteString(`"` + gstr.QuoteMeta(v, `"\`) + `"`)
+		buffer.WriteString(v)
 		if k != len(a.array)-1 {
 			buffer.WriteString(glue)
 		}
@@ -536,9 +547,20 @@ func (a *SortedStrArray) CountValues() map[string]int {
 	return m
 }
 
-// String returns current array as a string.
+// String returns current array as a string, which implements like json.Marshal does.
 func (a *SortedStrArray) String() string {
-	return "[" + a.Join(",") + "]"
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	buffer := bytes.NewBuffer(nil)
+	buffer.WriteByte('[')
+	for k, v := range a.array {
+		buffer.WriteString(`"` + gstr.QuoteMeta(v, `"\`) + `"`)
+		if k != len(a.array)-1 {
+			buffer.WriteByte(',')
+		}
+	}
+	buffer.WriteByte(']')
+	return buffer.String()
 }
 
 // MarshalJSON implements the interface MarshalJSON for json.Marshal.

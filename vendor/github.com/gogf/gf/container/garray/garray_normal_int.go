@@ -376,6 +376,17 @@ func (a *IntArray) Slice() []int {
 	return array
 }
 
+// Interfaces returns current array as []interface{}.
+func (a *IntArray) Interfaces() []interface{} {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	array := make([]interface{}, len(a.array))
+	for k, v := range a.array {
+		array[k] = v
+	}
+	return array
+}
+
 // Clone returns a new array, which is a copy of current array.
 func (a *IntArray) Clone() (newArray *IntArray) {
 	a.mu.RLock()
@@ -610,7 +621,7 @@ func (a *IntArray) CountValues() map[int]int {
 	return m
 }
 
-// String returns current array as a string.
+// String returns current array as a string, which implements like json.Marshal does.
 func (a *IntArray) String() string {
 	return "[" + a.Join(",") + "]"
 }

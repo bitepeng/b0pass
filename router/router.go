@@ -18,8 +18,8 @@ func init() {
 		//跨域设置
 		g.Middleware(MiddlewareCORS)
 		//文件上传
-		g.POST("/uploado", api.Upload)
-		g.POST("/upload", api.Uploadx)
+		g.POST("/upload", api.Upload)
+		//g.POST("/upload", api.Uploadx)
 		g.GET("/lists", api.Lists)
 		g.GET("/delete", api.Delete)
 		g.GET("/sip", api.GetIp)
