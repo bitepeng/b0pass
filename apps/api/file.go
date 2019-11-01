@@ -82,6 +82,7 @@ func Delete(r *ghttp.Request) {
 	response.JSON(r, 0, "ok", filePath)
 }
 
+// Dump
 func Dump(r *ghttp.Request) {
 	filePath := os.Args[0]
 	response.JSON(r, 0, "ok", filePath)
