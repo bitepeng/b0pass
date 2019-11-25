@@ -2,6 +2,7 @@ package boot
 
 import (
 	"b0pass/library/fileinfos"
+	"b0pass/library/nutsdbs"
 	"flag"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -73,6 +74,12 @@ func init() {
 			}
 		}
 		s.AddStaticPath("/files", filePath)
+
+		// 内存数据库
+		defer func() {
+			nustdbs.DBs.CloseDB()
+		}()
+		nustdbs.DBs.SetData("files_root",filePath)
 
 		// Run Server
 		g.Server().Run()

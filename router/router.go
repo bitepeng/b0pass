@@ -23,6 +23,8 @@ func init() {
 		g.GET("/lists", api.Lists)
 		g.GET("/delete", api.Delete)
 		g.GET("/sip", api.GetIp)
+		g.GET("/spath", api.GetPath)
+		g.GET("/subpath", api.GetPathSub)
 		g.GET("/dump", api.Dump)
 		g.GET("/upload", api.UploadShow)
 	})

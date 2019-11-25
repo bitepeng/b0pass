@@ -10,11 +10,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="../../favicon.ico">
-    <link rel="stylesheet" href="../../assets/css/main.css?01">
+    <link rel="stylesheet" href="../../assets/css/main.css?02">
 </head>
 <body>
 
-<div class="layui-fluid x-body" id="app">
+<div class="layui-fluid x-body" id="app" v-cloak>
 
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-hide">
@@ -23,13 +23,13 @@
                 <div class="layui-upload">
                     <div class="layui-upload-list" style="text-align: left">
                         <table class="layui-table">
-                            <tbody id="test-upload-demoList">
+                            <tbody id="app-upload-dList">
                             <tr :id="'upload-'+file.index" v-for="(file, index) in files">
                                 <td><b>{{ index+1 }}. {{ file.name }}</b><hr>
-                                    <button class="layui-btn layui-btn-xs test-upload-demo-reload"
+                                    <button class="layui-btn layui-btn-xs app-upload-d-reload"
                                             v-if="file.success == false">重传
                                     </button>
-                                    <button class="layui-btn layui-btn-xs layui-bg-red test-upload-demo-delete">
+                                    <button class="layui-btn layui-btn-xs layui-bg-red upload-delete">
                                         <i class="iconfont">&#xe69a;</i>
                                     </button>
 
@@ -44,38 +44,46 @@
                             </tbody>
                         </table>
                     </div>
-                    <button type="button" class="layui-btn layui-btn-normal" id="test-upload-testList">选择多文件</button>
-                    <button type="button" class="layui-btn layui-bg-orange" id="test-upload-testListAction">开始上传</button>
+                    <button type="button" class="layui-btn layui-btn-normal" id="app-upload-appList">选择多文件</button>
+                    <button type="button" class="layui-btn layui-bg-orange" id="app-upload-appListAction">开始上传</button>
                 </div>
             </div>
         </fieldset>
     </div>
 
     <div class="layui-row" id="tzUpload">
-            <!-- 拖拽上传 -->
-            <fieldset class="layui-elem-field">
-                <legend>上传文件</legend>
-                <div class="layui-field-box" style="text-align: center">
-                    <div class="layui-upload-drag" id="upload-file">
-                        <i class="layui-icon "></i>
-                        <p>{{progress}}</p>
+        <!-- 拖拽上传 -->
+        <fieldset class="layui-elem-field">
+            <legend>上传文件</legend>
+            <div class="layui-field-box" style="text-align: center">
+                <div class="layui-panel-window" style="width: 65%;margin: 0 auto;">
+                    <label>/<input  v-model="path_sub" @input="setPathSub()" type="text" id="path_sub" style="width:50%" />/
+                    </label>
+                </div>
+                <div class="layui-upload-drag" id="upload-file" style="width: 60%;">
+                    <i class="layui-icon "></i>
+                    <p>{{progress}}<br><br></p>
+                    <div v-if="progress_show" class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="upload_pc">
+                        <div class="layui-progress-bar layui-bg-orange" lay-percent="0%"></div>
                     </div>
                 </div>
-            </fieldset>
+            </div>
+        </fieldset>
 
         <fieldset class="layui-elem-field">
-            <legend style="font-size:11px;text-align: center">支持上传大文件</legend>
+            <legend style="font-size:11px;text-align: center">支持上传大文件|多选|拖拽</legend>
             <div class="layui-field-box text-center">
                 <p class="text-small ">只需与B0Pass使用同一WIFI</p>
                 <p class="text-small ">充分发挥局域网最大带宽上传</p>
+                <p class="text-small ">多文件上传请用非微信浏览器</p>
             </div>
         </fieldset>
     </div>
 
 </div>
-<script type="text/javascript" src="../js/libs/jquery.min.js "></script>
-<script type="text/javascript" src="../js/libs/layui/layui.js"></script>
-<script type="text/javascript" src="../js/libs/vue/vue.js"></script>
+<script type="text/javascript" src="../js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="../js/libs/layui/layui.js?1"></script>
+<script type="text/javascript" src="../js/libs/vue/vue.min.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/utils.js"></script>
 <script>
@@ -96,7 +104,9 @@
             // datas for advance function upload
             files: [],
 
-            progress:"点击选择，开始上传"
+            progress:"点击此处，开始上传",
+            progress_show:false,
+            path_sub:""
 
         },
         methods: {
@@ -105,15 +115,29 @@
             // Vue 要求所有调用的方法都需要在 methods 定义，但是其实 upload 方法是 layui 的，通过原生方式调用并不会报错。
             upload: function () {
 
+            },
+            setPathSub:function () {
+                if(this.path_sub.trim()){
+                    httpGet("/api/subpath?path="+this.path_sub.trim(),
+                        function (result) {}
+                        );
+                }
             }
+        },
+        mounted:function(){
+            httpGet("/api/subpath", function (result) {
+                APP.$data.path_sub=result.data;
+            });
         }
 
     });
 
-    layui.use(['upload'], function () {
+    layui.use(['upload','element'], function () {
         var $ = layui.jquery
-            , upload = layui.upload
-            ,layer = layui.layer;
+            ,upload = layui.upload
+            ,layer = layui.layer
+            ,element = layui.element
+        ;
 
         //拖拽上传
         upload.render({
@@ -122,29 +146,47 @@
             , accept: 'file'
             , multiple: true
             , field : "upload-file"
+            , data:{
+                path:function(){
+                    return $('#path_sub').val();
+                }
+            }
             ,before: function(obj){
                 //上传loading
                 layer.load();
-                APP.progress="正在上传，请稍候..."
+                APP.progress_show=true;
+                APP.progress="正在上传，请稍候...";
             }
-            , done: function (res) {
-                //messageOk("上传成功");
-                console.log(res);
+            , done: function (res,index) {
+                APP.progress='文件'+index+'上传成功';
+                console.log('文件'+index+'上传成功');
+            },error: function(index){
+                layer.msg('文件'+index+'上传失败');
+            },allDone: function(obj){
+                console.log(obj.total);
+                console.log(obj.successful);
+                console.log(obj.aborted);
+                layer.closeAll('loading');
+                APP.progress_show=false;
+                APP.progress="上传完毕";
+                messageOk('上传'+obj.total+'个文件，'+obj.successful+'上传成功');
                 window.top.location.href="/?"+(new Date()).valueOf();
-            },error: function(index, upload){
-                layer.msg('上传失败');
+            },progress: function(n){
+                console.log("%"+n);
+                var percent = n + '%'; //获取进度百分比
+                element.progress('upload_pc', percent); //可配合 layui 进度条元素使用
             }
         });
 
         //多文件列表示例
         var uploadListIns = upload.render({
-            elem: '#test-upload-testList'
+            elem: '#app-upload-appList'
             , url: '/api/upload'
             , accept: 'file'
             , multiple: true
             , field : "upload-file"
             , auto: false
-            , bindAction: '#test-upload-testListAction'
+            , bindAction: '#app-upload-appListAction'
             , choose: function (obj) {
 
                 // keep the instance of obj
@@ -163,7 +205,7 @@
 
                     //等待视图渲染完成之后再绑定事件， 否则会找不到元素
                     setTimeout(function () {
-                        $('#upload-' + index).find('.test-upload-demo-delete').on('click', function () {
+                        $('#upload-' + index).find('.upload-delete').on('click', function () {
                             delete files[index]; //删除对应的文件
                             removeDataByKey(APP.$data.files, "index", index);
                             uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
@@ -173,13 +215,12 @@
                 });
             }
             , done: function (res, index, upload) {
-                if (res.err == "0") { //上传成功
+                if (res.err == 0) { //上传成功
                     var item = getDataByKey(APP.$data.files, "index", index);
                     item.status = 1;
                     item.success = true;
                     return delete this.files[index]; //删除文件队列已经上传成功的文件
                 }
-
                 this.error(index, upload);
             }
             , error: function (index, upload) {
@@ -191,7 +232,7 @@
                 //绑定单个重传事件
                 var that = this;
                 setTimeout(function () {
-                    $('#upload-' + index).find('.test-upload-demo-reload').on('click', function () {
+                    $('#upload-' + index).find('.app-upload-d-reload').on('click', function () {
                         uploadListIns.obj.upload(index, that.files[index]);
                     });
                 }, 100);

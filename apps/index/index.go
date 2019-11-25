@@ -27,9 +27,19 @@ func (c *Controller) FileLists() {
 		ips = append(ips, pp+":"+strconv.Itoa(port))
 	}
 	c.View.Assign("ips",ips)
+	// path
+	path := fileinfos.GetRootPath() + "/files/"
+	c.View.Assign("path",path)
 	// file lists
-	fp := fileinfos.GetRootPath() + "/files/*"
-	flists := fileinfos.ListDirData(fp)
+	fprPath:=c.Request.GetString("path")
+	var fpPath string
+	if fprPath!="" {
+		fpPath="/files"+fprPath+"/*"
+	}else{
+		fpPath="/files/*"
+	}
+	fp := fileinfos.GetRootPath() + fpPath
+	flists := fileinfos.ListDirData(fp,fprPath)
 	c.View.Assign("flists",flists)
 	// views
 	_ = c.View.Display("file-lists.html")

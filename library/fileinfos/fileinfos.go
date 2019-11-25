@@ -90,7 +90,7 @@ func GetSize(fileBytes uint64) string {
 }
 
 // List Dir Data
-func ListDirData(fp string) []map[string]string {
+func ListDirData(fp,fpSub string) []map[string]string {
 	files, _ := filepath.Glob(fp)
 	var ret []map[string]string
 	var indexs=0
@@ -109,10 +109,12 @@ func ListDirData(fp string) []map[string]string {
 		//fileext
 		mext := strings.ToUpper(path.Ext(mfile))
 		if fileInfo.IsDir() {
-			mext = "目录"
+			mext = "dir"
+			mtype = "dir"
 		}
 		if mext==""{
 			mext = "file"
+			mtype= "file"
 		}
 		//index
 		indexs++
@@ -123,7 +125,7 @@ func ListDirData(fp string) []map[string]string {
 		m["size"] = strconv.Itoa(int(fileInfo.Size()))
 		m["sizes"] = GetSize(uint64(fileInfo.Size()))
 		m["date"] = fileInfo.ModTime().Format("01-02")
-		m["path"] = "/files/" + mfile
+		m["path"] = fpSub+"/"+ mfile
 		m["type"] = mtype
 		m["indexs"]=strconv.Itoa(indexs)
 		ret = append(ret, m)

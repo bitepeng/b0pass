@@ -43,17 +43,17 @@
 	<div class="layui-col-xs6 layui-col-sm4 layui-col-md3 layui-col-lg2">
 		<div class="layui-card bg-gray">
 			<div class="layui-card-header inline-text">
-				<b title="${.date}">${.indexs} .${.name}</b>
+				<b title="${.date}">${.indexs}. ${.name}</b>
 				&nbsp;
 				<span onclick="deleteFile('${.path}')"
-					  class="layui-badge layui-bg-gray layuiadmin-badge inline-icon">x</span>
+					  class="layui-badge layui-bg-gray layuiadmin-badge layui-icon layui-icon-delete"></span>
 			</div>
 			<div class="layui-card-body layuiadmin-card-list">
 				<p class="layuiadmin-big-font" style="text-align: center">
 
 					<a onclick="openView('${.name}','${.path}','${.type}')">
 						${if eq .type "img"}
-						<img src="${.path}" height="50"  alt="${.name}"/>
+						<img src="files/${.path}" height="50"  alt="${.name}"/>
 						${else}
 						<div class="filebox">${.ext}</div>
 						${end}
@@ -87,10 +87,12 @@
 
 	function openView(t,f,mtype) {
 		if(mtype=="img"){
-			x_open_full(t, "./page/image.html?name="+encodeURI(f));
+			x_open_full(t, "./page/image.html?name="+encodeURI("/files/"+f));
+		}else if(mtype=="dir"){
+			x_open_full(t, "./file-lists?path="+encodeURI(f));
 		}else{
 			//x_open_full(t, f)
-			window.open(f);
+			window.open("files/"+f);
 		}
 	}
 
@@ -99,7 +101,7 @@
 			btn : [ '确定', '取消' ]//按钮
 		}, function(index) {
 			if(index>0){
-				httpGet("/api/delete?f="+filepath, function (result) {
+				httpGet("/api/delete?f=/files"+filepath, function (result) {
 					messageOk("删除成功");
 					window.location.reload();
 				});

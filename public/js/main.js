@@ -197,11 +197,11 @@ function x_open_full(title, url) {
 		content: url,
 		maxmin: false,
 		success : function(layero, index){
-			setTimeout(function(){
+			/*setTimeout(function(){
 				layui.layer.tips('返回', '.layui-layer-setwin .layui-layer-close', {
 					tips: 3
 				});
-			},500)
+			},500)*/
 		}
 	});
 }
@@ -219,4 +219,30 @@ function x_admin_close(callback) {
             parent.render();
             break;
     }
+}
+
+
+/*cookie*/
+
+function setCookie(name,value) {
+	var Days = 90;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days*24*60*60*1000);
+	document.cookie = name + "="+ escape (value.trim()) + ";expires=" + exp.toGMTString();
+}
+
+function getCookie(name) {
+	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+	if(arr=document.cookie.match(reg))
+		return unescape(arr[2]);
+	else
+		return null;
+}
+
+function delCookie(name) {
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval=getCookie(name);
+	if(cval!=null)
+		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }

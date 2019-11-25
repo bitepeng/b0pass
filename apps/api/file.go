@@ -2,11 +2,13 @@ package api
 
 import (
 	"b0pass/library/fileinfos"
+	nustdbs "b0pass/library/nutsdbs"
 	"b0pass/library/response"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/util/gconv"
 	"io"
+	"log"
 	"os"
 )
 
@@ -19,7 +21,10 @@ func Upload(r *ghttp.Request) {
 		defer func() { _ = f.Close() }()
 		name := gfile.Basename(h.Filename)
 		size := h.Size
-		savePath := fileinfos.GetRootPath() + "/files/" + name
+		pathSub :=r.GetPostString("path")
+		nustdbs.DBs.SetData("files_path",pathSub)
+		savePath := fileinfos.GetRootPath() + "/files/" +pathSub+"/"+ name
+		log.Println(savePath)
 		file, err := gfile.Create(savePath)
 		if err != nil {
 			r.Response.Write(err)
@@ -27,7 +32,7 @@ func Upload(r *ghttp.Request) {
 		}
 		defer func() { _ = file.Close() }()
 		if _, err := io.Copy(file, f); err != nil {
-			response.JSON(r, 201, e.Error())
+			response.JSON(r, 201, err.Error())
 			return
 		}
 		response.JSON(r, 0, "ok", size)
@@ -69,7 +74,7 @@ func Uploadx(r *ghttp.Request) {
 func Lists(r *ghttp.Request) {
 	fp := fileinfos.GetRootPath() + "/files/*"
 	var ret []map[string]string
-	ret = fileinfos.ListDirData(fp)
+	ret = fileinfos.ListDirData(fp,"files")
 	response.JSON(r, 0, "ok", ret)
 }
 
@@ -78,7 +83,7 @@ func Delete(r *ghttp.Request) {
 	f := r.Get("f")
 	fp := fileinfos.GetRootPath()
 	filePath := fp + gconv.String(f)
-	_ = os.Remove(filePath)
+	_ = os.RemoveAll(filePath)
 	response.JSON(r, 0, "ok", filePath)
 }
 
