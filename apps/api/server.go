@@ -2,14 +2,15 @@ package api
 
 import (
 	"b0pass/boot"
-	"b0pass/library/fileinfos"
 	"b0pass/library/ipaddress"
 	nustdbs "b0pass/library/nutsdbs"
+	"b0pass/library/openurl"
 	"b0pass/library/response"
 	"github.com/gogf/gf/net/ghttp"
 	"strconv"
 )
 
+// GetIp 获取IP地址
 func GetIp(r *ghttp.Request) {
 	port := boot.ServPort
 	ip, _ := ipaddress.GetIP()
@@ -20,21 +21,34 @@ func GetIp(r *ghttp.Request) {
 	response.JSON(r, 0, "ok", ips)
 }
 
-func GetPath(r *ghttp.Request) {
-	path:=fileinfos.GetRootPath()
-	response.JSON(r, 0, "ok", path)
+// GetPathSub 上传目录记忆功能
+func GetSubPath(r *ghttp.Request){
+	getData:=r.GetString("path")
+	dbKey:="files_path"
+	if getData!=""{
+		nustdbs.DBs.SetData(dbKey,getData)
+	}
+	dbData :=nustdbs.DBs.GetData(dbKey)
+	/*if filesPath =="" {
+		dbData:=time.Now().Format("2006-01-02")
+		nustdbs.DBs.SetData("files_path",dbData)
+	}*/
+	response.JSON(r, 0, "ok", dbData)
 }
 
-func GetPathSub(r *ghttp.Request){
-	getPath:=r.GetString("path")
-	filesPath :=nustdbs.DBs.GetData("files_path")
-	if getPath!="" {
-		filesPath=getPath
-		nustdbs.DBs.SetData("files_path",filesPath)
+// GetTextData 文本内容共享
+func GetTextData(r *ghttp.Request){
+	getData:=r.GetString("data")
+	dbKey:="data_text"
+	if getData!=""{
+		nustdbs.DBs.SetData(dbKey,getData)
 	}
-	/*if filesPath =="" {
-		dates:=time.Now().Format("2006-01-02")
-		nustdbs.DBs.SetData("files_path",dates)
-	}*/
-	response.JSON(r, 0, "ok", filesPath)
+	dbData :=nustdbs.DBs.GetData(dbKey)
+	response.JSON(r, 0, "ok", dbData)
+}
+
+// OpenUrl 打开本地url
+func OpenUrl(r *ghttp.Request){
+	getUrl:=r.GetString("url")
+	_ = openurl.Open(getUrl)
 }

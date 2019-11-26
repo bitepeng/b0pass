@@ -221,9 +221,31 @@ function x_admin_close(callback) {
     }
 }
 
+/**
+ * IsPC
+ * true为PC端，false为手机端
+ * @return {boolean}
+ */
+function IsPC() {
+	var userAgentInfo = navigator.userAgent;
+	var Agents = ["Android", "iPhone",
+		"SymbianOS", "Windows Phone",
+		"iPad", "iPod"];
+	var flag = true;
+	for (var v = 0; v < Agents.length; v++) {
+		if (userAgentInfo.indexOf(Agents[v]) > 0) {
+			flag = false;
+			break;
+		}
+	}
+	return flag;
+}
 
-/*cookie*/
-
+/**
+ * cookie
+ * @param name
+ * @param value
+ */
 function setCookie(name,value) {
 	var Days = 90;
 	var exp = new Date();
@@ -231,6 +253,11 @@ function setCookie(name,value) {
 	document.cookie = name + "="+ escape (value.trim()) + ";expires=" + exp.toGMTString();
 }
 
+/**
+ * getCookie
+ * @param name
+ * @returns {string|null}
+ */
 function getCookie(name) {
 	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
 	if(arr=document.cookie.match(reg))
@@ -239,6 +266,10 @@ function getCookie(name) {
 		return null;
 }
 
+/**
+ * delCookie(name)
+ * @param name
+ */
 function delCookie(name) {
 	var exp = new Date();
 	exp.setTime(exp.getTime() - 1);

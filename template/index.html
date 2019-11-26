@@ -53,7 +53,7 @@
 			</li>
 			<li class="layui-nav-item">
 				<a href="./page/upload.html?${.times}" target="iframe">
-					<i class="layui-icon">&#xe681;</i> 上传</a>
+					<i class="layui-icon">&#xe681;</i> 传输</a>
 			</li>
 			<li class="layui-nav-item">
 				<a onclick="x_admin_open('手机扫码','./page/qrcode.html', 250, 320)">
@@ -88,5 +88,11 @@
 
 <script type="text/javascript" src="js/libs/jquery.min.js"></script>
 <script type="text/javascript" src="js/libs/layui/layui.js?1"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/main.js?01"></script>
+<script>
+	var ispc=IsPC();
+	if(!ispc){
+		$(".footer").css("display","none");
+	}
+</script>
 </html>

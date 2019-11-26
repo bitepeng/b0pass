@@ -763,13 +763,14 @@ img {
     right: 12px;
 }
 .inline-small{
-    font-size: 10px;
+    font-size: 12px;
 }
 .filebox{
-    height: 48px;
+    height: 38px;
     width: 40%;
-    line-height:46px;
+    line-height:36px;
     margin: 0 auto;
+    margin-bottom: 20px;
     text-align: center;
     background-color: #01AAED;
     border:1px solid #ddd;
@@ -783,4 +784,14 @@ img {
 .text-small{
     font-size: 12px;
     color: #999;
+}
+.right-span {
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+}
+.right-span2 {
+    position: absolute;
+    right: 28px;
+    bottom: 25px;
 }

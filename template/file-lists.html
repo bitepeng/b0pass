@@ -10,7 +10,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="../assets/css/main.css?02">
+	<link rel="stylesheet" href="../assets/css/main.css?03">
 </head>
 
 <body>
@@ -19,7 +19,6 @@
 		<div>手机电脑文件传输||局域网文件服务器</div>
 		${range .ips}
 		<div class="home-index-tips">
-
 			<div class="home-index-tips-left">
 				<a onclick="openQrcode('${.}')" title="手机扫码传输文件">
 				<b><i class="iconfont">&#xe6ec;</i> ${.}</b>
@@ -35,6 +34,21 @@
 			</div>
 		</div>
 		${end}
+
+		<div class="home-index-tips">
+			<div class="home-index-tips-left">
+				<a href="api/openurl?url=${.path_root}" target="iframe-hide" title="打开文件根目录" onclick="messageOk('在主电脑打开文件根目录成功');">
+					<b><i class="layui-icon layui-icon-layouts"></i> ${.path_root}</b>
+				</a>
+			</div>
+			<div class="home-index-tips-right">
+				<a href="api/openurl?url=${.path_root}" target="iframe-hide" title="打开" onclick="messageOk('在主电脑打开文件根目录成功');">
+					<i class="layui-icon layui-icon-more"></i>
+					<i class="layui-icon layui-icon-next"></i>
+				</a>
+			</div>
+		</div>
+
 	</blockquote>
 
 
@@ -44,9 +58,7 @@
 		<div class="layui-card bg-gray">
 			<div class="layui-card-header inline-text">
 				<b title="${.date}">${.indexs}. ${.name}</b>
-				&nbsp;
-				<span onclick="deleteFile('${.path}')"
-					  class="layui-badge layui-bg-gray layuiadmin-badge layui-icon layui-icon-delete"></span>
+
 			</div>
 			<div class="layui-card-body layuiadmin-card-list">
 				<p class="layuiadmin-big-font" style="text-align: center">
@@ -57,16 +69,20 @@
 						${else}
 						<div class="filebox">${.ext}</div>
 						${end}
-
 					</a>
 
 				</p>
-				<p class="inline-small">
-					${.date}
-                    <span class="layuiadmin-span-color">
-                    ${.sizes}
-                    <i class="layui-inline layui-icon layui-icon-save"></i></span>
-				</p>
+				<div class="inline-small" style="margin-top:10px;">
+					<div>${.sizes}</div>
+					<div class="right-span">
+						<i onclick="deleteFile('${.path}')" class="layui-badge layui-bg-gray layuiadmin-badge layui-icon layui-icon-delete"></i>
+					</div>
+					<div class="right-span2">
+						<a href="/api/openurl?url=${$.path_root}/${.path}" target="iframe-hide" title="投屏在电脑" onclick="messageOk('在主电脑投屏成功');">
+						<i class="layui-badge layui-bg-gray layuiadmin-badge layui-icon layui-icon-chart-screen"></i>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -74,11 +90,12 @@
 	</div>
 
 </div>
-
+<iframe name="iframe-hide" class="layui-hide"></iframe>
 <script type="text/javascript" src="../js/libs/jquery.min.js "></script>
 <script type="text/javascript" src="../js/libs/layui/layui.js"></script>
-<script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" src="../js/utils.js"></script>
+<script type="text/javascript" src="../js/main.js?01"></script>
+<script type="text/javascript" src="../js/utils.js?01"></script>
+<script type="text/javascript" src="../js/download.js?01"></script>
 <script>
 
 	function openQrcode(ip){
@@ -96,6 +113,10 @@
 		}
 	}
 
+	function downLoadOP(f) {
+		//window.open("files/"+f);
+	}
+
 	function deleteFile(filepath) {
 		layer.confirm('确认要删除这个文件吗<br>'+filepath+'', {
 			btn : [ '确定', '取消' ]//按钮
@@ -108,6 +129,50 @@
 			}
 		});
 	}
+
+
+
+	//下载文件
+	downloadFile = function (sUrl) {
+		//iOS devices do not support downloading. We have to inform user about this.
+		if (/(iP)/g.test(navigator.userAgent)) {
+			alert('Your device does not support files downloading. Please try again in desktop browser.');
+			return false;
+		}
+
+		//If in Chrome or Safari - download via virtual link click
+		if (downloadFile.isChrome || downloadFile.isSafari) {
+			//Creating new link node.
+			var link = document.createElement('a');
+			link.href = sUrl;
+
+			if (link.download !== undefined) {
+				//Set HTML5 download attribute. This will prevent file from opening if supported.
+				var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
+				link.download = fileName;
+			}
+
+			//Dispatching click event.
+			if (document.createEvent) {
+				var e = document.createEvent('MouseEvents');
+				e.initEvent('click', true, true);
+				link.dispatchEvent(e);
+				return true;
+			}
+		}
+
+		// Force file download (whether supported by server).
+		if (sUrl.indexOf('?') === -1) {
+			sUrl += '?download';
+		}
+
+		window.open(sUrl, '_self');
+		return true;
+	}
+
+	downloadFile.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+	downloadFile.isSafari = navigator.userAgent.toLowerCase().indexOf('safari') > -1;
+
 </script>
 </body>
 

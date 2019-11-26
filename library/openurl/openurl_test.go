@@ -7,3 +7,9 @@ func TestOpen(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestOpen2(t *testing.T) {
+	if err := Open("/Users/"); err != nil {
+		t.Error(err)
+	}
+}

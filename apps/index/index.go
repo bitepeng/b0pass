@@ -28,8 +28,8 @@ func (c *Controller) FileLists() {
 	}
 	c.View.Assign("ips",ips)
 	// path
-	path := fileinfos.GetRootPath() + "/files/"
-	c.View.Assign("path",path)
+	pathRoot := fileinfos.GetRootPath() + "/files/"
+	c.View.Assign("path_root", pathRoot)
 	// file lists
 	fprPath:=c.Request.GetString("path")
 	var fpPath string

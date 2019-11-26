@@ -15,17 +15,18 @@ func init() {
 
 	// Api
 	s.Group("/api", func(g *ghttp.RouterGroup) {
-		//跨域设置
+		//cors
 		g.Middleware(MiddlewareCORS)
-		//文件上传
+		//file
 		g.POST("/upload", api.Upload)
-		//g.POST("/upload", api.Uploadx)
 		g.GET("/lists", api.Lists)
 		g.GET("/delete", api.Delete)
-		g.GET("/sip", api.GetIp)
-		g.GET("/spath", api.GetPath)
-		g.GET("/subpath", api.GetPathSub)
 		g.GET("/dump", api.Dump)
 		g.GET("/upload", api.UploadShow)
+		//server
+		g.GET("/sip", api.GetIp)
+		g.GET("/subpath", api.GetSubPath)
+		g.ALL("/textdata", api.GetTextData)
+		g.GET("/openurl",api.OpenUrl)
 	})
 }
