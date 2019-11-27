@@ -35,8 +35,8 @@ cat > ${APP}/Contents/Info.plist << EOF
 EOF
 cp docs/icons/icon.icns ${APP}/Contents/Resources/icon.icns
 
-##### win32 os ##### -ldflags "-H windowsgui"
-CGO_ENABLED="0" GOARCH="386" GOOS="windows" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_win32.exe main.go
+##### win32 os #####
+CGO_ENABLED="0" GOARCH="386" GOOS="windows" go build -ldflags "-H windowsgui" -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_win32.exe main.go
 
 ##### linux os #####
 # CGO_ENABLED="0" GOARCH="amd64" GOOS="linux" go build -mod=vendor -o ${GOPATH}/bin/${APPNAME}/${APPNAME}_linux cli.go

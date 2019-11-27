@@ -49,6 +49,8 @@
 			</div>
 		</div>
 
+		<div id="uesr_list"></div>
+
 	</blockquote>
 
 
@@ -96,7 +98,19 @@
 <script type="text/javascript" src="../js/main.js?01"></script>
 <script type="text/javascript" src="../js/utils.js?01"></script>
 <script type="text/javascript" src="../js/download.js?01"></script>
+<script type="text/javascript" src="js/sync.js?01"></script>
 <script>
+
+	function syncDo(data) {
+		var msg=data.msg;
+		console.log(msg);
+		if(msg==='reload'){
+			window.location.reload();
+		}
+		/*if(data.clientId=="0"){
+			$("#uesr_list").html(msg);
+		}*/
+	}
 
 	function openQrcode(ip){
 		x_admin_open('手机扫码','./page/qrcode.html?f='+ip, 250, 320);
@@ -124,6 +138,7 @@
 			if(index>0){
 				httpGet("/api/delete?f=/files"+filepath, function (result) {
 					messageOk("删除成功");
+					syncSend("reload");
 					window.location.reload();
 				});
 			}

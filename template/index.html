@@ -89,10 +89,22 @@
 <script type="text/javascript" src="js/libs/jquery.min.js"></script>
 <script type="text/javascript" src="js/libs/layui/layui.js?1"></script>
 <script type="text/javascript" src="js/main.js?01"></script>
+<!--<script type="text/javascript" src="js/sync.js?02"></script>-->
 <script>
 	var ispc=IsPC();
 	if(!ispc){
 		$(".footer").css("display","none");
 	}
+	/*
+	window.onload=function (){
+		syncSend("login");
+		setInterval(function () {
+			syncSend("login");
+		},10000);
+	};
+	function syncDo(){
+		return true;
+	}
+	*/
 </script>
 </html>

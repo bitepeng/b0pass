@@ -1,0 +1,149 @@
+<style type="text/css">
+    .input-form {
+        display:flex;
+    }
+    .online-container {
+
+    }
+    .list-group {
+        max-height:500px;
+        overflow: auto;
+    }
+    .online-title {
+        text-align: center;
+    }
+    .online-user {
+        width:200px;
+        float:left;
+    }
+    #txtContent {
+        display:flex;
+        flex-direction: column;
+    }
+    #btnSend {
+        margin-top:15px;
+        width: 100px;
+        height: 60px;
+    }
+</style>
+
+<div class="container">
+    <div class="list-group"></div>
+    <div>
+        <div class="online-container">
+            <div class="online-title">当前在线</div>
+            <hr>
+            <div class="online-list"></div>
+        </div>
+        <div style="clear:both;height:40px;"></div>
+        <div class="input-form">
+            <input class="form-control" id="txtContent" autofocus rows="6" placeholder="请输入发送内容(必需)">
+        </div>
+        <div style="text-align: center"><button class="btn btn-primary" id="btnSend">发 送</button></div>
+    </div>
+</div>
+
+<script type="application/javascript">
+    // 显示提示信息
+    function showInfo(content) {
+        $("<div class=\"list-group-item list-group-item-info\">" + content + "</div>").appendTo(".list-group");
+        $(".list-group").smoothScroll({position:$(".list-group")[0].scrollHeight, speed: 100});
+    }
+    // 显示警告信息
+    function showWaring(content) {
+        $("<div class=\"list-group-item list-group-item-warning\">" + content + "</div>").appendTo(".list-group");
+        $(".list-group").smoothScroll({position:$(".list-group")[0].scrollHeight, speed: 100});
+    }
+    // 显示成功信息
+    function showSuccess(content) {
+        $("<div class=\"list-group-item list-group-item-success\">" + content + "</div>").appendTo(".list-group");
+        $(".list-group").smoothScroll({position:$(".list-group")[0].scrollHeight, speed: 100});
+    }
+    // 显示错误信息
+    function showError(content) {
+        $("<div class=\"list-group-item list-group-item-danger\">" + content + "</div>").appendTo(".list-group");
+        $(".list-group").smoothScroll({position:$(".list-group")[0].scrollHeight, speed: 100});
+    }
+
+    $(function () {
+        // 向ws服务端发送消息
+        function sendMsg(name, data, type) {
+            ws.send(JSON.stringify({
+                name : "",
+                data : data,
+                type : type,
+            }));
+        }
+
+        var url = "ws://" + window.location.origin.replace("http://", "") + "/chat/web-socket";
+        var ws  = new WebSocket(url);
+        try {
+            // ws连接成功
+            ws.onopen = function () {
+                showInfo("WebSocket Server 连接成功！");
+            };
+            // ws连接关闭
+            ws.onclose = function () {
+                if (ws) {
+                    ws.close();
+                    ws = null;
+                }
+                showError("WebSocket Server 连接关闭！");
+            };
+            // ws连接错误
+            ws.onerror = function () {
+                if (ws) {
+                    ws.close();
+                    ws = null;
+                }
+                showError("WebSocket Server 连接关闭！");
+            };
+            // ws数据返回处理
+            ws.onmessage = function (result) {
+                var msg = JSON.parse(result.data);
+                switch (msg.type) {
+                    case "send":
+                        showSuccess("【" + msg.name + "】: " + msg.data);
+                        break;
+
+                    case "list":
+                        var content = "";
+                        for (i = 0; i < msg.data.length; i++) {
+                            content += '<div class="online-user"><i class="am-icon-user"></i> '+ msg.data[i] +'</div>';
+                        }
+                        $('.online-list').html(content);
+                        break;
+
+                    case "error":
+                        showError(msg.data);
+                        break;
+                }
+            };
+        } catch (e) {
+            layer.msg(e.message);
+        }
+
+        // 按钮点击发送数据
+        $("#btnSend").on("click", function () {
+            if (ws == null) {
+                showError("WebSocket Server [" + url +"] 连接失败，请F5刷新页面!");
+                return;
+            }
+            var name    = $.trim($("#txtName").val()).replace("/[\n]/g", "");
+            var content = $.trim($("#txtContent").val()).replace("/[\n]/g", "");
+            if (content.length <= 0) {
+                layer.msg("请输入发送内容!");
+                return;
+            }
+            $("#txtContent").val("");
+            sendMsg(name, content, "send")
+        });
+
+        // 回车按钮触发发送点击事件
+        $("#txtContent").on("keydown", function (event) {
+            if (event.keyCode == 13) {
+                $("#btnSend").trigger("click");
+            }
+        });
+    })
+</script>

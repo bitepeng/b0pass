@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>Sync</title>
+</head>
+<body>
+
+<div id="divShow"></div>
+<div>
+    <div>
+        <label for="txtContent"></label>
+        <input  id="txtContent" autofocus>
+        <button class="btn btn-default" onclick="sendMsg()">发送</button>
+    </div>
+</div>
+
+
+<script type="application/javascript">
+    /**
+     * WebSocket
+     */
+    var url = window.location.origin.replace("http://", "");
+    url = "ws://" + url + "/sync/web-socket";
+    var ws  = new WebSocket(url);
+    ws.onmessage = function (result) {
+        var data=JSON.parse(result.data)
+        showInfo(" > " + data.clientId + ": "+data.msg);
+    };
+
+    /**
+     * 发送数据
+     */
+    function sendMsg(){
+        var content = document.getElementById("txtContent").value;
+        //showInfo(content);
+        ws.send(content);
+    }
+
+    /**
+     * 显示数据
+     */
+    function showInfo(content) {
+        var divs = document.getElementById("divShow").innerHTML;
+        document.getElementById("divShow").innerHTML=divs+"<div>"+content+"</div>";
+    }
+</script>
+
+</body>
+</html>

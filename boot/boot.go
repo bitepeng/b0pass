@@ -64,7 +64,7 @@ func init() {
 		s.SetErrorLogEnabled(true)
 		s.SetAccessLogEnabled(true)
 		s.SetPort(ServPort)
-		s.SetDumpRouteMap(false)
+		//s.SetDumpRouteMap(false)
 
 		// 文件根目录
 		filePath := PathRoot + "/files"

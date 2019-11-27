@@ -3,6 +3,7 @@ package router
 import (
 	"b0pass/apps/api"
 	"b0pass/apps/index"
+	"b0pass/apps/sync"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 )
@@ -12,6 +13,10 @@ func init() {
 
 	// Index
 	s.BindController("/", new(index.Controller))
+
+	// Chat
+	//s.BindController("/chat", new(chat.Controller))
+	s.BindController("/sync", new(sync.Controller))
 
 	// Api
 	s.Group("/api", func(g *ghttp.RouterGroup) {
@@ -29,4 +34,5 @@ func init() {
 		g.ALL("/textdata", api.GetTextData)
 		g.GET("/openurl",api.OpenUrl)
 	})
+
 }

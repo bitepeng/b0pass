@@ -29,7 +29,7 @@
                     <fieldset class="layui-elem-field">
                         <div class="layui-field-box" style="text-align: center">
                             <div class="layui-panel-window" style="width: 65%;margin: 0 auto;">
-                                <label>/<input  v-model="path_sub" @input="setPathSub()" type="text" id="path_sub" style="width:50%" placeholder="自定义目录" />/
+                                <label>/<input  v-model="path_sub" @input="setPathSub()" type="text" id="path_sub" style="width:50%" placeholder="自定义上传子目录" />/
                                 </label>
                             </div>
                             <div class="layui-upload-drag" id="upload-file" style="width: 60%;">
@@ -84,6 +84,7 @@
 <script type="text/javascript" src="../js/libs/vue/vue.min.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/utils.js"></script>
+<script type="text/javascript" src="../js/sync.js?01"></script>
 <script>
     var APP = new Vue({
         el: '#app',
@@ -123,7 +124,9 @@
             setDataText:function(){
                 httpPost("/api/textdata",
                     {'data':this.data_text.trim()},
-                    function(result){});
+                    function(result){
+                        syncSend("reload_text");
+                    });
             }
         },
         mounted:function(){
@@ -173,7 +176,11 @@
                 APP.progress_show=false;
                 APP.progress="上传完毕";
                 messageOk('上传'+obj.total+'个文件，'+obj.successful+'上传成功');
-                window.top.location.href="/?"+(new Date()).valueOf();
+                // 上传完成事件
+                syncSend("reload");
+                setTimeout(function () {
+                    window.top.location.href="/?"+(new Date()).valueOf();
+                },100);
             },progress: function(n){
                 console.log("%"+n);
                 var percent = n + '%'; //获取进度百分比
@@ -182,6 +189,17 @@
         });
 
     });
+
+    function syncDo(data) {
+        var msg=data.msg;
+        if(msg==='reload_text'){
+            httpGet("/api/textdata",
+                function(result){
+                APP.$data.data_text=result.data;
+            });
+        }
+    }
+
 
 </script>
 </body>
