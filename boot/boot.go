@@ -2,7 +2,7 @@ package boot
 
 import (
 	"b0pass/library/fileinfos"
-	"b0pass/library/nutsdbs"
+	nustdbs "b0pass/library/nutsdbs"
 	"flag"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -64,7 +64,7 @@ func init() {
 		s.SetErrorLogEnabled(true)
 		s.SetAccessLogEnabled(true)
 		s.SetPort(ServPort)
-		//s.SetDumpRouteMap(false)
+		s.SetDumpRouteMap(false)
 
 		// 文件根目录
 		filePath := PathRoot + "/files"

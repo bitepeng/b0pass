@@ -6,7 +6,6 @@ import (
 	"github.com/gogf/gf/frame/gmvc"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/glog"
-	"log"
 )
 
 
@@ -94,8 +93,6 @@ func (c *Controller) writeUsers() error {
 		}
 		return true
 	})
-	log.Println(nameStr)
-
 	msgs:= "{" +
 		"\"clientId\":\"0\"," +
 		"\"msg\":\""+nameStr+"\"" +

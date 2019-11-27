@@ -11,7 +11,7 @@ var DBs *DBClient
 func init(){
 	DBs=&DBClient{
 		bucket:"db0",
-		dbdir:"/tmp/nutsdb",
+		dbdir:".db",
 	}
 	DBs.OpenDB()
 }
