@@ -66,6 +66,7 @@ function httpPost(url, data, success, fail) {
  * @returns {*}
  */
 function request(url, method, async, data, success, fail) {
+	console.log("request url"+url+">>>>");
 
 	if (typeof success != "function") {
 		success = function() {}
@@ -80,7 +81,7 @@ function request(url, method, async, data, success, fail) {
 		data: data,
 		dataType: "json",
 		success: function(result) {
-			//alert(JSON.stringify(result.err));
+			console.log("request url"+url+"::: "+JSON.stringify(result));
 			if (result.err == 0) {
 				success(result);
 			} else {
@@ -89,6 +90,7 @@ function request(url, method, async, data, success, fail) {
 		},
 		error: function(error) {
 			fail(error);
+			console.log("request fail url"+url+"::: "+JSON.stringify(error));
 		}
 	};
 	$.ajax(options);

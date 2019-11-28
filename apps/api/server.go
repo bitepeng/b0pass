@@ -3,10 +3,10 @@ package api
 import (
 	"b0pass/boot"
 	"b0pass/library/ipaddress"
-	nustdbs "b0pass/library/nutsdbs"
 	"b0pass/library/openurl"
 	"b0pass/library/response"
 	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/os/gcache"
 	"strconv"
 )
 
@@ -26,9 +26,9 @@ func GetSubPath(r *ghttp.Request){
 	getData:=r.GetString("path")
 	dbKey:="files_path"
 	if getData!=""{
-		nustdbs.DBs.SetData(dbKey,getData)
+		gcache.Set(dbKey,getData,0)
 	}
-	dbData :=nustdbs.DBs.GetData(dbKey)
+	dbData :=gcache.Get(dbKey)
 	/*if filesPath =="" {
 		dbData:=time.Now().Format("2006-01-02")
 		nustdbs.DBs.SetData("files_path",dbData)
@@ -41,9 +41,9 @@ func GetTextData(r *ghttp.Request){
 	getData:=r.GetString("data")
 	dbKey:="data_text"
 	if getData!=""{
-		nustdbs.DBs.SetData(dbKey,getData)
+		gcache.Set(dbKey,getData,0)
 	}
-	dbData :=nustdbs.DBs.GetData(dbKey)
+	dbData :=gcache.Get(dbKey)
 	response.JSON(r, 0, "ok", dbData)
 }
 

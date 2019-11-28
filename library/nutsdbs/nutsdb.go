@@ -1,27 +1,44 @@
 package nustdbs
 
 import (
-	"fmt"
+	"github.com/gogf/gf/os/glog"
 	"github.com/xujiajun/nutsdb"
 	"log"
 	"runtime"
+	"sync"
 )
+
+//--------------------
+type singleton struct{
+}
+var instance *singleton
+var once sync.Once
+func GetInstance()*singleton{
+	once.Do(func(){
+		instance=&singleton{}
+	})
+	return instance
+}
+//--------------------
 
 var DBs *DBClient
 var Dirs = map[string]string{
-	"windows": "tmp/db",
+	"windows": "/tmp/db",
 	"darwin":  "/tmp/db",
 	"linux":   "/tmp/db",
 }
 
 // 创建并打开数据库
-func init(){
-	DBs=&DBClient{
-		bucket:"db0",
-		dbdir:Dirs[runtime.GOOS],
-	}
-	fmt.Println("[modb]",Dirs[runtime.GOOS])
-	DBs.OpenDB()
+func Init(){
+	once.Do(func() {
+		DBs=&DBClient{
+			bucket:"db0",
+			dbdir:Dirs[runtime.GOOS],
+		}
+		glog.Cat("nutsdb").Println("init:",Dirs[runtime.GOOS])
+		DBs.OpenDB()
+	})
+
 }
 
 // IDBClient interface
@@ -40,10 +57,13 @@ type DBClient struct {
 
 // OpenDB() 打开数据库
 func (d *DBClient) OpenDB(){
+	glog.Cat("nutsdb").Println("OpenDB")
 	opt := nutsdb.DefaultOptions
 	opt.Dir = d.dbdir
 	db, err := nutsdb.Open(opt)
-	if err != nil {log.Fatal(err)}
+	if err != nil {
+		glog.Cat("nutsdb").Println("OpenDB:ERR:",err)
+	}
 	d.db=db
 }
 
@@ -54,6 +74,7 @@ func (d *DBClient) CloseDB(){
 
 // SetData(keys,value) 写入数据
 func (d *DBClient) SetData(keys,value string){
+	glog.Cat("nutsdb").Println("SetData:",keys,value)
 	key := []byte(keys)
 	val := []byte(value)
 	if err := d.db.Update(
@@ -63,12 +84,14 @@ func (d *DBClient) SetData(keys,value string){
 			}
 			return nil
 		}); err != nil {
+		glog.Cat("nutsdb").Println("SetData:ERR:",err)
 		log.Println(err)
 	}
 }
 
 // GetData() 读取数据
 func (d *DBClient) GetData(keys string) string {
+	glog.Cat("nutsdb").Println("GetData:",keys)
 	key := []byte(keys)
 	data:=""
 	if err := d.db.View(
@@ -84,6 +107,7 @@ func (d *DBClient) GetData(keys string) string {
 			}
 			return nil
 		}); err != nil {
+		glog.Cat("nutsdb").Println("GetData:ERR:",err)
 		log.Println(err)
 	}
 	return data

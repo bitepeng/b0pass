@@ -1,9 +1,22 @@
+# github.com/AndreasBriese/bbloom v0.0.0-20190306092124-e2d15f34fcf9
+github.com/AndreasBriese/bbloom
 # github.com/BurntSushi/toml v0.3.1
 github.com/BurntSushi/toml
 # github.com/bwmarrin/snowflake v0.0.0-20180412010544-68117e6bbede
 github.com/bwmarrin/snowflake
 # github.com/clbanning/mxj v1.8.4
 github.com/clbanning/mxj
+# github.com/dgraph-io/badger v1.6.0
+github.com/dgraph-io/badger
+github.com/dgraph-io/badger/options
+github.com/dgraph-io/badger/pb
+github.com/dgraph-io/badger/skl
+github.com/dgraph-io/badger/table
+github.com/dgraph-io/badger/y
+# github.com/dgryski/go-farm v0.0.0-20190423205320-6a90982ecee2
+github.com/dgryski/go-farm
+# github.com/dustin/go-humanize v1.0.0
+github.com/dustin/go-humanize
 # github.com/fatih/structs v1.1.0
 github.com/fatih/structs
 # github.com/fsnotify/fsnotify v1.4.7
@@ -72,6 +85,7 @@ github.com/gogf/gf/net/gipv4
 github.com/gogf/gf/net/gipv6
 github.com/gogf/gf/encoding/gcompress
 github.com/gogf/gf/internal/utilbytes
+github.com/gogf/gf/test/gtest
 github.com/gogf/gf/container/gring
 github.com/gogf/gf/os/gfsnotify
 github.com/gogf/gf/container/gpool
@@ -84,6 +98,8 @@ github.com/gogf/gf/crypto/gaes
 github.com/gogf/gf/encoding/gcharset
 github.com/gogf/gf/internal/fileinfo
 github.com/gogf/gf/os/gmutex
+# github.com/golang/protobuf v1.3.1
+github.com/golang/protobuf/proto
 # github.com/gomodule/redigo v2.0.0+incompatible
 github.com/gomodule/redigo/redis
 github.com/gomodule/redigo/internal
@@ -95,6 +111,8 @@ github.com/grokify/html-strip-tags-go
 github.com/mattn/go-runewidth
 # github.com/olekukonko/tablewriter v0.0.1
 github.com/olekukonko/tablewriter
+# github.com/pkg/errors v0.8.1
+github.com/pkg/errors
 # github.com/xujiajun/mmap-go v1.0.1
 github.com/xujiajun/mmap-go
 # github.com/xujiajun/nutsdb v0.4.0
@@ -107,8 +125,10 @@ github.com/xujiajun/utils/filesystem
 github.com/xujiajun/utils/strconv2
 # github.com/zserge/lorca v0.1.8
 github.com/zserge/lorca
-# golang.org/x/net v0.0.0-20190603091049-60506f45cf65
+# golang.org/x/net v0.0.0-20190620200207-3b0461eec859
 golang.org/x/net/websocket
+golang.org/x/net/trace
+golang.org/x/net/internal/timeseries
 # golang.org/x/sys v0.0.0-20190924092210-98129a5cf4a0
 golang.org/x/sys/unix
 golang.org/x/sys/windows

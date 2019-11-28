@@ -2,9 +2,9 @@ package api
 
 import (
 	"b0pass/library/fileinfos"
-	nustdbs "b0pass/library/nutsdbs"
 	"b0pass/library/response"
 	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/os/gcache"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/util/gconv"
 	"io"
@@ -23,7 +23,7 @@ func Upload(r *ghttp.Request) {
 		size := h.Size
 		// Get path
 		pathSub :=r.GetPostString("path")
-		nustdbs.DBs.SetData("files_path",pathSub)
+		gcache.Set("files_path",pathSub,0)
 		// Save path
 		savePath := fileinfos.GetRootPath() + "/files/" +pathSub+"/"+ name
 		log.Println(savePath)

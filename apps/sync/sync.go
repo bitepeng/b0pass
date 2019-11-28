@@ -78,7 +78,6 @@ func (c *Controller) writeGroup(msgType int,msg string) error {
 			_ = user.(*ghttp.WebSocket).WriteMessage(msgType, []byte(msgs))
 		}
 	})
-
 	return nil
 }
 
