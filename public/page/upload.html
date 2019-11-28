@@ -29,7 +29,7 @@
                     <fieldset class="layui-elem-field">
                         <div class="layui-field-box" style="text-align: center">
                             <div class="layui-panel-window" style="width: 65%;margin: 0 auto;">
-                                <label>/<input  v-model="path_sub" @input="setPathSub()" type="text" id="path_sub" style="width:50%" placeholder="自定义上传子目录" />/
+                                <label>/<input  v-model="path_sub" type="text" id="path_sub" style="width:50%" placeholder="自定义上传子目录" />/
                                 </label>
                             </div>
                             <div class="layui-upload-drag" id="upload-file" style="width: 60%;">
@@ -60,7 +60,7 @@
                         <div class="layui-field-box" style="text-align: center">
                             <div class="" style="margin: 0 auto;">
                                 <label>
-                                    <textarea  v-model="data_text" @input="setDataText()" type="text" id="data_text" style="width:100%;height:300px;" ></textarea>
+                                    <textarea  v-model="data_text" @mouseout="setDataText()" type="text" id="data_text" style="width:100%;height:300px;" ></textarea>
                                 </label>
                             </div>
                         </div>
@@ -118,24 +118,28 @@
 
             },
             setPathSub:function () {
-                httpGet("/api/subpath?path="+this.path_sub.trim(),
-                    function(result){});
+                httpPost("/api/subpath",
+                    {'path':this.path_sub.trim()},
+                    function(result){
+                        syncSend("reload_path");
+                    });
             },
             setDataText:function(){
                 httpPost("/api/textdata",
                     {'data':this.data_text.trim()},
-                    function(result){
-                        syncSend("reload_text");
-                    });
+                    function(result){});
             }
         },
         mounted:function(){
-            httpGet("/api/subpath",
-                function(result){APP.$data.path_sub=result.data;});
-            httpGet("/api/textdata",
-                function(result){APP.$data.data_text=result.data;});
+            httpPost("/api/textdata",{},
+                function(result){
+                this.data_text=result.data;
+            });
+            httpPost("/api/subpath",{},
+                function(result){
+                    this.path_sub=result.data;
+            });
         }
-
     });
 
     layui.use(['upload','element'], function () {
@@ -154,7 +158,7 @@
             , field : "upload-file"
             , data:{
                 path:function(){
-                    return $('#path_sub').val();
+                    return APP.path_sub;
                 }
             }
             ,before: function(obj){
@@ -193,9 +197,9 @@
     function syncDo(data) {
         var msg=data.msg;
         if(msg==='reload_text'){
-            httpGet("/api/textdata",
+            httpPost("/api/textdata","{}",
                 function(result){
-                APP.$data.data_text=result.data;
+                    APP.data_text=result.data;
             });
         }
     }

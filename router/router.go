@@ -30,7 +30,7 @@ func init() {
 		g.GET("/upload", api.UploadShow)
 		//server
 		g.GET("/sip", api.GetIp)
-		g.GET("/subpath", api.GetSubPath)
+		g.ALL("/subpath", api.GetSubPath)
 		g.ALL("/textdata", api.GetTextData)
 		g.GET("/openurl",api.OpenUrl)
 	})

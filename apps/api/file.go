@@ -21,10 +21,13 @@ func Upload(r *ghttp.Request) {
 		defer func() { _ = f.Close() }()
 		name := gfile.Basename(h.Filename)
 		size := h.Size
+		// Get path
 		pathSub :=r.GetPostString("path")
 		nustdbs.DBs.SetData("files_path",pathSub)
+		// Save path
 		savePath := fileinfos.GetRootPath() + "/files/" +pathSub+"/"+ name
 		log.Println(savePath)
+		// Upload file
 		file, err := gfile.Create(savePath)
 		if err != nil {
 			r.Response.Write(err)
