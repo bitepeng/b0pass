@@ -2,7 +2,6 @@ package main
 
 
 import (
-	"b0pass/library/gkvdbs/gkvdb"
 	nustdbs "b0pass/library/nutsdbs"
 	"fmt"
 )
