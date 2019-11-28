@@ -121,23 +121,25 @@
                 httpPost("/api/subpath",
                     {'path':this.path_sub.trim()},
                     function(result){
-                        syncSend("reload_path");
+
                     });
             },
             setDataText:function(){
                 httpPost("/api/textdata",
                     {'data':this.data_text.trim()},
-                    function(result){});
+                    function(result){
+                        syncSend("reload_text");
+                    });
             }
         },
         mounted:function(){
-            httpPost("/api/textdata",{},
-                function(result){
-                this.data_text=result.data;
-            });
             httpPost("/api/subpath",{},
                 function(result){
-                    this.path_sub=result.data;
+                    APP.$data.path_sub=result.data;
+            });
+            httpPost("/api/textdata",{},
+                function(result){
+                    APP.$data.data_text=result.data;
             });
         }
     });
@@ -199,7 +201,7 @@
         if(msg==='reload_text'){
             httpPost("/api/textdata","{}",
                 function(result){
-                    APP.data_text=result.data;
+                    APP.$data.data_text=result.data;
             });
         }
     }

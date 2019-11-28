@@ -1,18 +1,26 @@
 package nustdbs
 
 import (
+	"fmt"
 	"github.com/xujiajun/nutsdb"
 	"log"
+	"runtime"
 )
 
 var DBs *DBClient
+var Dirs = map[string]string{
+	"windows": "tmp/db",
+	"darwin":  "/tmp/db",
+	"linux":   "/tmp/db",
+}
 
 // 创建并打开数据库
 func init(){
 	DBs=&DBClient{
 		bucket:"db0",
-		dbdir:"tmp/db",
+		dbdir:Dirs[runtime.GOOS],
 	}
+	fmt.Println("[modb]",Dirs[runtime.GOOS])
 	DBs.OpenDB()
 }
 
@@ -66,7 +74,11 @@ func (d *DBClient) GetData(keys string) string {
 	if err := d.db.View(
 		func(tx *nutsdb.Tx) error {
 			if e, err := tx.Get(d.bucket, key);err!=nil{
-				return err
+				if err.Error()=="key not found"{
+					d.SetData(keys,"")
+				}else{
+					return err
+				}
 			}else{
 				data=string(e.Value)
 			}
