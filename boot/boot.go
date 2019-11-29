@@ -22,6 +22,7 @@ func ExecArgs(){
 	}
 }
 
+
 // 用于应用初始化。
 func init() {
 
@@ -31,6 +32,9 @@ func init() {
 
 	// 资源根目录
 	PathRoot = fileinfos.GetRootPath()
+
+	// 恢复文件到缓存
+	fileinfos.Init("data_path","data_text")
 
 	go func() {
 

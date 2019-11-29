@@ -4,7 +4,6 @@ import (
 	"b0pass/library/fileinfos"
 	"b0pass/library/response"
 	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/gcache"
 	"github.com/gogf/gf/os/gfile"
 	"github.com/gogf/gf/util/gconv"
 	"io"
@@ -23,7 +22,7 @@ func Upload(r *ghttp.Request) {
 		size := h.Size
 		// Get path
 		pathSub :=r.GetPostString("path")
-		gcache.Set("files_path",pathSub,0)
+		fileinfos.Set("data_path",pathSub)
 		// Save path
 		savePath := fileinfos.GetRootPath() + "/files/" +pathSub+"/"+ name
 		log.Println(savePath)

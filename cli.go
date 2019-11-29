@@ -13,9 +13,6 @@ import (
 )
 
 func main() {
-	/*
-		Wait Server
-	*/
 	//Cli Args
 	boot.ExecArgs()
 	ipArr,_:=ipaddress.GetIP()

@@ -11,7 +11,7 @@ import (
 var commands = map[string]string{
 	"windows": "cmd /c start ",
 	"darwin":  "open ",
-	"linux":   "xdg-open ",
+	"linux":   "xdg-open ",//eog -w
 }
 
 // Open 打开浏览器

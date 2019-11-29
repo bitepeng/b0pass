@@ -120,7 +120,10 @@
             },
             setPathSub:function () {
                 httpPost("/api/subpath",
-                    {'path':this.path_sub.trim()},
+                    {
+                        'path':this.path_sub,
+                        'code':"1"
+                    },
                     function(result){
 
                     });
@@ -128,7 +131,10 @@
             setDataText:function(){
                 console.log("methods:textdata>>");
                 httpPost("/api/textdata",
-                    {'data':this.data_text.trim()},
+                    {
+                        'data':this.data_text,
+                        'code':"1"
+                    },
                     function(result){
                         console.log("mounted:textdata:"+JSON.stringify(result.data));
                         syncSend("reload_text");
