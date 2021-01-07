@@ -1,8 +1,10 @@
 package boot
 
 import (
+	conf2 "b0pass/library/conf"
 	"b0pass/library/fileinfos"
 	"flag"
+	"fmt"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gfile"
@@ -13,28 +15,28 @@ import (
 var (
 	PathRoot string
 	ServPort int
+	filePath string
 )
 
-func ExecArgs(){
+func ExecArgs() {
 	flag.Parse()
-	if ServPort<=0{
-		ServPort=g.Config().GetInt("setting.port")
+	if ServPort <= 0 {
+		ServPort = g.Config().GetInt("setting.port")
 	}
 }
-
 
 // 用于应用初始化。
 func init() {
 
 	// 分析CLI参数
-	flag.IntVar(&ServPort,"p",8899,"-p for Server Port(default=8899)")
+	flag.IntVar(&ServPort, "p", 8899, "-p for Server Port(default=8899)")
 	ExecArgs()
 
 	// 资源根目录
 	PathRoot = fileinfos.GetRootPath()
 
 	// 恢复文件到缓存
-	fileinfos.Init("data_path","data_text")
+	fileinfos.Init("data_path", "data_text")
 
 	go func() {
 
@@ -62,7 +64,7 @@ func init() {
 		s.SetReadTimeout(3 * 60 * time.Second)
 		s.SetWriteTimeout(3 * 60 * time.Second)
 		s.SetIdleTimeout(3 * 60 * time.Second)
-		s.SetMaxHeaderBytes(32*1024)
+		s.SetMaxHeaderBytes(32 * 1024)
 		s.SetNameToUriType(ghttp.URI_TYPE_ALLLOWER)
 		s.SetErrorLogEnabled(true)
 		s.SetAccessLogEnabled(true)
@@ -70,7 +72,13 @@ func init() {
 		s.SetDumpRouteMap(false)
 
 		// 文件根目录
-		filePath := PathRoot + "/files"
+		if gfile.Exists(PathRoot + "/config.conf") {
+			conf := conf2.InitConfig(PathRoot + "/config.conf")
+			filePath = conf["filePath"]
+		} else {
+			filePath = PathRoot + "/files/"
+		}
+		fmt.Printf("filePath:" + filePath)
 		if !gfile.Exists(filePath) {
 			if err := gfile.Mkdir(filePath); err != nil {
 				panic(err)
