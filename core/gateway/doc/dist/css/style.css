@@ -1,0 +1,18 @@
+body{font-family:'Courier New', Courier, monospace;padding:5px 20px; line-height: 120%;}
+
+a{text-decoration: none;}
+hr{ margin:0 auto;border: 0;height: 1px;background-color:#999;clear: both;margin: 10px 0;}
+
+table{border:none;padding:0;margin:0;border-spacing:0;width: 100%;}
+td{border: 1px #ccc solid;padding:5px 10px;margin: 0;vertical-align: top;}
+
+input{font-size: 14px;line-height: 200%;width:180px;margin:10px 0;}
+button{font-size: 14px;line-height: 200%;margin:10px 0;padding:2px 30px;width:188px;}
+
+.pull-right{float:right; margin-bottom: 10px;}
+.clear{clear: both;}
+
+.dbg{font-weight:bold; color:white;background: darkblue; background-image: linear-gradient(to bottom, rgb(72, 196, 238),  rgb(18, 168, 218));}
+.des{font-size: 12px; color: #ccc;padding:10px 0;}
+.rlink{float:right;margin-top:45px;}
+.tag{padding:2px 5px;text-align:center;width:60px; border-radius:5px;font-size:12px;}

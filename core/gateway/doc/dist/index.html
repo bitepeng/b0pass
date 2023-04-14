@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DevDoc</title>
+    <link href="css/style.css" media="screen" rel="stylesheet">
+</head>
+
+<body>
+    <h1> B0GO DevDoc </h1>
+    <p>Go语言极简Web开发脚手架<a href="/dev/api" target="_blank">API</a>文档</p>
+
+    <div id="apps-div"></div>
+
+    <script src="js/ajax.js"></script>
+    <script>
+        window.onload = check();
+        function check() {
+            var appDiv = document.getElementById("apps-div");
+            ajax("/dev/api", "", "get", function (data) {
+                //data=JSON.parse(e);
+                var strDiv = "";
+                for (var k in data) {
+                    var hName = data[k]['Name'];
+                    var hDes = data[k]['ReadMe'];
+                    strDiv += '<div class="rlink"><b><a target="_blank" href="/app/' + hName + '">/app/' + hName + '</a></b></div>';
+                    strDiv += '<br><h2>' + hName + '</h2><hr>';
+                    strDiv += '<div class="des">' + hDes.replaceAll("#", "") + " " + data[k]['Config'] + '</div>';
+                    var router = data[k]['Router'];
+                    for (var k1 in router) {
+                        strDiv += '<table><tr class="dbg"><td width="300">Api</td><td>Param</td>';
+                        strDiv += '<td width="200">Description</td></tr>';
+                        var router1 = router[k1];
+                        for (var k2 in router1) {
+                            var hParam = router1[k2]["param"];
+                            strDiv += '<tr><td><span class="dbg tag">' + k1 + '</span> ';
+                            strDiv += '<a target="_blank" href=' + router1[k2]["url"] + '>' + router1[k2]["url"] + '</a></td>';
+                            strDiv += '<td>' + hParam.replaceAll("\n", "<br>") + '</td>';
+                            strDiv += '<td>' + router1[k2]["title"] + '</td></tr>';
+                        }
+                        strDiv += '</table><br/>';
+                    }
+                }
+                appDiv.innerHTML = strDiv;
+            });
+        }
+    </script>
+</body>
+
+</html>

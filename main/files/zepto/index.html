@@ -1,0 +1,3374 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name=viewport content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <![endif]-->
+  <title>Zepto.js: 轻量且兼容 jQuery API 的 JavaScript 工具库 | Zepto.js 中文网</title>
+  
+  <meta name=description content="Zepto.js 是一个轻量级的、针对现代高级浏览器的 JavaScript 工具库，它兼容 jQuery 的 API。如果你会用 jQuery，那么你就已经会用 Zepto.js 了。
+">
+  
+  <link rel=stylesheet href=style.css>
+
+  <meta name=apple-mobile-web-app-capable content=yes>
+  <meta name=apple-mobile-web-app-status-bar-style content=white>
+  <meta name=format-detection content="telephone=no">
+
+  <link rel=apple-touch-icon-precomposed href=icon.png>
+  <link rel=icon type=image/png href=favicon.png>
+</head>
+<body class="emoji-enabled">
+  
+  <div id="menu_icon">🍔</div>
+
+<aside id="sidebar" class="interface">
+
+  <a class="toc_title" href="#">
+    Zepto.js 中文文档 <span class="version">(1.2.0)</span>
+  </a>
+
+  <ul class=toc_section>
+    <li><a href="#download">下载</a></li>
+    <li><a href="#browsers">浏览器支持</a></li>
+    <li><a href="#modules">模块</a></li>
+    <li><a href="https://github.com/madrobby/zepto/releases">更新日志</a></li>
+    <li><a href="#thanks">致谢</a></li>
+  </ul>
+
+  <hr>
+
+  <a class=toc_title href="#core">Core</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#$()">$()</a></li>
+  
+  <li><a href="#$.camelCase">$.camelCase</a></li>
+  
+  <li><a href="#$.contains">$.contains</a></li>
+  
+  <li><a href="#$.each">$.each</a></li>
+  
+  <li><a href="#$.extend">$.extend</a></li>
+  
+  <li><a href="#$.fn">$.fn</a></li>
+  
+  <li><a href="#$.grep">$.grep</a></li>
+  
+  <li><a href="#$.inArray">$.inArray</a></li>
+  
+  <li><a href="#$.isArray">$.isArray</a></li>
+  
+  <li><a href="#$.isFunction">$.isFunction</a></li>
+  
+  <li><a href="#$.isNumeric">$.isNumeric</a></li>
+  
+  <li><a href="#$.isPlainObject">$.isPlainObject</a></li>
+  
+  <li><a href="#$.isWindow">$.isWindow</a></li>
+  
+  <li><a href="#$.map">$.map</a></li>
+  
+  <li><a href="#$.noop">$.noop</a></li>
+  
+  <li><a href="#$.parseJSON">$.parseJSON</a></li>
+  
+  <li><a href="#$.trim">$.trim</a></li>
+  
+  <li><a href="#$.type">$.type</a></li>
+  
+  <li><a href="#add">add</a></li>
+  
+  <li><a href="#addClass">addClass</a></li>
+  
+  <li><a href="#after">after</a></li>
+  
+  <li><a href="#append">append</a></li>
+  
+  <li><a href="#appendTo">appendTo</a></li>
+  
+  <li><a href="#attr">attr</a></li>
+  
+  <li><a href="#before">before</a></li>
+  
+  <li><a href="#children">children</a></li>
+  
+  <li><a href="#clone">clone</a></li>
+  
+  <li><a href="#closest">closest</a></li>
+  
+  <li><a href="#concat">concat</a></li>
+  
+  <li><a href="#contents">contents</a></li>
+  
+  <li><a href="#css">css</a></li>
+  
+  <li><a href="#data">data</a></li>
+  
+  <li><a href="#each">each</a></li>
+  
+  <li><a href="#empty">empty</a></li>
+  
+  <li><a href="#eq">eq</a></li>
+  
+  <li><a href="#filter">filter</a></li>
+  
+  <li><a href="#find">find</a></li>
+  
+  <li><a href="#first">first</a></li>
+  
+  <li><a href="#forEach">forEach</a></li>
+  
+  <li><a href="#get">get</a></li>
+  
+  <li><a href="#has">has</a></li>
+  
+  <li><a href="#hasClass">hasClass</a></li>
+  
+  <li><a href="#height">height</a></li>
+  
+  <li><a href="#hide">hide</a></li>
+  
+  <li><a href="#html">html</a></li>
+  
+  <li><a href="#index">index</a></li>
+  
+  <li><a href="#indexOf">indexOf</a></li>
+  
+  <li><a href="#insertAfter">insertAfter</a></li>
+  
+  <li><a href="#insertBefore">insertBefore</a></li>
+  
+  <li><a href="#is">is</a></li>
+  
+  <li><a href="#last">last</a></li>
+  
+  <li><a href="#map">map</a></li>
+  
+  <li><a href="#next">next</a></li>
+  
+  <li><a href="#not">not</a></li>
+  
+  <li><a href="#offset">offset</a></li>
+  
+  <li><a href="#offsetParent">offsetParent</a></li>
+  
+  <li><a href="#parent">parent</a></li>
+  
+  <li><a href="#parents">parents</a></li>
+  
+  <li><a href="#pluck">pluck</a></li>
+  
+  <li><a href="#position">position</a></li>
+  
+  <li><a href="#prepend">prepend</a></li>
+  
+  <li><a href="#prependTo">prependTo</a></li>
+  
+  <li><a href="#prev">prev</a></li>
+  
+  <li><a href="#prop">prop</a></li>
+  
+  <li><a href="#push">push</a></li>
+  
+  <li><a href="#ready">ready</a></li>
+  
+  <li><a href="#reduce">reduce</a></li>
+  
+  <li><a href="#remove">remove</a></li>
+  
+  <li><a href="#removeAttr">removeAttr</a></li>
+  
+  <li><a href="#removeClass">removeClass</a></li>
+  
+  <li><a href="#removeProp">removeProp</a></li>
+  
+  <li><a href="#replaceWith">replaceWith</a></li>
+  
+  <li><a href="#scrollLeft">scrollLeft</a></li>
+  
+  <li><a href="#scrollTop">scrollTop</a></li>
+  
+  <li><a href="#show">show</a></li>
+  
+  <li><a href="#siblings">siblings</a></li>
+  
+  <li><a href="#size">size</a></li>
+  
+  <li><a href="#slice">slice</a></li>
+  
+  <li><a href="#text">text</a></li>
+  
+  <li><a href="#toggle">toggle</a></li>
+  
+  <li><a href="#toggleClass">toggleClass</a></li>
+  
+  <li><a href="#unwrap">unwrap</a></li>
+  
+  <li><a href="#val">val</a></li>
+  
+  <li><a href="#width">width</a></li>
+  
+  <li><a href="#wrap">wrap</a></li>
+  
+  <li><a href="#wrapAll">wrapAll</a></li>
+  
+  <li><a href="#wrapInner">wrapInner</a></li>
+  
+</ul>
+
+
+  <a class=toc_title href="#detect">Detect</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#Detect 模块">Detect 模块</a></li>
+  
+</ul>
+
+
+  <a class=toc_title href="#event">Event</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#$.Event">$.Event</a></li>
+  
+  <li><a href="#$.proxy">$.proxy</a></li>
+  
+  <li><a href="#bind">bind</a></li>
+  
+  <li><a href="#delegate">delegate</a></li>
+  
+  <li><a href="#die">die</a></li>
+  
+  <li><a href="#event.isDefaultPrevented">event.isDefaultPrevented</a></li>
+  
+  <li><a href="#event.isImmediatePropagationStopped">event.isImmediatePropagationStopped</a></li>
+  
+  <li><a href="#event.isPropagationStopped">event.isPropagationStopped</a></li>
+  
+  <li><a href="#live">live</a></li>
+  
+  <li><a href="#off">off</a></li>
+  
+  <li><a href="#on">on</a></li>
+  
+  <li><a href="#one">one</a></li>
+  
+  <li><a href="#trigger">trigger</a></li>
+  
+  <li><a href="#triggerHandler">triggerHandler</a></li>
+  
+  <li><a href="#unbind">unbind</a></li>
+  
+  <li><a href="#undelegate">undelegate</a></li>
+  
+</ul>
+
+
+  <a class=toc_title href="#ajax">Ajax</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#$.ajax">$.ajax</a></li>
+  
+  <li><a href="#$.ajaxJSONP">$.ajaxJSONP</a></li>
+  
+  <li><a href="#$.ajaxSettings">$.ajaxSettings</a></li>
+  
+  <li><a href="#$.get">$.get</a></li>
+  
+  <li><a href="#$.getJSON">$.getJSON</a></li>
+  
+  <li><a href="#$.param">$.param</a></li>
+  
+  <li><a href="#$.post">$.post</a></li>
+  
+  <li><a href="#load">load</a></li>
+  
+</ul>
+
+
+  <a class=toc_title href="#form">Form</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#serialize">serialize</a></li>
+  
+  <li><a href="#serializeArray">serializeArray</a></li>
+  
+  <li><a href="#submit">submit</a></li>
+  
+</ul>
+
+
+  <a class=toc_title href="#fx">Effects</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#$.fx">$.fx</a></li>
+  
+  <li><a href="#animate">animate</a></li>
+  
+</ul>
+
+
+  <a class=toc_title href="#touch">Touch</a>
+  
+  <ul class=toc_section>
+  
+  <li><a href="#Touch events">Touch events</a></li>
+  
+</ul>
+
+</aside>
+
+<div class="container">
+
+  <header>
+  <h1>Zepto.js</h1>
+
+  <p>
+    <b>Zepto</b> 是一个轻量级的、针对现代高级浏览器的<b> JavaScript 工具库</b>，它兼容<b> jQuery 的 API</b> 。
+
+    <em>如果你会用 jQuery，那么你就已经会用 Zepto 了。</em>
+  </p>
+
+
+  <p>
+    Zepto 的设计目的是<b>提供与 jQuery 兼容的 API</b>，但并不是 100% 覆盖 jQuery API 。
+    Zepto 设计的目的是提供一个 5-10k 的通用库、<b>下载并快速执行</b>、<b>有一套大家熟悉且稳定的 API</b>，
+    所以你可以把<b>主要精力放到应用开发上</b>。
+  </p>
+
+  <p>
+    Zepto 是一款开源软件，它采用的是对开发者和商业都很友好的开源协议 --
+    <a href="https://github.com/madrobby/zepto/blob/master/MIT-LICENSE">MIT license</a>。
+  </p>
+
+  </header>
+
+  <h3 id=download>下载 Zepto</h3>
+
+  <ul class=downloads>
+    <li>
+      <a href="zepto.js" class="download">zepto.js v1.2.0 (开发版)</a>
+      – <i>57.3k uncompressed, lots of comments</i>
+    </li>
+    <li>
+      <a href="zepto.min.js" class="download">zepto.min.js v1.2.0 (稳定版)</a>
+      – <i>9.6k when gzipped</i>
+    </li>
+  </ul>
+
+  <p>
+    其他下载方式：
+  </p>
+  <ul>
+    <li><code>npm install zepto</code>; or</li>
+    <li>
+      <a href="https://github.com/madrobby/zepto">grab the latest version on GitHub</a>.
+      <iframe src="https://ghbtns.com/github-btn.html?user=madrobby&amp;repo=zepto&amp;type=watch&amp;count=true"
+        style="margin-left:10px" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      <iframe src="https://ghbtns.com/github-btn.html?user=madrobby&amp;repo=zepto&amp;type=fork&amp;count=true"
+        allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+    </li>
+  </ul>
+
+  <p>
+    默认构建包含以下<a href="#modules">模块：</a>
+    <em>Core, Ajax, Event, Form, IE</em>.
+  </p>
+
+  <p class=compat>
+    如果 <code>$</code> 变量尚未定义，Zepto 只设置全局变量 <code>$</code> 指向它本身。
+    没有 <code>Zepto.noConflict</code>方法。
+  </p>
+
+  <h3 id=browsers>浏览器支持：</h3>
+
+  <h4>主要浏览器 (100% 支持)</h4>
+  <ul>
+    <li>Safari 6+ (Mac)</li>
+    <li>Chrome 30+ (Windows, Mac, Android, iOS, Linux, Chrome OS)</li>
+    <li>Firefox 24+ (Windows, Mac, Android, Linux, Firefox OS)</li>
+    <li>iOS 5+ Safari</li>
+    <li>Android 2.3+ Browser</li>
+    <li>Internet Explorer 10+ (Windows, Windows Phone)</li>
+  </ul>
+
+  <h4>次要浏览器 (全部或部分支持)</h4>
+  <ul>
+    <li>iOS 3+ Safari</li>
+    <li>Chrome &lt;30</li>
+    <li>Firefox 4+</li>
+    <li>Safari &lt;6</li>
+    <li>Android Browser 2.2</li>
+    <li>Opera 10+</li>
+    <li>webOS 1.4.5+ Browser</li>
+    <li>BlackBerry Tablet OS 1.0.7+ Browser</li>
+    <li>Amazon Silk 1.0+</li>
+    <li>Other WebKit-based browsers/runtimes</li>
+  </ul>
+
+  <p>
+    <em>需要注意的是 Zepto 的一些可选功能是专门针对移动端浏览器的；
+      因为它的最初目标在移动端提供一个精简的类似 jQuery 的工具库。</em>
+  </p>
+
+  <p>
+    在浏览器上(Safari、Chrome 和 Firefox)上开发页面应用或者构建基于 HTML 的 web-view 本地应用，
+    例如 <a href="http://phonegap.com/">PhoneGap</a>，使用 Zepto 是一个不错的选择。
+  <p>
+
+  <p>
+    总之，Zepto 希望在所有的现代浏览器中作为一种基础环境来使用。
+    Zepto 不支持旧版本的 Internet Explorer浏览器(<10)。
+  </p>
+
+  <h3>手动构建 Zepto</h3>
+
+  <p>
+    上面提供的 <code>zepto.js</code> 和 <code>zepto.min.js</code> 可以直接使用。
+    然而，为了更好的程序效果和自由性，可以通过 Zepto 源码构建 Zepto.js 和 zepto.min.js 的时候选择模块并作测试，
+    使用 <a href="https://github.com/mishoo/UglifyJS">UglifyJS</a> 根据你的需要来生
+    成 <code>zepto.min.js</code> (当服务端开启gzipped后，最精简的代码)文件。
+  </p>
+
+  <p>
+    请参考 <a href="https://github.com/madrobby/zepto#readme">the README</a> 文件了解如何构建 Zepto，
+    还有如何测试以及提交补丁的说明。
+  </p>
+
+  <h3 id=modules>Zepto 模块</h3>
+
+<table>
+<thead><tr>
+<th>模块名</th> <th>默认内置</th> <th>描述</th>
+</tr></thead>
+<tbody>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/zepto.js#files">zepto</a></th>
+    <td>✔</td>
+    <td>Core module; contains most methods</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/event.js#files">event</a></th>
+    <td>✔</td>
+    <td>Event handling via <code>on()</code> &amp; <code>off()</code>
+</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/ajax.js#files">ajax</a></th>
+    <td>✔</td>
+    <td>XMLHttpRequest and JSONP functionality</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/form.js#files">form</a></th>
+    <td>✔</td>
+    <td>Serialize &amp; submit web forms</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/ie.js#files">ie</a></th>
+    <td>✔</td>
+    <td>
+      Add support for Internet Explorer 10+ on desktop and Windows Phone 8.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/detect.js#files">detect</a></th>
+    <td></td>
+    <td>Provides <code>$.os</code> and <code>$.browser</code> information</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/fx.js#files">fx</a></th>
+    <td></td>
+    <td>The <code>animate()</code> method</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/fx_methods.js#files">fx_methods</a></th>
+    <td></td>
+    <td>
+      Animated <code>show</code>, <code>hide</code>, <code>toggle</code>,
+      and <code>fade*()</code> methods.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/assets.js#files">assets</a></th>
+    <td></td>
+    <td>
+      Experimental support for cleaning up iOS memory after removing
+      image elements from the DOM.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/data.js#files">data</a></th>
+    <td></td>
+    <td>
+      A full-blown <code>data()</code> method, capable of storing arbitrary
+      objects in memory.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/deferred.js#files">deferred</a></th>
+    <td></td>
+    <td>
+      Provides <code>$.Deferred</code> promises API.
+      Depends on the "callbacks" module.
+      <br>
+      When included, <a href="#$.ajax"><code>$.ajax()</code></a> supports a
+      promise interface for chaining callbacks.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/callbacks.js#files">callbacks</a></th>
+    <td></td>
+    <td>
+      Provides <code>$.Callbacks</code> for use in "deferred" module.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/selector.js#files">selector</a></th>
+    <td></td>
+    <td>
+      Experimental <a href="http://api.jquery.com/category/selectors/jquery-selector-extensions/">jQuery
+      CSS extensions</a> support for functionality such as <code>$('div:first')</code> and
+      <code>el.is(':visible')</code>.
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/touch.js#files">touch</a></th>
+    <td></td>
+    <td>
+      Fires tap– and swipe–related events on touch devices. This works with both
+      `touch` (iOS, Android) and `pointer` events (Windows Phone).
+    </td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/gesture.js#files">gesture</a></th>
+    <td></td>
+    <td>Fires pinch gesture events on touch devices</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/stack.js#files">stack</a></th>
+    <td></td>
+    <td>Provides <code>andSelf</code> &amp; <code>end()</code> chaining methods</td>
+  </tr>
+<tr>
+<th><a href="https://github.com/madrobby/zepto/blob/master/src/ios3.js#files">ios3</a></th>
+    <td></td>
+    <td>
+      String.prototype.trim and Array.prototype.reduce methods
+      (if they are missing) for compatibility with iOS 3.x.
+    </td>
+  </tr>
+</tbody>
+</table>
+
+  <h3>创建插件</h3>
+
+  <p>可以通过为<a href="#$.fn"><code>$.fn</code></a>添加方法，创建新的插件。
+  </p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">;(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">foo</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="c1">// `this` refers to the current Zepto collection.</span>
+      <span class="c1">// When possible, return the Zepto collection to allow chaining.</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">})(</span><span class="nx">Zepto</span><span class="p">)</span></code></pre></figure>
+
+  <p>
+     参考
+    <a href="https://github.com/madrobby/zepto/blob/master/src/zepto.js">source of Zepto's core module</a>,
+    <a href="https://github.com/madrobby/zepto#code-style-guidelines">coding style guidelines</a>.
+  </p>
+
+  <section id=documentation>
+
+    <hr>
+    <h2 id="core">核心方法</h2>
+    
+    
+<article class=method id="$()">
+  <h3>$()
+  
+  
+  </h3>
+  
+  
+  <pre class=highlight><code>
+  $(selector, [context])            ⇒ collection
+  $(&lt;Zepto collection&gt;)             ⇒ same collection
+  $(&lt;DOM nodes&gt;)                    ⇒ collection
+  $(htmlString)                     ⇒ collection
+  $(htmlString, attributes)         ⇒ collection [v1.0]
+  Zepto(function($){ ... })
+</code></pre>
+  
+  <p>通过执行 css 选择器，包装 dom 节点，或者通过一个 html 字符串创建多个元素 来创建一个 Zepto 集合对象。</p>
+
+<p>Zepto 集合是一个类似数组的对象，它具有链式方法来操作它指向的 DOM 节点，除了 $( Zepto) 对象上的直接方法外 (如 $.extend)，文档对象中的所有方法都是集合方法。</p>
+
+<p>如果选择器中存在 content 参数 (css 选择器，dom，或者 Zepto 集合对象)，那么只在所给的节点背景下进行 css 选择器；这个功能和使用 $(context).find(selector) 是一样的。</p>
+
+<p>当给定一个 html 字符串片段来创建一个 dom 节点时。也可以通过给定一组属性映射来创建节点。最快的创建但元素，使用 &lt;div&gt; 或 &lt;div/&gt; 形式。</p>
+
+<p>当一个函数附加在 DOMContentLoaded 事件处理流程中。如果页面已加载完毕，这个方法将会立即被执行。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">)</span>  <span class="c1">//=&gt; all DIV elements on the page</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#foo</span><span class="dl">'</span><span class="p">)</span> <span class="c1">//=&gt; element with ID "foo"</span>
+
+<span class="c1">// create element:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;p&gt;Hello&lt;/p&gt;</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//=&gt; the new P element</span>
+<span class="c1">// create element with attributes:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;p /&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">text</span><span class="p">:</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">,</span> <span class="na">id</span><span class="p">:</span><span class="dl">"</span><span class="s2">greeting</span><span class="dl">"</span><span class="p">,</span> <span class="na">css</span><span class="p">:{</span><span class="na">color</span><span class="p">:</span><span class="dl">'</span><span class="s1">darkblue</span><span class="dl">'</span><span class="p">}</span> <span class="p">})</span>
+<span class="c1">//=&gt; &lt;p id=greeting style="color:darkblue"&gt;Hello&lt;/p&gt;</span>
+
+<span class="c1">// execute callback when the page is ready:</span>
+<span class="nx">Zepto</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ready to Zepto!</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+<p class="compat">
+  不支持<a href="http://api.jquery.com/category/selectors/jquery-selector-extensions/">jQuery CSS 扩展</a> ， 然而，可选的 “selector” 模块有限提供了支持几个最常用的伪选择器，而且可以被丢弃，与现有的代码或插件的兼容执行。
+</p>
+
+<p class="compat">
+  如果 $ 变量尚未定义，Zepto 只设置了全局变量 $ 指向它本身。允许您同时使用的 Zepto 和有用的遗留代码，例如，prototype.js。
+  只要首先加载 Prototype，Zepto 将不会覆盖 Prototype 的 $ 函数。Zepto 将始终设置全局变量 Zepto 指向它本身。
+</p>
+
+
+</article>
+
+<article class=method id="$.camelCase">
+  <h3>$.camelCase
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=highlight><code>$.camelCase(string) ⇒ string
+</code></pre>
+  
+  <p>将一组字符串变成 “骆驼” 命名法的新字符串，如果该字符已经是 “骆驼” 命名法，则不变化。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">camelCase</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello-there</span><span class="dl">'</span><span class="p">)</span> <span class="c1">//=&gt; "helloThere"</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">camelCase</span><span class="p">(</span><span class="dl">'</span><span class="s1">helloThere</span><span class="dl">'</span><span class="p">)</span>  <span class="c1">//=&gt; "helloThere"</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.contains">
+  <h3>$.contains
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.contains(parent, node) ⇒ boolean
+</code></pre>
+  
+  <p>检查父节点是否包含给定的 dom 节点，如果两者是相同的节点，则返回 false。</p>
+
+</article>
+
+<article class=method id="$.each">
+  <h3>$.each
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.each(collection, function(index, item){ ... }) ⇒ collection
+</code></pre>
+  
+  <p>Iterate over array elements or object key-value pairs. Returning
+<code>false</code> from the iterator function stops the iteration.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">([</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">item</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">item %d is: %s</span><span class="dl">'</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="kd">var</span> <span class="nx">hash</span> <span class="o">=</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">zepto.js</span><span class="dl">'</span><span class="p">,</span> <span class="na">size</span><span class="p">:</span> <span class="dl">'</span><span class="s1">micro</span><span class="dl">'</span> <span class="p">}</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">hash</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">%s: %s</span><span class="dl">'</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.extend">
+  <h3>$.extend
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.extend(target, [source, [source2, ...]]) ⇒ target
+$.extend(true, target, [source, ...]) ⇒ target [v1.0]
+</code></pre>
+  
+  <p>Extend target object with properties from each of the source objects,
+overriding the properties on target.</p>
+
+<p>By default, copying is shallow. An optional <code>true</code> for the first argument
+triggers deep (recursive) copying.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{</span> <span class="na">one</span><span class="p">:</span> <span class="dl">'</span><span class="s1">patridge</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span> <span class="na">two</span><span class="p">:</span> <span class="dl">'</span><span class="s1">turtle doves</span><span class="dl">'</span> <span class="p">}</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">source</span><span class="p">)</span>
+<span class="c1">//=&gt; { one: 'patridge',</span>
+<span class="c1">//     two: 'turtle doves' }</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.fn">
+  <h3>$.fn
+  
+  
+  </h3>
+  
+  
+  <p><code>Zepto.fn</code> is an object that holds all of the methods that are available on
+Zepto collections, such as <a href="#addClass"><code>addClass()</code></a>, <a href="#attr"><code>attr()</code></a>, and
+other.  Adding a function to this object makes that method available on every
+Zepto collection.</p>
+
+<p>Here’s an example implementation of Zepto’s <a href="#empty"><code>empty()</code></a> method:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">empty</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="k">this</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span> <span class="p">})</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.grep">
+  <h3>$.grep
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.grep(items, function(item){ ... }) ⇒ array
+</code></pre>
+  
+  <p>Get a new array containing only the items for which the callback function
+returned true.</p>
+
+</article>
+
+<article class=method id="$.inArray">
+  <h3>$.inArray
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.inArray(element, array, [fromIndex]) ⇒ number
+</code></pre>
+  
+  <p>Get the position of element inside an array, or <code>-1</code> if not found.</p>
+
+</article>
+
+<article class=method id="$.isArray">
+  <h3>$.isArray
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.isArray(object) ⇒ boolean
+</code></pre>
+  
+  <p>True if the object is an array.</p>
+
+</article>
+
+<article class=method id="$.isFunction">
+  <h3>$.isFunction
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.isFunction(object) ⇒ boolean
+</code></pre>
+  
+  <p>True if the object is a function.</p>
+
+</article>
+
+<article class=method id="$.isNumeric">
+  <h3>$.isNumeric
+  
+  <span class=version>v1.2+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.isNumeric(value) ⇒ boolean
+</code></pre>
+  
+  <p>True if the value is a finite Number or a String representing a number.</p>
+
+</article>
+
+<article class=method id="$.isPlainObject">
+  <h3>$.isPlainObject
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.isPlainObject(object) ⇒ boolean
+</code></pre>
+  
+  <p>True if the object is a “plain” JavaScript object, which is only true for object
+literals and objects created with <code>new Object</code>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">isPlainObject</span><span class="p">({})</span>         <span class="c1">// =&gt; true</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">isPlainObject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Object</span><span class="p">)</span> <span class="c1">// =&gt; true</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">isPlainObject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">)</span>   <span class="c1">// =&gt; false</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">isPlainObject</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span>     <span class="c1">// =&gt; false</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.isWindow">
+  <h3>$.isWindow
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.isWindow(object) ⇒ boolean
+</code></pre>
+  
+  <p>True if the object is a window object. This is useful for iframes where each one
+has its own window, and where these objects fail the regular <code>obj === window</code>
+check.</p>
+
+</article>
+
+<article class=method id="$.map">
+  <h3>$.map
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.map(collection, function(item, index){ ... }) ⇒ collection
+</code></pre>
+  
+  <p>Iterate through elements of collection and return all results of running the
+iterator function, with <code>null</code> and <code>undefined</code> values filtered out.</p>
+
+</article>
+
+<article class=method id="$.noop">
+  <h3>$.noop
+  
+  <span class=version>v1.2+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>var callback = $.noop
+</code></pre>
+  
+  <p>A reference to a function that does nothing.</p>
+
+</article>
+
+<article class=method id="$.parseJSON">
+  <h3>$.parseJSON
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.parseJSON(string) ⇒ object
+</code></pre>
+  
+  <p>Alias for the native <code>JSON.parse</code> method.</p>
+
+</article>
+
+<article class=method id="$.trim">
+  <h3>$.trim
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.trim(string) ⇒ string
+</code></pre>
+  
+  <p>Remove whitespace from beginning and end of a string; just like
+String.prototype.trim().</p>
+
+</article>
+
+<article class=method id="$.type">
+  <h3>$.type
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.type(object) ⇒ string
+</code></pre>
+  
+  <p>Get string type of an object. Possible types are:
+null undefined boolean number string function array date regexp object error.</p>
+
+<p>For other objects it will simply report “object”. To find out if an object is a
+plain JavaScript object, use <a href="#$.isPlainObject">isPlainObject</a>.</p>
+
+</article>
+
+<article class=method id="add">
+  <h3>add
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>add(selector, [context]) ⇒ self
+</code></pre>
+  
+  <p>添加元素到当前匹配的元素集合中。如果给定 context 参数，将只在 context 元素中根据 CSS 选择器（selector）进行查找，否则在整个 document 中查找。</p>
+
+</article>
+
+<article class=method id="addClass">
+  <h3>addClass
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>addClass(name) ⇒ self
+addClass(function(index, oldClassName){ ... }) ⇒ self
+</code></pre>
+  
+  <p>为每个匹配的元素添加指定的c lass 类名。多个 class 类名使用空格分隔。</p>
+
+</article>
+
+<article class=method id="after">
+  <h3>after
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>after(content) ⇒ self
+</code></pre>
+  
+  <p>在每个匹配的元素后面插入内容。内容可以为 HTML 字符串、DOM 节点或者由节点组成的数组。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">form label</span><span class="dl">'</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;p&gt;A note below the label&lt;/p&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="append">
+  <h3>append
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>append(content) ⇒ self
+</code></pre>
+  
+  <p>在每个匹配的元素的内部的末尾插入内容。内容可以为 HTML 字符串、DOM节点或者节点组成的数组。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;new list item&lt;/li&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="appendTo">
+  <h3>appendTo
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>appendTo(target) ⇒ self
+</code></pre>
+  
+  <p>将匹配的元素插入到目标元素的内部的末尾。这个有点像 <a href="#append">append</a>，但是插入的目标与其相反。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;new list item&lt;/li&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">appendTo</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="attr">
+  <h3>attr
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>attr(name) ⇒ string
+attr(name, value) ⇒ self
+attr(name, function(index, oldValue){ ... }) ⇒ self
+attr({ name: value, name2: value2, ... }) ⇒ self
+</code></pre>
+  
+  <p>读取或设置 DOM 的属性。如果没有给定 value 参数，则读取对象集合中第一个元素的属性值。当给定了 value 参数。则设置对象集合中所有元素的该属性的值。当 value 参数为 null，那么这个属性将被移除(类似 <a href="#removeAttr">removeAttr</a>)，多个属性可以通过对象键值对的方式进行设置。</p>
+
+<p>要读取 DOM 的属性如 <code>checked</code> 或 <code>selected</code>, 使用 <a href="#prop">prop</a> 方法。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">action</span><span class="dl">'</span><span class="p">)</span>             <span class="c1">//=&gt; 读取值</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">action</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">/create</span><span class="dl">'</span><span class="p">)</span>  <span class="c1">//=&gt; 设置值</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">action</span><span class="dl">'</span><span class="p">,</span> <span class="kc">null</span><span class="p">)</span>       <span class="c1">//=&gt; 删除属性</span>
+
+<span class="c1">// 同时操作多个属性：</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">attr</span><span class="p">({</span>
+  <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/create</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="before">
+  <h3>before
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>before(content) ⇒ self
+</code></pre>
+  
+  <p>在每个匹配元素的前面插入内容。内容可以为 HTML 字符串、DOM 节点或者节点组成的数组。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">table</span><span class="dl">'</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;p&gt;See the following table:&lt;/p&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="children">
+  <h3>children
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>children([selector]) ⇒ collection
+</code></pre>
+  
+  <p>获得元素集合中的每个元素的直接子元素，如果给定 selector，那么返回的结果中只包含符合 CSS 选择器（selector）的元素。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ol</span><span class="dl">'</span><span class="p">).</span><span class="nx">children</span><span class="p">(</span><span class="dl">'</span><span class="s1">*:nth-child(2n)</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">//=&gt; every other list item from every ordered list</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="clone">
+  <h3>clone
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>clone() ⇒ collection
+</code></pre>
+  
+  <p>通过深度克隆来复制集合中的所有元素。</p>
+
+<p class="compat">
+  This method doesn't have an option for copying data and event handlers over to
+  the new elements, as it has in jQuery.
+</p>
+
+</article>
+
+<article class=method id="closest">
+  <h3>closest
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>closest(selector, [context]) ⇒ collection
+closest(collection) ⇒ collection [v1.0]
+closest(element) ⇒ collection [v1.0]
+</code></pre>
+  
+  <p>从元素本身开始，逐级向上级元素匹配，并返回最先匹配 selector 的元素。如果给定 context 节点参数，那么只匹配该节点的后代元素。这个方法与 <a href="#parents"><code>parents(selector)</code></a> 有点相像，但它只返回最先匹配的祖先元素。</p>
+
+<p>如果参数是一个 Zepto 对象集合或者一个元素，结果必须匹配给定的元素而不是选择器（selector）。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">input[type=text]</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">input</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="concat">
+  <h3>concat
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>concat(nodes, [node2, ...]) ⇒ self
+</code></pre>
+  
+  <p>添加元素到一个元素集合中。如果参数是一个数组，那么这个数组中的所有元素将会合并到当前元素集合中。</p>
+
+<p class="compat">
+  This is a Zepto-provided method that is not part of the jQuery API.
+</p>
+
+</article>
+
+<article class=method id="contents">
+  <h3>contents
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>contents() ⇒ collection
+</code></pre>
+  
+  <p>获取元素集合中的每个元素的子元素，包括文字和注释节点。</p>
+
+</article>
+
+<article class=method id="css">
+  <h3>css
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>css(property) ⇒ value
+css([property1, property2, ...]) ⇒ object [v1.1]
+css(property, value) ⇒ self
+css({ property: value, property2: value2, ... }) ⇒ self
+</code></pre>
+  
+  <p>读取或设置 DOM 元素的 CSS 属性。当 value 参数不存在的时候，返回对象集合中第一个元素的 CSS 属性。当 value 参数存在时，设置对象集合中每一个元素的对应 CSS 属性。</p>
+
+<p>多个属性可以通过传递一个属性名组成的数组一次性获取。多个属性可以利用对象键值对的方式进行设置。</p>
+
+<p>当 value 为空(空字符串，null 或 undefined)，那个 CSS 属性将会被移出。当 value 参数为一个无单位的数字，如果该 CSS 属性需要单位，“px” 将会自动添加到该属性上。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="dl">'</span><span class="s1">background-color</span><span class="dl">'</span><span class="p">)</span>          <span class="c1">// 读取属性值</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="dl">'</span><span class="s1">background-color</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#369</span><span class="dl">'</span><span class="p">)</span>  <span class="c1">// 设置属性值</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="dl">'</span><span class="s1">background-color</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">)</span>      <span class="c1">// 移除属性</span>
+
+<span class="c1">// set multiple properties:</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#8EE</span><span class="dl">'</span><span class="p">,</span> <span class="na">fontSize</span><span class="p">:</span> <span class="mi">28</span> <span class="p">})</span>
+
+<span class="c1">// read multiple properties:</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">css</span><span class="p">([</span><span class="dl">'</span><span class="s1">backgroundColor</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fontSize</span><span class="dl">'</span><span class="p">])[</span><span class="dl">'</span><span class="s1">fontSize</span><span class="dl">'</span><span class="p">]</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="data">
+  <h3>data
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>data(name) ⇒ value
+data(name, value) ⇒ self
+</code></pre>
+  
+  <p>Read or write <code>data-*</code> DOM attributes. Behaves like <a href="#attr">attr</a>, but prepends
+<code>data-</code> to the attribute name.</p>
+
+<p>When reading attribute values, the following conversions apply:
+<span class="version">v1.0+</span></p>
+
+<ul>
+  <li>“true”, “false”, and “null” are converted to corresponding types;</li>
+  <li>number values are converted to actual numeric types;</li>
+  <li>JSON values are parsed, if it’s valid JSON;</li>
+  <li>everything else is returned as string.</li>
+</ul>
+
+<p class="compat">
+  Zepto's basic implementation of `data()` only stores strings.
+  To store arbitrary objects, include the optional "data" module
+  in your custom build of Zepto.
+</p>
+
+</article>
+
+<article class=method id="each">
+  <h3>each
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>each(function(index, item){ ... }) ⇒ self
+</code></pre>
+  
+  <p>遍历一个对象集合每个元素。在迭代函数中，<code>this</code> 关键字指向当前项(作为函数的第二个参数传递)。如果迭代函数返回 <code>false</code>，遍历结束。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">form input</span><span class="dl">'</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">input %d is: %o</span><span class="dl">'</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="empty">
+  <h3>empty
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>empty() ⇒ self
+</code></pre>
+  
+  <p>清空对象集合中每个元素的 DOM 内容。</p>
+
+</article>
+
+<article class=method id="eq">
+  <h3>eq
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>eq(index) ⇒ collection
+</code></pre>
+  
+  <p>从当前对象集合中获取给定索引值的元素。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">).</span><span class="nx">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1">//=&gt; 只选取第一个元素</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">).</span><span class="nx">eq</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">//=&gt; 只选取最后一个元素</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="filter">
+  <h3>filter
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>filter(selector) ⇒ collection
+filter(function(index){ ... }) ⇒ collection [v1.0]
+</code></pre>
+  
+  <p>过滤对象集合，返回对象集合中满足 CSS 选择器的项。如果参数为一个函数，函数返回有实际值得时候，元素才会被返回。在函数中， <code>this</code> 关键字指向当前的元素。</p>
+
+<p>与此相反的功能，查看 <a href="#not">not</a>。</p>
+
+</article>
+
+<article class=method id="find">
+  <h3>find
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>find(selector) ⇒ collection
+find(collection) ⇒ collection [v1.0]
+find(element) ⇒ collection [v1.0]
+</code></pre>
+  
+  <p>在当对象前集合内查找符合 CSS 选择器的每个元素的后代元素。</p>
+
+<p>如果给定 Zepto 对象集合或者元素，过滤它们，只有当它们在当前 Zepto 集合对象中时，才回被返回。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#myform</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">input, select</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="first">
+  <h3>first
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>first() ⇒ collection
+</code></pre>
+  
+  <p>获取当前对象集合中的第一个元素。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">).</span><span class="nx">first</span><span class="p">()</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="forEach">
+  <h3>forEach
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>forEach(function(item, index, array){ ... }, [context])
+</code></pre>
+  
+  <p>遍历对象集合中每个元素，有点类似 <a href="#each">each</a>，但是遍历函数的参数不一样，当函数返回 <code>false</code> 的时候，遍历不会停止。</p>
+
+<p class="compat">
+  这是一个 Zepto 提供的方法，在 jQuery 的 API 中没有对应的方法。
+</p>
+
+</article>
+
+<article class=method id="get">
+  <h3>get
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>get() ⇒ array
+get(index) ⇒ DOM node
+</code></pre>
+  
+  <p>从当前对象集合中获取所有元素或单个元素。当 index 参数不存在的时，以普通数组的方式返回所有的元素。当指定 index 时，只返回该置的元素。这点与 <a href="#eq">eq</a> 不同，该方法返回的是 DOM 节点，<em>不是</em> Zepto 对象集合。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">h2</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">elements</span><span class="p">.</span><span class="kd">get</span><span class="p">()</span>   <span class="c1">//=&gt; 获取所有标题组成的数组</span>
+<span class="nx">elements</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">//=&gt; 获取第一个标题节点</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="has">
+  <h3>has
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>has(selector) ⇒ collection
+has(node) ⇒ collection
+</code></pre>
+  
+  <p>判断当前对象集合的子元素是否有符合选择器的元素，或者是否包含指定的 DOM 节点，如果有，则返回新的对象集合，该对象过滤掉不含有选择器匹配元素或者不含有指定 DOM 节点的对象。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ol &gt; li</span><span class="dl">'</span><span class="p">).</span><span class="nx">has</span><span class="p">(</span><span class="dl">'</span><span class="s1">a[href]</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">//=&gt; 只获取包含链接的 LI 元素。</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="hasClass">
+  <h3>hasClass
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>hasClass(name) ⇒ boolean
+</code></pre>
+  
+  <p>检查对象集合中是否有元素含有指定的 class 。</p>
+
+</article>
+
+<article class=method id="height">
+  <h3>height
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>height() ⇒ number
+height(value) ⇒ self
+height(function(index, oldHeight){ ... }) ⇒ self
+</code></pre>
+  
+  <p>获取对象集合中第一个元素的高度；或者设置对象集合中所有元素的高度。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#foo</span><span class="dl">'</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span>   <span class="c1">// =&gt; 123</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span>   <span class="c1">// =&gt; 838 (viewport height)</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span> <span class="c1">// =&gt; 22302</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="hide">
+  <h3>hide
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>hide() ⇒ self
+</code></pre>
+  
+  <p>通过设置 CSS 的属性 <code>display</code> 为 <code>none</code> 来将对象集合中的元素隐藏。</p>
+
+</article>
+
+<article class=method id="html">
+  <h3>html
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>html() ⇒ string
+html(content) ⇒ self
+html(function(index, oldHtml){ ... }) ⇒ self
+</code></pre>
+  
+  <p>获取或设置对象集合中元素的 HTML 内容。当没有给定 content 参数时，返回对象集合中第一个元素的 innerHtml。当给定 content 参数时，用其替换对象集合中每个元素的内容。content 可以是 <a href="#append">append</a> 中描述的所有类型。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// autolink everything that looks like a Twitter username</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.comment p</span><span class="dl">'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">idx</span><span class="p">,</span> <span class="nx">oldHtml</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">oldHtml</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">(</span><span class="sr">^|</span><span class="se">\W)</span><span class="sr">@</span><span class="se">(\w{1,15})</span><span class="sr">/g</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">$1@&lt;a href="http://twitter.com/$2"&gt;$2&lt;/a&gt;</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="index">
+  <h3>index
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>index([element]) ⇒ number
+</code></pre>
+  
+  <p>获取一个元素的索引值（从 0 开始计数）。当 elemen 参数没有给出时，返回当前元素在兄弟节点中的位置。当 element 参数给出时，返回它在当前对象集合中的位置。如果没有找到该元素，则返回 <code>-1</code>。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">li:nth-child(2)</span><span class="dl">'</span><span class="p">).</span><span class="nx">index</span><span class="p">()</span>  <span class="c1">//=&gt; 1</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="indexOf">
+  <h3>indexOf
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>indexOf(element, [fromIndex]) ⇒ number
+</code></pre>
+  
+  <p>在当前对象集合中获取一个元素的索引值（从0开始计数）。如果给定 fromIndex 参数，从该位置开始往后查找，返回以 0 开始计数的索引值，如果没找到，则返回 <code>-1</code>。推荐优先使用 <a href="#index">index</a> 方法。</p>
+
+<p class="compat">
+  这是一个 Zepto 提供的方法，在 jQuery 的 API 中没有对应的方法。
+</p>
+
+</article>
+
+<article class=method id="insertAfter">
+  <h3>insertAfter
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>insertAfter(target) ⇒ self
+</code></pre>
+  
+  <p>将集合中的元素插入到指定的目标元素后面。这个有点像 <a href="#after">after</a>，但是参数顺序相反。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;p&gt;Emphasis mine.&lt;/p&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="dl">'</span><span class="s1">blockquote</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="insertBefore">
+  <h3>insertBefore
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>insertBefore(target) ⇒ self
+</code></pre>
+  
+  <p>将集合中的元素插入到指定的目标元素前面。这个有点像 <a href="#before">before</a>，但是参数顺序相反。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;p&gt;See the following table:&lt;/p&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">insertBefore</span><span class="p">(</span><span class="dl">'</span><span class="s1">table</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="is">
+  <h3>is
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>is(selector) ⇒ boolean
+</code></pre>
+  
+  <p>判断当前元素集合中的第一个元素是否符 CSS 选择器（selector）。为了支持基本的 jQuery 非标准选择器，例如： <code>:visible</code> ，务必引入可选的 “selector” 模块。</p>
+
+<p class="compat">
+  不支持 <a href="http://api.jquery.com/category/selectors/jquery-selector-extensions/">jQuery CSS extensions</a>。可选的 “selector” 模块仅支持有限的几个常用方法。
+</p>
+
+</article>
+
+<article class=method id="last">
+  <h3>last
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>last() ⇒ collection
+</code></pre>
+  
+  <p>获取对象集合中最后一个元素。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">).</span><span class="nx">last</span><span class="p">()</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="map">
+  <h3>map
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>map(function(index, item){ ... }) ⇒ collection
+</code></pre>
+  
+  <p>遍历对象集合中的所有元素。通过遍历函数返回值形成一个新的集合对象。在遍历函数中 <code>this</code> 关键之指向当前循环的项（遍历函数中的第二个参数）。</p>
+
+<p>遍历函数的返回值组成一个新的集合并被返回，集合中的 <code>null</code> 和 <code>undefined</code> 全部被过滤掉，不会出现在集合中。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// get text contents of all elements in collection</span>
+<span class="nx">elements</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span> <span class="p">}).</span><span class="kd">get</span><span class="p">().</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="next">
+  <h3>next
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>next() ⇒ collection
+next(selector) ⇒ collection [v1.0]
+</code></pre>
+  
+  <p>获取对象集合中每一个元素的下一个兄弟节点(可以选择性的带上过滤选择器)。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">dl dt</span><span class="dl">'</span><span class="p">).</span><span class="nx">next</span><span class="p">()</span>   <span class="c1">//=&gt; the DD elements</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="not">
+  <h3>not
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>not(selector) ⇒ collection
+not(collection) ⇒ collection
+not(function(index){ ... }) ⇒ collection
+</code></pre>
+  
+  <p>Filter the current collection to get a new collection of elements that don’t
+match the CSS selector. If another collection is given instead of selector,
+return only elements not present in it. If a function is given, return only
+elements for which the function returns a falsy value. Inside the function,
+the <code>this</code> keyword refers to the current element.</p>
+
+<p>For the opposite, see <a href="#filter">filter</a>.</p>
+
+</article>
+
+<article class=method id="offset">
+  <h3>offset
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>offset() ⇒ object
+offset(coordinates) ⇒ self [v1.0]
+offset(function(index, oldOffset){ ... }) ⇒ self [v1.0]
+</code></pre>
+  
+  <p>Get position of the element in the document. Returns an object with properties:
+<code>top</code>, <code>left</code>, <code>width</code> and <code>height</code>.</p>
+
+<p>When given an object with properties <code>left</code> and <code>top</code>, use those values to
+position each element in the collection relative to the document.</p>
+
+</article>
+
+<article class=method id="offsetParent">
+  <h3>offsetParent
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>offsetParent() ⇒ collection
+</code></pre>
+  
+  <p>Find the first ancestor element that is <em>positioned</em>, meaning its CSS <code>position</code>
+value is “relative”, “absolute” or “fixed”.</p>
+
+</article>
+
+<article class=method id="parent">
+  <h3>parent
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>parent([selector]) ⇒ collection
+</code></pre>
+  
+  <p>Get immediate parents of each element in the collection. If CSS selector is
+given, filter results to include only ones matching the selector.</p>
+
+</article>
+
+<article class=method id="parents">
+  <h3>parents
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>parents([selector]) ⇒ collection
+</code></pre>
+  
+  <p>Get all ancestors of each element in the collection. If CSS selector is given,
+filter results to include only ones matching the selector.</p>
+
+<p>To get only immediate parents, use <a href="#parent">parent</a>. To only get the first
+ancestor that matches the selector, use <a href="#closest">closest</a>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1</span><span class="dl">'</span><span class="p">).</span><span class="nx">parents</span><span class="p">()</span>   <span class="c1">//=&gt; [&lt;div#container&gt;, &lt;body&gt;, &lt;html&gt;]</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="pluck">
+  <h3>pluck
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>pluck(property) ⇒ array
+</code></pre>
+  
+  <p>Get values from a named property of each element in the collection, with <code>null</code>
+and <code>undefined</code> values filtered out.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">body &gt; *</span><span class="dl">'</span><span class="p">).</span><span class="nx">pluck</span><span class="p">(</span><span class="dl">'</span><span class="s1">nodeName</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; ["DIV", "SCRIPT"]</span>
+
+<span class="c1">// implementation of Zepto's `next` method</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> 
+  <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">pluck</span><span class="p">(</span><span class="dl">'</span><span class="s1">nextElementSibling</span><span class="dl">'</span><span class="p">))</span> 
+<span class="p">}</span></code></pre></figure>
+
+<p class="compat">
+  This is a Zepto-provided method that is not part of the jQuery API.
+</p>
+
+</article>
+
+<article class=method id="position">
+  <h3>position
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>position() ⇒ object
+</code></pre>
+  
+  <p>Get the position of the first element in the collection, relative to the
+<a href="#offsetParent">offsetParent</a>. This information is useful when absolutely
+positioning an element to appear aligned with another.</p>
+
+<p>Returns an object with properties: <code>top</code>, <code>left</code>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">position</span><span class="p">()</span>
+
+<span class="c1">// position a tooltip relative to the element</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#tooltip</span><span class="dl">'</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span>
+  <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">top</span><span class="p">:</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="na">left</span><span class="p">:</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">left</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="prepend">
+  <h3>prepend
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>prepend(content) ⇒ self
+</code></pre>
+  
+  <p>Prepend content to the DOM inside each element in the collection. The content
+can be an HTML string, a DOM node or an array of nodes.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;first list item&lt;/li&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="prependTo">
+  <h3>prependTo
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>prependTo(target) ⇒ self
+</code></pre>
+  
+  <p>Prepend elements of the current collection inside each of the target elements. This is
+like <a href="#prepend">prepend</a>, only with reversed operands.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;first list item&lt;/li&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">prependTo</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="prev">
+  <h3>prev
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>prev() ⇒ collection
+prev(selector) ⇒ collection [v1.0]
+</code></pre>
+  
+  <p>Get the previous sibling–optionally filtered by selector–of each element in
+the collection.</p>
+
+</article>
+
+<article class=method id="prop">
+  <h3>prop
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>prop(name) ⇒ value
+prop(name, value) ⇒ self
+prop(name, function(index, oldValue){ ... }) ⇒ self
+prop({ name: value, name2: value2, ... }) ⇒ self
+</code></pre>
+  
+  <p>Read or set properties of DOM elements. This should be preferred over <a href="#attr">attr</a> in
+case of reading values of properties that change with user interaction over
+time, such as <code>checked</code> and <code>selected</code>.</p>
+
+<p>Short and lowercase names such as <code>for</code>, <code>class</code>, <code>readonly</code> and similar will be
+mapped to actual properties such as <code>htmlFor</code>, <code>className</code>, <code>readOnly</code>, etc.</p>
+
+</article>
+
+<article class=method id="push">
+  <h3>push
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>push(element, [element2, ...]) ⇒ self
+</code></pre>
+  
+  <p>Add elements to the end of the current collection.</p>
+
+<p class="compat">
+  This is a Zepto-provided method that is not part of the jQuery API.
+</p>
+
+</article>
+
+<article class=method id="ready">
+  <h3>ready
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>ready(function($){ ... }) ⇒ self
+</code></pre>
+  
+  <p>Attach an event handler for the “DOMContentLoaded” event that fires when the DOM
+on the page is ready. It’s recommended to use the <a href="#$(\)">$()</a> function instead
+of this method.</p>
+
+</article>
+
+<article class=method id="reduce">
+  <h3>reduce
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>reduce(function(memo, item, index, array){ ... }, [initial]) ⇒ value
+</code></pre>
+  
+  <p>Identical to <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce">Array.reduce</a> that iterates over current collection.</p>
+
+<p class="compat">
+  This is a Zepto-provided method that is not part of the jQuery API.
+</p>
+
+
+</article>
+
+<article class=method id="remove">
+  <h3>remove
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>remove() ⇒ self
+</code></pre>
+  
+  <p>Remove elements in the current collection from their parent nodes, effectively
+detaching them from the DOM.</p>
+
+</article>
+
+<article class=method id="removeAttr">
+  <h3>removeAttr
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>removeAttr(name) ⇒ self
+</code></pre>
+  
+  <p>Remove the specified attribute from all elements in the collection.
+Multiple attributes to remove can be passed as a space-separated list.</p>
+
+</article>
+
+<article class=method id="removeClass">
+  <h3>removeClass
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>removeClass([name]) ⇒ self
+removeClass(function(index, oldClassName){ ... }) ⇒ self
+</code></pre>
+  
+  <p>Remove the specified class name from all elements in the collection. When the
+class name isn’t given, remove all class names. Multiple class names can be given in a space-separated string.</p>
+
+</article>
+
+<article class=method id="removeProp">
+  <h3>removeProp
+  
+  <span class=version>v1.2+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>removeProp(name) ⇒ self
+</code></pre>
+  
+  <p>Remove a property from each of the DOM nodes in the collection. This is done
+with JavaScript’s <code>delete</code> operator. Note that trying to remove some built-in
+DOM properties such as <code>className</code> or <code>maxLength</code> won’t have any affect, since
+browsers disallow removing those properties.</p>
+
+</article>
+
+<article class=method id="replaceWith">
+  <h3>replaceWith
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>replaceWith(content) ⇒ self
+</code></pre>
+  
+  <p>Replace each element in the collection–both its contents and the element
+itself–with the new content. Content can be of any type described in
+<a href="#before">before</a>.</p>
+
+</article>
+
+<article class=method id="scrollLeft">
+  <h3>scrollLeft
+  
+  <span class=version>v1.1+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>scrollLeft() ⇒ number
+scrollLeft(value) ⇒ self
+</code></pre>
+  
+  <p>Gets or sets how many pixels were scrolled to the right so far on window or
+scrollable element on the page.</p>
+
+</article>
+
+<article class=method id="scrollTop">
+  <h3>scrollTop
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>scrollTop() ⇒ number
+scrollTop(value) ⇒ self [v1.1]
+</code></pre>
+  
+  <p>Gets or sets how many pixels were scrolled down so far on window or scrollable
+element on the page.</p>
+
+</article>
+
+<article class=method id="show">
+  <h3>show
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>show() ⇒ self
+</code></pre>
+  
+  <p>Restore the default value for the “display” property of each element in the
+array, effectively showing them if they were hidden with <a href="#hide">hide</a>.</p>
+
+</article>
+
+<article class=method id="siblings">
+  <h3>siblings
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>siblings([selector]) ⇒ collection
+</code></pre>
+  
+  <p>Get all sibling nodes of each element in the collection. If CSS selector is
+specified, filter the results to contain only elements that match the selector.</p>
+
+</article>
+
+<article class=method id="size">
+  <h3>size
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>size() ⇒ number
+</code></pre>
+  
+  <p>Get the number of elements in this collection.</p>
+
+</article>
+
+<article class=method id="slice">
+  <h3>slice
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>slice(start, [end]) ⇒ array
+</code></pre>
+  
+  <p>Extract the subset of this array, starting at <code>start</code> index. If <code>end</code> is
+specified, extract up to but not including <code>end</code> index.</p>
+
+</article>
+
+<article class=method id="text">
+  <h3>text
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>text() ⇒ string
+text(content) ⇒ self
+text(function(index, oldText){ ... }) ⇒ self [v1.1.4]
+</code></pre>
+  
+  <p>Get or set the text content of elements in the collection. When no content is
+given, returns the text contents of all the elements in the collection, if no element exists, <code>null</code> will be returned. When
+content is given, uses it to replace the text contents of each element in the
+collection. This is similar to <a href="#html">html</a>, with the exception it can’t be
+used for getting or setting HTML.</p>
+
+</article>
+
+<article class=method id="toggle">
+  <h3>toggle
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>toggle([setting]) ⇒ self
+</code></pre>
+  
+  <p>Toggle between showing and hiding each of the elements, based on whether the
+first element is visible or not. If <code>setting</code> is present, this method behaves
+like <a href="#show">show</a> if setting is truthy or <a href="#hide">hide</a> otherwise.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">input[type=text]</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#too_long</span><span class="dl">'</span><span class="p">).</span><span class="nx">toggle</span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">val</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">140</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="toggleClass">
+  <h3>toggleClass
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>toggleClass(names, [setting]) ⇒ self
+toggleClass(function(index, oldClassNames){ ... }, [setting]) ⇒ self
+</code></pre>
+  
+  <p>Toggle given class names (space-separated) in each element in the collection.
+The class name is removed if present on an element; otherwise it’s added. If
+<code>setting</code> is present, this method behaves like <a href="#addClass">addClass</a> if setting
+is truthy or <a href="#removeClass">removeClass</a> otherwise.</p>
+
+</article>
+
+<article class=method id="unwrap">
+  <h3>unwrap
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>unwrap() ⇒ self
+</code></pre>
+  
+  <p>Remove immediate parent nodes of each element in the collection and put their
+children in their place. Basically, this method removes one level of ancestry
+while keeping current elements in the DOM.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div id=wrapper&gt;&lt;p&gt;Content&lt;/p&gt;&lt;/div&gt;</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#wrapper p</span><span class="dl">'</span><span class="p">).</span><span class="nx">unwrap</span><span class="p">().</span><span class="nx">parents</span><span class="p">()</span>  <span class="c1">//=&gt; [&lt;body&gt;, &lt;html&gt;]</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="val">
+  <h3>val
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>val() ⇒ string
+val(value) ⇒ self
+val(function(index, oldValue){ ... }) ⇒ self
+</code></pre>
+  
+  <p>Get or set the value of form controls. When no value is given, return
+the value of the first element. For <code>&lt;select multiple&gt;</code>, an array of values
+is returend. When a value is given, set all elements to this value.</p>
+
+</article>
+
+<article class=method id="width">
+  <h3>width
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>width() ⇒ number
+width(value) ⇒ self
+width(function(index, oldWidth){ ... }) ⇒ self
+</code></pre>
+  
+  <p>Get the width of the first element in the collection; or set the width of all elements in the collection.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#foo</span><span class="dl">'</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span>   <span class="c1">// =&gt; 123</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span>   <span class="c1">// =&gt; 768 (viewport width)</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span> <span class="c1">// =&gt; 768 </span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="wrap">
+  <h3>wrap
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>wrap(structure) ⇒ self
+wrap(function(index){ ... }) ⇒ self [v1.0]
+</code></pre>
+  
+  <p>Wrap each element of the collection separately in a DOM structure. Structure can
+be a single element or several nested elements, and can be passed in as a HTML
+string or DOM node, or as a function that is called for each element and returns
+one of the first two types.</p>
+
+<p><strong>Keep in mind</strong> that wrapping works best when operating on nodes that are part
+of the DOM. When calling <code>wrap()</code> on a new element and then inserting the result
+in the document, the element will lose the wrapping.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// wrap each button in a separate span:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.buttons a</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;span&gt;</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// wrap each code block in a div and pre:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">code</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div class=highlight&gt;&lt;pre /&gt;&lt;/div&gt;</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// wrap all form inputs in a span with classname</span>
+<span class="c1">// corresponding to input type:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">){</span>
+  <span class="k">return</span> <span class="dl">'</span><span class="s1">&lt;span class=</span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">field /&gt;</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="c1">//=&gt; &lt;span class=textfield&gt;&lt;input type=text /&gt;&lt;/span&gt;,</span>
+<span class="c1">//   &lt;span class=searchfield&gt;&lt;input type=search /&gt;&lt;/span&gt;</span>
+
+<span class="c1">// WARNING: will not work as expected!</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;em&gt;broken&lt;/em&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">appendTo</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+<span class="c1">// do this instead:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;em&gt;better&lt;/em&gt;</span><span class="dl">'</span><span class="p">).</span><span class="nx">appendTo</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;li&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="wrapAll">
+  <h3>wrapAll
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>wrapAll(structure) ⇒ self
+</code></pre>
+  
+  <p>Wrap all elements in a single structure. Structure can be a single element or
+several nested elements, and can be passed in as a HTML string or DOM node.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// wrap all buttons in a single div:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">a.button</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrapAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div id=buttons /&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="wrapInner">
+  <h3>wrapInner
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>wrapInner(structure) ⇒ self
+wrapInner(function(index){ ... }) ⇒ self [v1.0]
+</code></pre>
+  
+  <p>Wrap the <em>contents</em> of each element separately in a structure. Structure can be
+a single element or several nested elements, and can be passed in as a HTML string
+or DOM node, or as a function that is called for each element and returns one of
+the first two types.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// wrap the contents of each navigation link in a span:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">nav a</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrapInner</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;span&gt;</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// wrap the contents of each list item in a paragraph and emphasis:</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">ol li</span><span class="dl">'</span><span class="p">).</span><span class="nx">wrapInner</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;p&gt;&lt;em /&gt;&lt;/p&gt;</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+
+
+    <hr>
+    <h2 id="detect">Detect methods</h2>
+    
+    
+<article class=method id="Detect 模块">
+  <h3>Detect 模块
+  
+  
+  </h3>
+  
+  
+  <p>“detect” 模块对于站点或 app 针对不同环境调优很有用处，并且能帮助你识别手机和平板；以及不同的浏览器和操作系统。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// The following boolean flags are set to true if they apply,</span>
+<span class="c1">// if not they're either set to `false` or `undefined`.</span>
+<span class="c1">// We recommend accessing them with `!!` prefixed to coerce to a boolean.</span>
+
+<span class="c1">// general device type</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">phone</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">tablet</span>
+
+<span class="c1">// specific OS</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">ios</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">android</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">webos</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">blackberry</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">bb10</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">rimtabletos</span>
+
+<span class="c1">// specific device type</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">iphone</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">ipad</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">ipod</span> <span class="c1">// [v1.1]</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">touchpad</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">kindle</span>
+
+<span class="c1">// specific browser</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">chrome</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">firefox</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">safari</span> <span class="c1">// [v1.1]</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">webview</span> <span class="c1">// (iOS) [v1.1]</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">silk</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">playbook</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">ie</span> <span class="c1">// [v1.1]</span>
+
+<span class="c1">// Additionally, version information is available as well.</span>
+<span class="c1">// Here's what's returned for an iPhone running iOS 6.1.</span>
+<span class="o">!!</span><span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">phone</span>         <span class="c1">// =&gt; true</span>
+<span class="o">!!</span><span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">iphone</span>        <span class="c1">// =&gt; true</span>
+<span class="o">!!</span><span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">ios</span>           <span class="c1">// =&gt; true</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">version</span>       <span class="c1">// =&gt; "6.1"</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">version</span>  <span class="c1">// =&gt; "536.26"</span></code></pre></figure>
+
+
+</article>
+
+
+
+    <hr>
+    <h2 id="event">事件处理</h2>
+    
+    
+<article class=method id="$.Event">
+  <h3>$.Event
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.Event(type, [properties]) ⇒ event
+</code></pre>
+  
+  <p>Create and initialize a DOM event of the specified type. If a properties object 
+is given, use it to extend the new event object. The event is configured to
+bubble by default; this can be turned off by setting the <code>bubbles</code> property to <code>false</code>.</p>
+
+<p>An event initialized with this function can be triggered with
+<a href="#trigger">trigger</a>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">Event</span><span class="p">(</span><span class="dl">'</span><span class="s1">mylib:change</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">bubbles</span><span class="p">:</span> <span class="kc">false</span> <span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.proxy">
+  <h3>$.proxy
+  
+  <span class=version>v1.0+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>$.proxy(fn, context) ⇒ function
+$.proxy(fn, context, [additionalArguments...]) ⇒ function [v1.1.4]
+$.proxy(context, property) ⇒ function
+$.proxy(context, property, [additionalArguments...]) ⇒ function [v1.1.4]
+</code></pre>
+  
+  <p>Get a function that ensures that the value of <code>this</code> in the original function
+refers to the context object. In the second form, the original function is read
+from the specific property of the context object.</p>
+
+<p>If additional arguments are passed beyond the 2nd argument, they are applied to
+every invocation of the wrapped function in front of its actual arguments.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Zepto</span><span class="dl">'</span><span class="p">},</span>
+    <span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello from + </span><span class="dl">"</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="c1">// ensures that the handler will be executed in the context of `obj`:</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="nx">handler</span><span class="p">,</span> <span class="nx">obj</span><span class="p">))</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="bind">
+  <h3>bind
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#on">on</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>bind(type, function(e){ ... }) ⇒ self
+bind(type, [data], function(e){ ... }) ⇒ self [v1.1]
+bind({ type: handler, type2: handler2, ... }) ⇒ self
+bind({ type: handler, type2: handler2, ... }, [data]) ⇒ self [v1.1]
+</code></pre>
+  
+  <p>Attach an event handler to elements.</p>
+
+</article>
+
+<article class=method id="delegate">
+  <h3>delegate
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#on">on</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>delegate(selector, type, function(e){ ... }) ⇒ self
+delegate(selector, { type: handler, type2: handler2, ... }) ⇒ self
+</code></pre>
+  
+  <p>Attach an event handler that is only triggered when the event originated from a
+node that matches a selector.</p>
+
+</article>
+
+<article class=method id="die">
+  <h3>die
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#off">off</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>die(type, function(e){ ... }) ⇒ self
+die({ type: handler, type2: handler2, ... }) ⇒ self
+</code></pre>
+  
+  <p>Detach event handler added by <a href="#live">live</a>.</p>
+
+</article>
+
+<article class=method id="event.isDefaultPrevented">
+  <h3>event.isDefaultPrevented
+  
+  <span class=version>v1.1+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>event.isDefaultPrevented() ⇒ boolean
+</code></pre>
+  
+  <p>Returns true if <code>preventDefault()</code> was called for this event instance. This
+serves as a cross-platform alternative to the native <code>defaultPrevented</code> property
+which is missing or unreliable in some browsers.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// trigger a custom event and check whether it was cancelled</span>
+<span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Event</span><span class="p">(</span><span class="dl">'</span><span class="s1">custom</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">element</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
+<span class="nx">event</span><span class="p">.</span><span class="nx">isDefaultPrevented</span><span class="p">()</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="event.isImmediatePropagationStopped">
+  <h3>event.isImmediatePropagationStopped
+  
+  <span class=version>v1.1+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>event.isImmediatePropagationStopped() ⇒ boolean
+</code></pre>
+  
+  <p>Returns true if <code>stopImmediatePropagation()</code> was called for this event instance.
+Zepto implements the native method in browsers that don’t support it (e.g. old
+versions of Android).</p>
+
+</article>
+
+<article class=method id="event.isPropagationStopped">
+  <h3>event.isPropagationStopped
+  
+  <span class=version>v1.1+</span>
+  </h3>
+  
+  
+  <pre class=signature><code>event.isPropagationStopped() ⇒ boolean
+</code></pre>
+  
+  <p>Returns true if <code>stopPropagation()</code> was called for this event instance.</p>
+
+</article>
+
+<article class=method id="live">
+  <h3>live
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#on">on</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>live(type, function(e){ ... }) ⇒ self
+live({ type: handler, type2: handler2, ... }) ⇒ self
+</code></pre>
+  
+  <p>Like <a href="#delegate">delegate</a> where the selector is taken from the current
+collection.</p>
+
+</article>
+
+<article class=method id="off">
+  <h3>off
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>off(type, [selector], function(e){ ... }) ⇒ self
+off({ type: handler, type2: handler2, ... }, [selector]) ⇒ self
+off(type, [selector]) ⇒ self
+off() ⇒ self
+</code></pre>
+  
+  <p>Detach event handlers added with <a href="#on">on</a>. To detach a specific event handler,
+the same function must be passed that was used for <code>on()</code>. Otherwise, just
+calling this method with an event type will detach all handlers of that type.
+When called without arguments, it detaches <em>all</em> event handlers registered on
+current elements.</p>
+
+</article>
+
+<article class=method id="on">
+  <h3>on
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>on(type, [selector], function(e){ ... }) ⇒ self
+on(type, [selector], [data], function(e){ ... }) ⇒ self [v1.1]
+on({ type: handler, type2: handler2, ... }, [selector]) ⇒ self
+on({ type: handler, type2: handler2, ... }, [selector], [data]) ⇒ self [v1.1]
+</code></pre>
+  
+  <p>Add event handlers to the elements in collection. Multiple event types can be
+passed in a space-separated string, or as an object where event types are keys
+and handlers are values. If a CSS selector is given, the handler function will 
+only be called when an event originates from an element that matches the selector.</p>
+
+<p>If the <code>data</code> argument is given, this value will be made available as the
+<code>event.data</code> property during the execution of the event handler.</p>
+
+<p>Event handlers are executed in the context of the element to which the handler
+is attached, or the matching element in case a selector is provided. When an
+event handler returns <code>false</code>, <code>preventDefault()</code> and <code>stopPropagation()</code> is called for the current
+event, preventing the default browser action such as following links.</p>
+
+<p>If <code>false</code> is passed as argument to this method in place of the callback
+function, it’s equivalent to passing a function that returns <code>false</code>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#content</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">// observe all clicks inside #content:</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span> <span class="p">...</span> <span class="p">})</span>
+<span class="c1">// observe clicks inside navigation links in #content</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">nav a</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span> <span class="p">...</span> <span class="p">})</span>
+<span class="c1">// all clicks inside links in the document</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span> <span class="p">...</span> <span class="p">})</span>
+<span class="c1">// disable following any navigation link on the page</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">nav a</span><span class="dl">'</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="one">
+  <h3>one
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>one(type, [selector], function(e){ ... }) ⇒ self
+one(type, [selector], [data], function(e){ ... }) ⇒ self [v1.1]
+one({ type: handler, type2: handler2, ... }, [selector]) ⇒ self
+one({ type: handler, type2: handler2, ... }, [selector], [data]) ⇒ self [v1.1]
+</code></pre>
+  
+  <p>Adds an event handler that removes itself the first time it runs, ensuring that
+the handler only fires once. See <a href="#on"><code>.on()</code></a> for the explanation of
+<code>selector</code> and <code>data</code> arguments.</p>
+
+</article>
+
+<article class=method id="trigger">
+  <h3>trigger
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>trigger(event, [args]) ⇒ self
+</code></pre>
+  
+  <p>Trigger the specified event on elements of the collection. Event can either be a
+string type, or a full event object obtained with <a href="#$.Event">$.Event</a>. If an args
+array is given, it is passed as additional arguments to event handlers.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// add a handler for a custom event</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">mylib:change</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="k">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">change on %o with data %s, %s</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span> <span class="k">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="c1">// trigger the custom event</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="dl">'</span><span class="s1">mylib:change</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">])</span></code></pre></figure>
+
+<p class="compat">
+  Zepto only supports triggering events on DOM elements.
+</p>
+
+</article>
+
+<article class=method id="triggerHandler">
+  <h3>triggerHandler
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>triggerHandler(event, [args]) ⇒ self
+</code></pre>
+  
+  <p>Like <a href="#trigger">trigger</a>, but triggers only event handlers on current
+elements and doesn’t bubble.</p>
+
+</article>
+
+<article class=method id="unbind">
+  <h3>unbind
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#off">off</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>unbind(type, function(e){ ... }) ⇒ self
+unbind({ type: handler, type2: handler2, ... }) ⇒ self
+</code></pre>
+  
+  <p>Detach event handler added with <a href="#bind">bind</a>.</p>
+
+</article>
+
+<article class=method id="undelegate">
+  <h3>undelegate
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#off">off</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>undelegate(selector, type, function(e){ ... }) ⇒ self
+undelegate(selector, { type: handler, type2: handler2, ... }) ⇒ self
+</code></pre>
+  
+  <p>Detach event handler added with <a href="#delegate">delegate</a>.</p>
+
+</article>
+
+
+
+    <hr>
+    <h2 id="ajax">Ajax 请求</h2>
+    
+    
+<article class=method id="$.ajax">
+  <h3>$.ajax
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.ajax(options) ⇒ XMLHttpRequest
+</code></pre>
+  
+  <p>Perform an Ajax request. It can be to a local resource, or cross-domain via
+<a href="https://developer.mozilla.org/en/http_access_control">HTTP access control</a> support in browsers or <a href="http://json-p.org">JSONP</a>.</p>
+
+<p>Options:</p>
+
+<ul>
+  <li><code>type</code> (default: “GET”): HTTP request method (“GET”, “POST”, or other)</li>
+  <li><code>url</code> (default: current URL): URL to which the request is made</li>
+  <li><code>data</code> (default: none): data for the request; for GET requests it is appended
+to query string of the URL. Non-string objects will get serialized with
+<a href="#$.param">$.param</a></li>
+  <li><code>processData</code> (default: true): whether to automatically serialize <code>data</code> for
+non-GET requests to string</li>
+  <li><code>contentType</code> (default: “application/x-www-form-urlencoded”): the Content-Type
+of the data being posted to the server (this can also be set via <code>headers</code>).
+Pass <code>false</code> to skip setting the default value.</li>
+  <li><code>mimeType</code> (default: none): override the MIME type of the response.
+<span class="version">v1.1+</span></li>
+  <li><code>dataType</code> (default: none): response type to expect from the server. One of
+<code>json</code>, <code>jsonp</code>, <code>script</code>, <code>xml</code>, <code>html</code>, or <code>text</code>.</li>
+  <li><code>jsonp</code> (default: “callback”): the name of the JSONP callback query parameter</li>
+  <li><code>jsonpCallback</code> (default: “jsonp{N}”): the string (or a function that returns)
+name of the global JSONP callback function. Set this to enable browser caching.
+<span class="version">v1.1+</span></li>
+  <li><code>timeout</code> (default: <code>0</code>): request timeout in milliseconds, <code>0</code> for no timeout</li>
+  <li><code>headers</code>: object of additional HTTP headers for the Ajax request</li>
+  <li><code>async</code> (default: true): set to <code>false</code> to issue a synchronous (blocking) request</li>
+  <li><code>global</code> (default: true): trigger global Ajax events on this request</li>
+  <li><code>context</code> (default: window): context to execute callbacks in</li>
+  <li><code>traditional</code> (default: false): activate traditional (shallow) serialization
+of <code>data</code> parameters with <a href="#$.param">$.param</a></li>
+  <li><code>cache</code> (default: true): whether the browser should be allowed to cache GET responses.
+Since <span class="version">v1.1.4</span>, the default is <code>false</code> for
+<code>dataType: "script"</code> or <code>jsonp</code>.</li>
+  <li><code>xhrFields</code> (default: none): an object containing properties to be copied over
+verbatim to the XMLHttpRequest instance.
+<span class="version">v1.1+</span></li>
+  <li><code>username</code> &amp; <code>password</code> (default: none): HTTP Basic authentication credentials.
+<span class="version">v1.1+</span></li>
+</ul>
+
+<p>If the URL contains <code>=?</code> or <code>dataType</code> is “jsonp”, the request is performed
+by injecting a <code>&lt;script&gt;</code> tag instead of using XMLHttpRequest (see <a href="http://json-p.org">JSONP</a>).
+This has the limitation of <code>contentType</code>, <code>dataType</code>, <code>headers</code>, and <code>async</code> not
+being supported.</p>
+
+<h4>Ajax callbacks</h4>
+
+<p>You can specify the following callback functions, which are given in order of execution:</p>
+
+<ol>
+  <li>
+    <p><code>beforeSend(xhr, settings)</code>: before the request is sent. Provides access to
+ the xhr object and allows changing the settings.
+ Return <code>false</code> from the function to cancel the request</p>
+  </li>
+  <li>
+    <p><code>success(data, status, xhr)</code>: when request succeeds</p>
+  </li>
+  <li>
+    <p><code>error(xhr, errorType, error)</code>: if there is an error (timeout, parse error,
+or status code not in HTTP 2xx)</p>
+  </li>
+  <li>
+    <p><code>complete(xhr, status)</code>: after the request is complete, regardless of error
+or success</p>
+  </li>
+</ol>
+
+<h4>Promise callback interface <span class="version">v1.1+</span></h4>
+
+<p>If the optional modules “callbacks” and “deferred” are loaded, the XHR object
+returned from <code>$.ajax()</code> calls implements a promise interface for adding
+callbacks by chaining:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">xhr</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">){</span> <span class="p">...</span> <span class="p">})</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">errorType</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span> <span class="p">...</span> <span class="p">})</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="p">...</span> <span class="p">})</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="p">...</span> <span class="p">})</span></code></pre></figure>
+
+<p>These methods supersede the <code>success</code>, <code>error</code>, and <code>complete</code> callback options.</p>
+
+<h4>Ajax events</h4>
+
+<p>These events are fired during the lifecycle of an Ajax request performed with
+the default setting of <code>global: true</code>:</p>
+
+<ol>
+  <li>
+    <p><code>ajaxStart</code> <i>(global)</i>: fired if no other Ajax requests are currently
+active</p>
+  </li>
+  <li>
+    <p><code>ajaxBeforeSend</code> (xhr, options): before sending the request; can be
+cancelled</p>
+  </li>
+  <li>
+    <p><code>ajaxSend</code> (xhr, options): like <code>ajaxBeforeSend</code>, but not cancellable</p>
+  </li>
+  <li>
+    <p><code>ajaxSuccess</code> (xhr, options, data): when the response is success</p>
+  </li>
+  <li>
+    <p><code>ajaxError</code> (xhr, options, error): when there was an error</p>
+  </li>
+  <li>
+    <p><code>ajaxComplete</code> (xhr, options): after request has completed, regardless
+of error or success</p>
+  </li>
+  <li>
+    <p><code>ajaxStop</code> <i>(global)</i>: fired if this was the last active Ajax request</p>
+  </li>
+</ol>
+
+<p>By default, Ajax events are fired on the document object. However, if the
+<code>context</code> of a request is a DOM node, the events are fired on that node and will
+bubble up the DOM. The only exceptions to this are the global events <code>ajaxStart</code>
+&amp; <code>ajaxStop</code>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">ajaxBeforeSend</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">,</span> <span class="nx">options</span><span class="p">){</span>
+  <span class="c1">// This gets fired for every Ajax request performed on the page.</span>
+  <span class="c1">// The xhr object and $.ajax() options are available for editing.</span>
+  <span class="c1">// Return false to cancel this request.</span>
+<span class="p">})</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/projects</span><span class="dl">'</span><span class="p">,</span>
+  <span class="c1">// data to be added to query string:</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Zepto.js</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="c1">// type of data we are expecting in return:</span>
+  <span class="na">dataType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">timeout</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+  <span class="na">context</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">body</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+    <span class="c1">// Supposing this JSON payload was received:</span>
+    <span class="c1">//   {"project": {"id": 42, "html": "&lt;div&gt;..." }}</span>
+    <span class="c1">// append the HTML to context object.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">html</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="na">error</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">type</span><span class="p">){</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ajax error!</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// post a JSON payload:</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/projects</span><span class="dl">'</span><span class="p">,</span>
+  <span class="c1">// post payload:</span>
+  <span class="na">data</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Zepto.js</span><span class="dl">'</span> <span class="p">}),</span>
+  <span class="na">contentType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.ajaxJSONP">
+  <h3>$.ajaxJSONP
+  <span class=emoji title=deprecated>🦄🔨</span>
+  
+  </h3>
+  
+  <p class=warning>
+    Deprecated, use <a href="#$.ajax">$.ajax</a> instead.
+  </p>
+  
+  
+  <pre class=signature><code>$.ajaxJSONP(options) ⇒ mock XMLHttpRequest
+</code></pre>
+  
+  <p>Perform a JSONP request to fetch data from another domain.</p>
+
+<p>This method has no advantages over <a href="#$.ajax">$.ajax</a> and should not be used.</p>
+
+</article>
+
+<article class=method id="$.ajaxSettings">
+  <h3>$.ajaxSettings
+  
+  
+  </h3>
+  
+  
+  <p>Object containing the default settings for Ajax requests. Most settings are
+described in <a href="#$.ajax">$.ajax</a>. The ones that are useful when set globally are:</p>
+
+<ul>
+  <li><code>timeout</code> (default: <code>0</code>): set to a non-zero value to specify a default timeout
+for Ajax requests in milliseconds</li>
+  <li><code>global</code> (default: true): set to false to prevent firing Ajax events</li>
+  <li><code>xhr</code> (default: XMLHttpRequest factory): set to a function that returns
+instances of XMLHttpRequest (or a compatible object)</li>
+  <li><code>accepts</code>: MIME types to request from the server for specific <code>dataType</code>
+values:
+    <ul>
+      <li>script: “text/javascript, application/javascript”</li>
+      <li>json:   “application/json”</li>
+      <li>xml:    “application/xml, text/xml”</li>
+      <li>html:   “text/html”</li>
+      <li>text:   “text/plain”</li>
+    </ul>
+  </li>
+</ul>
+
+</article>
+
+<article class=method id="$.get">
+  <h3>$.get
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.get(url, function(data, status, xhr){ ... }) ⇒ XMLHttpRequest
+$.get(url, [data], [function(data, status, xhr){ ... }], [dataType]) ⇒ XMLHttpRequest [v1.0]
+</code></pre>
+  
+  <p>Perform an Ajax GET request. This is a shortcut for the <a href="#$.ajax">$.ajax</a>
+method.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/whatevs.html</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.getJSON">
+  <h3>$.getJSON
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.getJSON(url, function(data, status, xhr){ ... }) ⇒ XMLHttpRequest
+$.getJSON(url, [data], function(data, status, xhr){ ... }) ⇒ XMLHttpRequest [v1.0]
+</code></pre>
+  
+  <p>Get JSON data via Ajax GET request. This is a shortcut for the <a href="#$.ajax">$.ajax</a>
+method.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="dl">'</span><span class="s1">/awesome.json</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// fetch data from another domain with JSONP</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="dl">'</span><span class="s1">//example.com/awesome.json?callback=?</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">remoteData</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">remoteData</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.param">
+  <h3>$.param
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.param(object, [shallow]) ⇒ string
+$.param(array) ⇒ string
+</code></pre>
+  
+  <p>Serialize an object to a URL-encoded string representation for use in Ajax
+request query strings and post data. If <code>shallow</code> is set, nested objects are
+not serialized and nested array values won’t use square brackets on their keys.</p>
+
+<p>If any of the individual value objects is a function instead of a string, the
+function will get invoked and its return value will be what gets serialized.</p>
+
+<p>This method accepts an array in <a href="#serializeArray">serializeArray</a> format, where
+each item has “name” and “value” properties.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">({</span> <span class="na">foo</span><span class="p">:</span> <span class="p">{</span> <span class="na">one</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">two</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}})</span>
+<span class="c1">//=&gt; "foo[one]=1&amp;foo[two]=2)"</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">({</span> <span class="na">ids</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">})</span>
+<span class="c1">//=&gt; "ids[]=1&amp;ids[]=2&amp;ids[]=3"</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">({</span> <span class="na">ids</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">},</span> <span class="kc">true</span><span class="p">)</span>
+<span class="c1">//=&gt; "ids=1&amp;ids=2&amp;ids=3"</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">({</span> <span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span> <span class="na">nested</span><span class="p">:</span> <span class="p">{</span> <span class="na">will</span><span class="p">:</span> <span class="dl">'</span><span class="s1">not be ignored</span><span class="dl">'</span> <span class="p">}})</span>
+<span class="c1">//=&gt; "foo=bar&amp;nested[will]=not+be+ignored"</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">({</span> <span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span> <span class="na">nested</span><span class="p">:</span> <span class="p">{</span> <span class="na">will</span><span class="p">:</span> <span class="dl">'</span><span class="s1">be ignored</span><span class="dl">'</span> <span class="p">}},</span> <span class="kc">true</span><span class="p">)</span>
+<span class="c1">//=&gt; "foo=bar&amp;nested=[object+Object]"</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">param</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">})</span>
+<span class="c1">//=&gt; "id=3"</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="$.post">
+  <h3>$.post
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>$.post(url, [data], function(data, status, xhr){ ... }, [dataType]) ⇒ XMLHttpRequest
+</code></pre>
+  
+  <p>Perform an Ajax POST request. This is a shortcut for the <a href="#$.ajax">$.ajax</a>
+method.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">/create</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">sample</span><span class="p">:</span> <span class="dl">'</span><span class="s1">payload</span><span class="dl">'</span> <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+  <span class="c1">// process response</span>
+<span class="p">})</span></code></pre></figure>
+
+<p><code>data</code> can also be a string:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">/create</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#some_form</span><span class="dl">'</span><span class="p">).</span><span class="nx">serialize</span><span class="p">(),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+  <span class="c1">// ...</span>
+<span class="p">})</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="load">
+  <h3>load
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>load(url, function(data, status, xhr){ ... }) ⇒ self
+</code></pre>
+  
+  <p>Set the html contents of the current collection to the result of a GET Ajax call to the given URL. Optionally, a CSS selector can be specified in the URL, like so, to use only the HTML content matching the selector for updating the collection:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#some_element</span><span class="dl">'</span><span class="p">).</span><span class="nx">load</span><span class="p">(</span><span class="dl">'</span><span class="s1">/foo.html #bar</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+<p>If no CSS selector is given, the complete response text is used instead.</p>
+
+<p>Note that any JavaScript blocks found are only executed in case no selector is given.</p>
+
+</article>
+
+
+
+    <hr>
+    <h2 id="form">表单方法</h2>
+    
+    
+<article class=method id="serialize">
+  <h3>serialize
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>serialize() ⇒ string
+</code></pre>
+  
+  <p>Serialize form values to an URL-encoded string for use in Ajax post requests.</p>
+
+</article>
+
+<article class=method id="serializeArray">
+  <h3>serializeArray
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>serializeArray() ⇒ array
+</code></pre>
+  
+  <p>Serialize form into an array of objects with <code>name</code> and <code>value</code> properties.
+Disabled form controls, buttons, and unchecked radio buttons/checkboxes are skipped.
+The result doesn’t include data from file inputs.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">).</span><span class="nx">serializeArray</span><span class="p">()</span>
+<span class="c1">//=&gt; [{ name: 'size', value: 'micro' },</span>
+<span class="c1">//    { name: 'name', value: 'Zepto' }]</span></code></pre></figure>
+
+
+</article>
+
+<article class=method id="submit">
+  <h3>submit
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>submit() ⇒ self
+submit(function(e){ ... }) ⇒ self
+</code></pre>
+  
+  <p>Trigger or attach a handler for the submit event. When no function given,
+trigger the “submit” event on the current form and have it perform its submit
+action unless <code>preventDefault()</code> was called for the event.</p>
+
+<p>When a function is given, this simply attaches it as a handler for the “submit”
+event on current elements.</p>
+
+</article>
+
+
+
+    <hr>
+    <h2 id="fx">Effects</h2>
+    
+    
+<article class=method id="$.fx">
+  <h3>$.fx
+  
+  
+  </h3>
+  
+  
+  <p>Global settings for animations:</p>
+
+<ul>
+  <li>
+    <p><code>$.fx.off</code> (default false in browsers that support CSS transitions): set to
+true to disable all <a href="#animate"><code>animate()</code></a> transitions.</p>
+  </li>
+  <li>
+    <p><code>$.fx.speeds</code>: an object with duration settings for animations:</p>
+
+    <ul>
+      <li><code>_default</code> (400 ms)</li>
+      <li><code>fast</code> (200 ms)</li>
+      <li><code>slow</code> (600 ms)</li>
+    </ul>
+
+    <p>Change existing values or add new properties to affect animations that use
+a string for setting duration.</p>
+  </li>
+</ul>
+
+</article>
+
+<article class=method id="animate">
+  <h3>animate
+  
+  
+  </h3>
+  
+  
+  <pre class=signature><code>animate(properties, [duration, [easing, [function(){ ... }]]]) ⇒ self
+animate(properties, { duration: msec, easing: type, complete: fn }) ⇒ self
+animate(animationName, { ... }) ⇒ self
+</code></pre>
+  
+  <p>Smoothly transition CSS properties of elements in the current collection.</p>
+
+<ul>
+  <li><code>properties</code>: object that holds CSS values to animate to; or CSS keyframe
+animation name</li>
+  <li><code>duration</code> (default 400): duration in milliseconds, or a string:
+    <ul>
+      <li><code>fast</code> (200 ms)</li>
+      <li><code>slow</code> (600 ms)</li>
+      <li>any custom property of <a href="#$.fx"><code>$.fx.speeds</code></a></li>
+    </ul>
+  </li>
+  <li><code>easing</code> (default <code>linear</code>): specifies the type of animation easing to use, one of:
+    <ul>
+      <li><code>ease</code></li>
+      <li><code>linear</code></li>
+      <li><code>ease-in</code> / <code>ease-out</code></li>
+      <li><code>ease-in-out</code></li>
+      <li><a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag"><code>cubic-bezier(...)</code></a></li>
+    </ul>
+  </li>
+  <li><code>complete</code>: callback function for when the animation finishes</li>
+  <li><code>delay</code>: transition delay in milliseconds
+<span class="version">v1.1+</span></li>
+</ul>
+
+<p>Zepto also supports the following <a href="http://www.w3.org/TR/css3-transforms/#transform-functions">CSS transform</a> properties:</p>
+
+<ul>
+  <li><code>translate(X|Y|Z|3d)</code></li>
+  <li><code>rotate(X|Y|Z|3d)</code></li>
+  <li><code>scale(X|Y|Z)</code></li>
+  <li><code>matrix(3d)</code></li>
+  <li><code>perspective</code></li>
+  <li><code>skew(X|Y)</code></li>
+</ul>
+
+<p>If the duration is <code>0</code> or <code>$.fx.off</code> is true (default in a browser that doesn’t
+support CSS transitions), animations will not be executed; instead the target
+values will take effect instantly. Similarly, when the target CSS properties
+match the current state of the element, there will be no animation and the
+<code>complete</code> function won’t be called.</p>
+
+<p>If the first argument is a string instead of object, it is taken as a <a href="http://www.w3.org/TR/css3-animations/#animations">CSS
+keyframe animation</a> name.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#some_element</span><span class="dl">"</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span>
+  <span class="na">opacity</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="na">left</span><span class="p">:</span> <span class="dl">'</span><span class="s1">50px</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#abcdef</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">rotateZ</span><span class="p">:</span> <span class="dl">'</span><span class="s1">45deg</span><span class="dl">'</span><span class="p">,</span> <span class="na">translate3d</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0,10px,0</span><span class="dl">'</span>
+<span class="p">},</span> <span class="mi">500</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ease-out</span><span class="dl">'</span><span class="p">)</span></code></pre></figure>
+
+<p class="compat">
+  Zepto exclusively uses CSS transitions for effects and animation. jQuery
+  easings are not supported. jQuery’s syntax for relative changes (<code>=+10px</code>) is
+  not supported. See the spec for a <a href="http://www.w3.org/TR/css3-transitions/#animatable-properties-">list of animatable properties</a>.
+  Browser support may vary, so be sure to test in all browsers you want to support.
+</p>
+
+
+</article>
+
+
+
+    <hr>
+    <h2 id="touch">Touch</h2>
+    
+    
+<article class=method id="Touch events">
+  <h3>Touch events
+  
+  
+  </h3>
+  
+  
+  <p>The “touch” module adds the following events, which can be used with <a href="#on">on</a> and <a href="#off">off</a>:</p>
+
+<ul>
+  <li><code>tap</code> — fires when the element is tapped.</li>
+  <li><code>singleTap</code> and <code>doubleTap</code> — this pair of events can be used to detect both single and double taps on the same element (if you don’t need double tap detection, use <code>tap</code> instead).</li>
+  <li><code>longTap</code> — fires when an element is tapped and the finger is held down for more than 750ms.</li>
+  <li><code>swipe</code>, <code>swipeLeft</code>, <code>swipeRight</code>, <code>swipeUp</code>, <code>swipeDown</code> — fires when an element is swiped (optionally in the given direction)</li>
+</ul>
+
+<p>All these events are also available via shortcut methods on any Zepto collection.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;style&gt;</span><span class="nc">.delete</span> <span class="p">{</span> <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span> <span class="p">}</span><span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">items</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>List item 1 <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">delete</span><span class="nt">&gt;</span>DELETE<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>List item 2 <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">delete</span><span class="nt">&gt;</span>DELETE<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="c1">// show delete buttons on swipe</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#items li</span><span class="dl">'</span><span class="p">).</span><span class="nx">swipe</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.delete</span><span class="dl">'</span><span class="p">).</span><span class="nx">hide</span><span class="p">()</span>
+  <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.delete</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">).</span><span class="nx">show</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="c1">// delete row on tapping delete button</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">.delete</span><span class="dl">'</span><span class="p">).</span><span class="nx">tap</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+
+</article>
+
+
+
+    <hr>
+    <h2 id="changelog">Change Log</h2>
+
+    <p>
+      查看 Github 上的 <a href="https://github.com/madrobby/zepto/releases">更新记录</a>。
+    </p>
+
+    <hr>
+    <h2 id=thanks>致谢 &amp; 感谢</h2>
+
+    <p>
+      A big <b>Thank-You</b> goes out to all of our
+      <a href="https://github.com/madrobby/zepto/contributors">awesome Zepto.js contributors</a>.
+      May you all forever bask in glory.
+    </p>
+
+    <p>
+      The Zepto API is based on <a href="http://jquery.com/">jQuery's Core API</a>, which
+      is released under the <a href="https://github.com/jquery/jquery/blob/master/LICENSE.txt">MIT license</a>.
+    </p>
+
+    <p>
+      This documentation is based on the layout of the
+      <a href="https://github.com/documentcloud/backbone/">Backbone.js</a>
+      documentation, which is released under the
+      <a href="https://github.com/documentcloud/backbone/blob/master/LICENSE">MIT license</a>.
+    </p>
+
+    <p>
+      <small>
+        &copy; 2010-2018 Thomas Fuchs, <a href="http://letsfreckle.com">Freckle Online Time Tracking</a><br>
+        Zepto and this documentation is released under the terms of the <a href="https://github.com/madrobby/zepto/blob/master/MIT-LICENSE">MIT license</a>.
+      </small>
+    </p>
+
+  </section>
+
+</div>
+
+<script src="zepto-docs.min.js"></script>
+
+<script>
+$(function(){
+  var reflowTimeout,
+    tour = $('#tour'), tourSlides = tour.children(),
+    tourSlide = 0, tourSlidesTotal = 5
+
+  function injectScript(src) {
+    var s = document.createElement('script')
+    s.src = src; s.async = true
+    $('script').first().before(s)
+  }
+
+  // Reflow all elements on the page. <david@14islands.com>
+  function reflowFixedPositions() {
+    var docStyle = document.documentElement.style
+    docStyle.paddingRight = '1px'
+    setTimeout(function(){ docStyle.paddingRight = '' }, 0)
+  }
+
+  $('.signature code').html(function(i, html){
+    return html
+      .replace(/\[([^\[]+)\]$/mg, '<span class=version>$1+</span>')
+      .replace(/\)([^()]+)$/mg, ') <span class=return>$1</span>')
+  })
+
+  $(document).on('mouseover', 'span.version', function(){
+    var el = $(this)
+    if (!el.attr('title'))
+      el.attr('title', "This feature is only available in Zepto " + el.text())
+  })
+
+  // don't follow links when the sidebar is tap-enabled
+  $('#sidebar').on('click', 'a', function(e){
+    return !$('body').hasClass('navigating')
+  })
+
+  $('#sidebar').on('tap', 'a', function(e){
+    location.href = this.href;
+
+    closeMenu()
+    setTimeout(function(){
+      // fixes sidebar becoming unscrollable in Safari 6
+      reflowFixedPositions()
+    }, 10)
+    return false
+  })
+
+  $(window).on('scroll', function(){
+    if(reflowTimeout) clearTimeout(reflowTimeout)
+    reflowTimeout = setTimeout(reflowFixedPositions, 200)
+  })
+
+  function closeMenu(){
+    if ($('body').hasClass('navigating')) {
+      $('body').removeClass('navigating')
+      setTimeout(function(){
+        $('#sidebar').css('display','none')
+      }, 350)
+    }
+  }
+
+  // show/hide menu on mobile
+  $('#menu_icon').on('tap', function(){
+    if ($('body').hasClass('navigating')) {
+      closeMenu()
+    } else {
+      $('#sidebar').css('display','block')
+      $('#sidebar')[0].offsetLeft // force render
+      $('body').addClass('navigating')
+    }
+    return false
+  })
+
+  // change the title of the page so bookmarks have a better default
+  if ($.os.ios || $.os.android)
+    document.title = 'Zepto Docs'
+
+  // For retina screens, use a hi-res version of the tour image.
+  // We're swapping this out on-demand (not an ideal solution)
+  // to avoid rendering bugs on iOS.
+  $('#tour > img')[0].src =
+    ('devicePixelRatio' in window && devicePixelRatio > 1) ?
+    'intro2x.jpg' : 'intro.jpg'
+
+  function advanceTourSlide(delta){
+    tourSlide = (tourSlide + delta + tourSlidesTotal) % tourSlidesTotal
+    var offset = tourSlide * tour.width()
+    tourSlides.animate({ translateX: -offset + 'px' })
+  }
+
+  tour.on('click swipeLeft', function(){ advanceTourSlide(+1) })
+      .on('swipeRight', function(){ advanceTourSlide(-1) })
+})
+</script>
+
+
+</body>
+</html>

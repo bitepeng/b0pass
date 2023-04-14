@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>上传文件</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="assets/lib/layui/css/layui.css" rel="stylesheet">
+  <style>
+    .legend{
+      font-size:12px;text-align: center;
+    }
+    input{
+      width:100%;height:32px;text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="layui-upload" style="margin:20px">
+
+    <div class="layui-upload-list">
+      <table class="layui-table">
+        <colgroup>
+          <col>
+          <col width="100">
+          <col width="240">
+          <col width="100">
+        </colgroup>
+        <thead>
+          <tr><th>文件名</th>
+          <th>大小</th>
+          <th>进度</th>
+          <th>提示</th>
+        </tr></thead>
+        <tbody id="fileList"></tbody>
+      </table>
+    </div>
+    <p style="text-align:center;margin-bottom:20px;">
+      <button type="button" class="layui-btn layui-bg-orange" id="submitAct" hidden>提交上传</button>
+    </p>
+
+
+    <fieldset class="layui-elem-field">
+      <legend style="font-size:14px;text-align: center;"><span id="f"></span></legend>
+      <div class="layui-field-box" style="text-align: center;">
+        <div class="layui-upload-drag layui-bg-gray" id="selectFile" style="width: 80%;">
+          <p><i class="layui-icon layui-icon-upload-drag layui-bg-gray"></i></p>
+          <p>选择文件</p>
+        </div>
+
+        <p style="margin-top:10px;">* 支持上传大文件 | 多选 | 拖拽</p>
+        <p>* 只需与B0Pass使用同一WIFI</p>
+        <p>* 充分发挥局域网最大带宽上传</p>
+        <p>* 多文件上传请用非微信浏览器</p>
+
+      </div>
+    </fieldset>
+          
+  </div>
+
+
+
+  <script src="assets/lib/layui/layui.js"></script>
+  <script src="assets/js/upload.js"></script>
+
+</body>
+</html>

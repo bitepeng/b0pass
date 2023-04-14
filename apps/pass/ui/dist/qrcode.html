@@ -1,0 +1,62 @@
+<html lang="zh-cn">
+<head>
+    <title>二维码</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+</head>
+<body>
+
+<div style="text-align: center;margin-top: 20px;">
+    <p>浏览器访问</p>
+    <input id="text" type="text" value="0" style="width:240px;text-align:center;display:none;height:36px;line-height:36px;font-size:14px;" readonly />
+    <p>手机扫码</p>
+    <select id="selects" onchange="setTextValue(this.value)"></select>
+</div>
+<div id="qrcode" style="width:235px; height:235px; margin:10px auto; text-align: center">
+</div>
+
+<script src="assets/lib/qrcode.min.js"></script>
+<script src="assets/lib/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['upload', 'element', 'layer'], function(){
+    var $ = layui.jquery
+    ,upload = layui.upload
+    ,element = layui.element
+    ,layer = layui.layer;
+
+    window.onload=function () {
+        var ip=args('f');
+        document.getElementById('text').value="http://"+ip;
+        document.getElementById('text').style.display="";
+        document.getElementById('selects').style.display="none";
+        makeCode();
+    };
+
+    function setTextValue(v){
+        document.getElementById('text').value="http://"+v;
+        makeCode();
+    }
+
+    function args(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]); return null;
+    }
+    //alert(args('f'));
+    var makeCode = function(){
+            new QRCode(document.getElementById("qrcode"), {
+            text: document.getElementById('text').value,
+            width: 235,
+            height: 235,
+            colorDark : "#226ef1",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    }
+
+ });
+</script>
+</body>
+</html>

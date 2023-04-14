@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/app/docs/editor/css/editormd.css" />
+    <link rel="stylesheet" href="/app/docs/editor/css/editormd.preview.css" />
+    <link rel="stylesheet" href="/app/docs/css/style.css" />
+    <title>{{.title}}</title>
+</head>
+
+<body>
+    <div id="layout">
+        <div id="doc-editormd-view" {{ if eq .ext "doc" }}style="padding-right: 320px;"{{ end }}>
+            <textarea style="display:none;" name="doc-editormd-markdown"></textarea>
+        </div>
+        {{ if eq .ext "doc" }}
+        <div id="sidebar">
+            <h1>Table of Contents</h1>
+            <div class="markdown-body editormd-preview-container" id="custom-toc-container"></div>
+        </div>
+        {{ end }}
+    </div>
+
+    <script src="/app/docs/js/jquery.min.js"></script>
+    <script src="/app/docs/editor/lib/marked.min.js"></script>
+    <script src="/app/docs/editor/lib/prettify.min.js"></script>
+    <script src="/app/docs/editor/lib/raphael.min.js"></script>
+    <script src="/app/docs/editor/lib/underscore.min.js"></script>
+    <script src="/app/docs/editor/lib/sequence-diagram.min.js"></script>
+    <script src="/app/docs/editor/lib/flowchart.min.js"></script>
+    <script src="/app/docs/editor/lib/jquery.flowchart.min.js"></script>
+    <script src="/app/docs/editor/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var docEditormdView = editormd.markdownToHTML(
+                "doc-editormd-view", {
+                    markdown: "{{.data }}",
+                    htmlDecode: "style,script,iframe",
+                    tocm: true,
+                    tocContainer: "#custom-toc-container",
+                    emoji: true,
+                    taskList: true,
+                    tex: true,
+                    flowChart: true,
+                    sequenceDiagram: true,
+            });
+        });
+    </script>
+</body>
+
+</html>

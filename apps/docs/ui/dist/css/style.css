@@ -1,0 +1,228 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+.clear {
+    *zoom: 1;
+    /* for IE 6/7 */
+}
+
+.clear:before,
+.clear:after {
+    height: 0;
+    content: "";
+    font-size: 0;
+    display: table;
+    line-height: 0;
+    /* for Opera */
+    visibility: hidden;
+}
+
+.clear:after {
+    clear: both;
+}
+
+body {
+    font-size: 14px;
+    color: #666;
+    font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", Helvetica, Tahoma, "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+    background: #fff;
+    text-align: center;
+}
+
+#layout {
+    text-align: left;
+}
+
+#layout>header,
+.btns {
+    padding: 15px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#layout>header>.btns {
+    background-color: #1c78f0;
+    width: 100%;
+    padding: 10px;
+}
+
+.btns {
+    padding-top: 0;
+}
+
+.btns button {
+    padding: 2px 8px;
+}
+
+.btns h1 {
+    font-family: monospace;
+    font-size: 20px;
+    float: left;
+    padding-right: 20px;
+    line-height: 36px;
+    color: white;
+}
+
+.btns h2 {
+    font-family: monospace;
+    font-size: 12px;
+    float: left;
+    padding-right: 20px;
+    line-height: 36px;
+    color: #ccc;
+}
+
+.btns button,
+.btn {
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    min-height: 36px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: background 300ms ease-out;
+    transition: background 300ms ease-out;
+}
+
+.btns button:hover,
+.btn:hover {
+    background: #2c8df5;
+    color: #fff;
+}
+
+.editormd .CodeMirror {
+    margin-top: 0;
+}
+
+.block-div{
+    margin: 0 auto;
+    width: 90%;
+    padding: 15px;
+}
+
+.md-div {
+    width: 100%;
+    margin: 15 auto;
+    margin-bottom: 20px;
+}
+
+.md-btn{
+    width: 100%;
+    margin: 0 auto;
+    display: none;
+    margin-top: -15px;
+    margin-bottom: -15px;
+    padding-left: 0;
+}
+
+.md-btn button{
+    border: 0;
+    background-color: #ffffcc;
+}
+
+.md-out {
+    padding: 15px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    background-color: #fefefe;
+    margin-bottom: 20px;
+}
+
+#display-btn {
+    float: right;
+}
+
+/*** MarkDown Show Style Start *****************************/
+body {padding: 40px;}
+#layout>header,.btns { width: auto;}
+#sidebar {
+    width: 320px;height: 100%;position: fixed;
+    top: 0;right: 0;overflow: hidden;background: #fff;
+    z-index: 100;padding: 18px;border: 1px solid #ddd;
+    border-top: none;border-bottom: none;
+}
+#sidebar:hover {overflow: auto;}
+#sidebar h1 { font-size: 16px;}
+#custom-toc-container { padding-left: 0;}
+#doc-editormd-view{padding-left:0;margin:0;}
+.editormd-html-preview{padding:0;}
+/*** MarkDown Show Style End ********************************/

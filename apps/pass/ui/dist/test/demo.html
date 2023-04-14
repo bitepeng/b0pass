@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>百灵快传 V2.0</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico"/>
+  <link rel="stylesheet" href="../assets/layui/css/layui.css"/>
+  <link rel="stylesheet" href="../assets/css/main.css"/>
+</head>
+<body>
+    <div class="main-div layui-layout-admin">
+        <div class="layui-header">
+          <ul class="layui-nav layui-bg-blue main-div" lay-bar="disabled">
+              <li class="layui-nav-item logo">百灵快传<span class="layui-badge layui-bg-gray">v2.0</span></li>
+              <li class="layui-nav-item pull-right"><a href=""><i class="layui-icon layui-icon-rate"></i> 帮助</a></li>
+              <!--<li class="layui-nav-item pull-right">
+                <a href="javascript:;">解决方案</a>
+                <dl class="layui-nav-child">
+                  <dd><a href="">移动模块</a></dd>
+                  <dd><a href="">后台模版</a></dd>
+                  <dd><a href="">电商平台</a></dd>
+                </dl>
+              </li>-->
+              <li class="layui-nav-item pull-right"><a href=""><i class="layui-icon layui-icon-upload-drag"></i> 上传</a></li>
+          </ul> 
+        </div>
+
+        <div class="main-banner layui-hide-xs">
+          <img src="../assets/img/banner-min.png" width="40%">
+          <p class="title">百灵快传(B0Pass)：手机电脑超大文件传输工具</p>
+          <p><button type="button" class="layui-btn layui-btn-primary layui-btn-warm layui-border-black"
+             id="link-pc"  onmouseover="javascript:showTip(this,'电脑共享：在浏览器输入这个网址');">
+            <i class="layui-icon layui-icon-windows"></i> 复制网址
+          </button> &nbsp;  &nbsp;  &nbsp;  &nbsp;  
+          <button type="button" class="layui-btn layui-btn-primary layui-btn-blue layui-border-black" 
+              id="link-phone"  onmouseover="javascript:showTip(this,'手机共享：浏览器扫码(建议QQ浏览器)');">
+            <i class="layui-icon layui-icon-cellphone-fine"></i> 手机扫码
+          </button></p>
+        </div>
+        <div class="main-banner layui-hide-md">
+        </div>
+
+        <div class="layui-bg-gray" style="padding: 15px;">
+            <div class="layui-row layui-col-space15">
+              <div class="layui-hide-xs layui-col-sm3 layui-col-md2">
+                <div class="layui-card">
+                  <div class="layui-card-header">目录</div>
+                  <div class="layui-card-body">
+                    <div id="tree-left"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-xs12 layui-col-sm9 layui-col-md10">
+                <div class="layui-card">
+                  <div class="layui-card-header">内容</div>
+                  <div class="layui-card-body">
+                    <table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+                    <script type="text/html" id="toolbarDT">
+                      <div class="layui-btn-container">
+                        <!--<button class="layui-btn layui-btn-sm layui-bg-gray" lay-event="getCheckData" title="返回上一级目录">
+                          <i class="layui-icon layui-icon-return"></i> 返回
+                        </button>
+                        <button class="layui-btn layui-btn-sm layui-bg-gray" lay-event="getCheckData" title="创建一个新目录">
+                          <i class="layui-icon layui-icon-addition"></i> 创建目录
+                        </button>
+                        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="getCheckData"  title="秒传超大文件">
+                          <i class="layui-icon layui-icon-upload-drag"></i> <b>上传</b><span class="layui-badge layui-bg-gray">秒传</span>
+                        </button>
+                        <button class="layui-btn layui-btn-sm layui-bg-gray" lay-event="getCheckData"  title="在线下载">
+                          <i class="layui-icon layui-icon-download-circle"></i> 在线下载
+                        </button>
+                        <button id="pc_run" class="layui-btn layui-btn-sm layui-bg-blue" lay-event="getCheckData" title="在主电脑上运行或打开选中文件">
+                          <i class="layui-icon layui-icon-chart-screen"></i> 电脑运行
+                        </button>
+                        <button class="layui-btn layui-btn-sm layui-bg-gray" lay-event="getCheckData" title="删除">
+                          <i class="layui-icon layui-icon-delete"></i> 删除
+                        </button>
+                        <button class="layui-btn layui-btn-sm layui-bg-blue" lay-event="getCheckData">选中数据</button>
+                        <button class="layui-btn layui-btn-sm layui-bg-blue" lay-event="getData">获取当前页数据</button>
+                        <button class="layui-btn layui-btn-sm layui-bg-blue" lay-event="isAll">是否全选</button>-->
+                      </div>
+                    </script>
+                    <script type="text/html" id="barDT">
+                      <a class="layui-btn layui-btn-xs layui-bg-gray" lay-event="edit"><i class="layui-icon layui-icon-list"></i>编辑</a>
+                      <a class="layui-btn layui-btn-xs layui-bg-gray" lay-event="edit"><i class="layui-icon layui-icon-search"></i>查看</a>
+                      <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+                    </script> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+
+    </div>
+
+    <script src="../assets/layui/layui.js"></script>
+
+    <script>
+        var showTip;
+        layui.use(['tree', 'table','util'], function(){
+          var tree = layui.tree
+          ,table = layui.table
+          ,layer = layui.layer
+          ,util = layui.util
+          
+          //tree--------------------------------------//
+          //tree数据
+          ,data1 = [{
+            title: '江西'
+            ,id: 1
+            ,spread: true
+            ,children: [{
+              title: '南昌'
+              ,id: 1000
+              ,children: [{
+                title: '青山湖区'
+                ,id: 10001
+              },{
+                title: '高新区'
+                ,id: 10002
+              }]
+            },{
+              title: '九江'
+              ,id: 1001
+            },{
+              title: '赣州'
+              ,id: 1002
+            }]
+          },{
+            title: '广西'
+            ,id: 2
+            ,children: [{
+              title: '南宁'
+              ,id: 2000
+            },{
+              title: '桂林'
+              ,id: 2001
+            }]
+          },{
+            title: '陕西'
+            ,id: 3
+            ,children: [{
+              title: '西安'
+              ,id: 3000
+            },{
+              title: '延安'
+              ,id: 3001
+            }]
+          }];
+         
+         
+          //常规用法
+          tree.render({
+            elem: '#tree-left' //默认是点击节点可进行收缩
+            ,data: data1
+            ,accordion: true 
+            ,isJump: true //是否允许点击节点时弹出新窗口跳转
+            ,click: function(obj){
+                var data = obj.data;  //获取当前点击的节点数据
+                layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+            }
+          });
+
+          //table----------------------------------------//
+
+          // 创建渲染实例
+          table.render({
+            elem: '#dataTable'
+            ,url:'demo.json'
+            //,toolbar: '#toolbarDT'
+            ,defaultToolbar: [/*'filter', 'exports', 'print', {
+              title: '帮助'
+              ,layEvent: 'LAYTABLE_TIPS'
+              ,icon: 'layui-icon-tips'
+            }*/]
+            ,height: 'full' // 最大高度减去其他容器已占有的高度差
+            ,cellMinWidth: 80
+            ,totalRow: true // 开启合计行
+            ,page: true
+            ,cols: [[
+              {type: 'checkbox', /*fixed: 'left'*/}
+              ,{field:'id', /*fixed: 'left',*/ width:80, title: 'ID', sort: true, totalRowText: '合计：'}
+              ,{field:'username', width:80, title: '用户'}
+              ,{field:'sex', width:80, title: '性别', sort: true}
+              ,{field:'sign', title: '签名', edit: 'textarea', minWidth: 260, style: '-moz-box-align: start;'}
+              ,{field:'experience', width: 100, title: '积分', sort: true, totalRow: '{{= d.TOTAL_NUMS }} 😊'} 
+              ,{field:'joinTime', title:'加入时间', width: 120}
+              ,{/*fixed: 'right',*/ title:'操作', width: 155, minWidth: 155, toolbar: '#barDT'}
+            ]]
+            ,done: function(){
+              var id = this.id;
+            }
+            ,error: function(res, msg){
+              console.log(res, msg)
+            }
+          });
+
+
+          // 工具栏事件
+          table.on('toolbar(dataTable)', function(obj){
+            var id = obj.config.id;
+            var checkStatus = table.checkStatus(id);
+            var othis = lay(this);
+            switch(obj.event){
+              case 'getCheckData':
+                var data = checkStatus.data;
+                layer.alert(layui.util.escape(JSON.stringify(data)));
+              break;
+              case 'getData':
+                var getData = table.getData(id);
+                console.log(getData);
+                layer.alert(layui.util.escape(JSON.stringify(getData)));
+              break;
+              case 'isAll':
+                layer.msg(checkStatus.isAll ? '全选': '未全选')
+              break;
+              case 'multi-row':
+                table.reload('dataTable', {
+                  // 设置行样式，此处以设置多行高度为例。若为单行，则没必要设置改参数 - 注：v2.7.0 新增
+                  lineStyle: 'height: 95px;' 
+                });
+                layer.msg('即通过设置 lineStyle 参数可开启多行');
+              break;
+              case 'default-row':
+                table.reload('dataTable', {
+                  lineStyle: null // 恢复单行
+                });
+                layer.msg('已设为单行');
+              break;
+              case 'LAYTABLE_TIPS':
+                layer.alert('Table for layui-v'+ layui.v);
+              break;
+            };
+          });
+        
+          //触发单元格工具事件
+          table.on('tool(dataTable)', function(obj){ // 双击 toolDouble
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+              layer.confirm('真的删除行么', function(index){
+                obj.del();
+                layer.close(index);
+              });
+            } else if(obj.event === 'edit'){
+              layer.open({
+                title: '编辑',
+                type: 1,
+                area: ['80%','80%'],
+                content: '<div style="padding: 16px;">自定义表单元素</div>'
+              });
+            }
+          });
+        
+          //触发表格复选框选择
+          table.on('checkbox(dataTable)', function(obj){
+            console.log(obj)
+          });
+        
+          //触发表格单选框选择
+          table.on('radio(dataTable)', function(obj){
+            console.log(obj)
+          });
+          
+          // 行单击事件
+          table.on('row(dataTable)', function(obj){
+            //console.log(obj);
+            //layer.closeAll('tips');
+          });
+          // 行双击事件
+          table.on('rowDouble(dataTable)', function(obj){
+            console.log(obj);
+          });
+        
+          // 单元格编辑事件
+          table.on('edit(dataTable)', function(obj){
+            var field = obj.field //得到字段
+            ,value = obj.value //得到修改后的值
+            ,data = obj.data; //得到所在行所有键值
+        
+            var update = {};
+            update[field] = value;
+            obj.update(update);
+          });
+
+
+          //tools----------------------------------------//
+          showTip=function(obj,msg){
+              layer.tips("<span>"+msg+"</span>","#"+obj.id,{tips:1, time:2000});
+          }
+
+          
+          
+        });
+        </script>
+
+</body>
+</html>
