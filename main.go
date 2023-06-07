@@ -49,7 +49,7 @@ func main() {
 		args = append(args, "--class=Lorca")
 	}
 	if runtime.GOOS == "windows" {
-		args = append(args, "-ldflags '-H windowsgui'")
+		args = append(args, "-ldflags '-H windowsgui'", "--remote-allow-origins=*")
 	}
 
 	// New Lorca UI
