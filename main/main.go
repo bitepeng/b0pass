@@ -3,18 +3,33 @@ package main
 import (
 	_ "b0go/apps/docs"
 	_ "b0go/apps/pass"
+	"os"
 	"strings"
 	"time"
 
 	"b0go/core/engine"
 	_ "b0go/core/gateway"
 	"b0go/core/tools/cmd"
+	"b0go/core/tools/files"
 	"b0go/core/tools/nets"
 
 	"github.com/logrusorgru/aurora"
 )
 
 func main() {
+	/**
+	* 检查配置
+	 */
+	configFile := "config.ini"
+	defaultConfig := "[gateway]\nListenAddr = \":8888\"\n\n[pass]\nPath = \"files\"\n"
+	ok, _ := files.PathExists(configFile)
+	if !ok {
+		os.WriteFile(configFile, []byte(defaultConfig), 0666)
+		os.MkdirAll("files", 0666)
+	}
+	/**
+	* 启动服务
+	 */
 	go func() {
 		//Version
 		engine.Print(aurora.Black("--------------------------------------------"))
@@ -38,6 +53,6 @@ func main() {
 		cmd.Open("http://" + ip + ":" + ports[1])
 	}()
 	time.Sleep(5000 * time.Microsecond)
-	engine.Run("config.ini")
+	engine.Run(configFile)
 	select {}
 }
