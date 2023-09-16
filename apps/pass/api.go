@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -153,14 +154,39 @@ func FileDownload(c *gin.Context) {
 	c.File(filePath)
 }
 
-// FileUpload 大文件上传
+// FileUpload 上传文件
 func FileUpload(c *gin.Context) {
+	lens, _ := strconv.Atoi(c.Request.Header["Content-Length"][0])
+	log.Println("FileUpload::::", lens)
+	if lens > 1024 {
+		FileUploadBig(c)
+	} else {
+		FileUploadTiny(c)
+	}
+}
+
+// FileUploadTiny 小文件上传
+func FileUploadTiny(c *gin.Context) {
+	RootPath := config.Path
+	f := c.DefaultQuery("f", "/")
+	RootPath = RootPath + f
+	files.NodeAdd(RootPath)
+	log.Println("FileUploadBig:::", RootPath)
+	//上传文件
+	file, _ := c.FormFile("file")
+	c.SaveUploadedFile(file, RootPath+file.Filename)
+	//上传成功
+	engine.OK("上传成功", "", c)
+}
+
+// FileUploadBig 大文件上传
+func FileUploadBig(c *gin.Context) {
 
 	RootPath := config.Path
 	f := c.DefaultQuery("f", "/")
 	RootPath = RootPath + f
 	files.NodeAdd(RootPath)
-	log.Println("FileUpload:::", RootPath)
+	log.Println("FileUploadBig:::", RootPath)
 
 	content_type_, has_key := c.Request.Header["Content-Type"]
 	if !has_key {

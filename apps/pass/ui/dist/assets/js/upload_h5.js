@@ -27,7 +27,7 @@ layui.use(['upload', 'element'], function(){
       ,number: 100
       ,auto: false
       ,bindAction: '#submitAct'
-      ,choose: function(obj){  
+      ,choose: function(obj){
         var that = this;
         //将每次选择的文件追加到文件队列
         that.files = obj.pushFile(); 
@@ -35,6 +35,7 @@ layui.use(['upload', 'element'], function(){
         //显示文件列表
         $(".layui-upload-list").show();
         $("#submitAct").show();
+        $("#selectFile").text("继续添加");
         
         //读取本地文件
         that.elemList.html("");
@@ -52,9 +53,10 @@ layui.use(['upload', 'element'], function(){
             }
             //文件列表
             var tr = $(['<tr id="upload-'+ index +'">'
-              ,'<td style="overflow: hidden;text-overflow:ellipsis;white-space:normal;">'+ file.name +'<br> Size:'+ fsize+'<br>',
+              ,'<td style="overflow: hidden;text-overflow:ellipsis;white-space:normal;">'+ file.name +'<br>',
               ,'<button class="layui-btn layui-btn-xs act-reload layui-hide">重传</button>'
               ,'<button class="layui-btn layui-btn-xs layui-btn-danger act-delete">移除</button>'
+              +' Size:'+ fsize+'<br>'
               ,'</td>'
               ,'<td>'+
               '<div class="layui-progress" lay-filter="progress-file-'+ index +'">'
@@ -94,9 +96,11 @@ layui.use(['upload', 'element'], function(){
       }
       ,allDone: function(obj){ 
           layer.closeAll('loading');
-          layer.msg("上传完成");
-          console.log(obj)
-          //layer.closeAll();
+          layer.msg("上传完成!");
+          console.log("上传完成:",obj)
+          var index=parent.layer.getFrameIndex(window.name);
+          parent.location.reload(false);
+          parent.layer.close(index);
       }
       ,error: function(index, upload){
           layer.close('loading');
