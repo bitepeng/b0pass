@@ -1,3 +1,6 @@
+//go:build !windows
+// +build !windows
+
 package cmd
 
 import (
@@ -5,7 +8,6 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
-	"syscall"
 )
 
 // commands 执行程序
@@ -40,6 +42,6 @@ func Open(uri string) error {
 	//cmd.Start
 	log.Println("[CommandAs]", cmds)
 	//windows cmd不出现黑框
-	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+	//cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	return cmd.Start()
 }

@@ -1,5 +1,5 @@
-# B0GO
-> b0go -- 基于Go语言的极简Web开发脚手架
+# B0Boot-GO
+> b0boot-go -- 基于Go语言的极简Web开发脚手架
 
 
 ## 技术特性
