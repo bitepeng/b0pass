@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="editor/css/editormd.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>B0Note</title>
+</head>
+
+<body>
+
+    <div id="layout">
+        <header>
+
+            <div class="btns clear">
+                <h1>B0Note</h1>
+                <h2>
+                    < Play Markdown & Code />
+                </h2>
+                <button id="display-btn" title="切换编辑/预览状态" hidden> ▤ 编辑 </button>
+                <button id="create-btn" title="在顶部新增区块"> ✙ 添加 </button>
+                <button id="runall-btn" title="运行全部区块" hidden> ▶ 运行 </button>
+            </div>
+        </header>
+        <div class="block-div">
+            <div id="rootdiv"></div>
+        </div>  
+
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="editor/editormd.min.js"></script>
+    <script type="text/javascript">
+        /**
+         * 初始化设置
+         */
+        var objEmd = {};    //编辑器对象
+        var theEmd;         //当前编辑器
+        var i = 1;          //Cell计数器
+        var flagHide = false;
+
+        $(function () {
+
+            /**
+             * 添加Cell
+             */
+            $("#create-btn").click(function () {
+                createCell($("#rootdiv"))
+            });
+
+            /*
+            * 显示隐藏编辑框
+            */
+            $("#display-btn").bind("click", function () {
+                if (flagHide) {
+                    $("#create-btn").show();
+                    $("#runall-btn").show();
+                    for (let key in objEmd) {
+                        $("#" + key).show();
+                    }
+                    flagHide = false;
+                    $("#display-btn").text("▤ 编辑");
+                } else {
+                    $("#create-btn").hide();
+                    $("#runall-btn").hide();
+                    $("#runall-btn").click();
+                    for (let key in objEmd) {
+                        $("#" + key).hide();
+                        $("#unselect-" + key).click();
+                    }
+                    flagHide = true;
+                    $("#display-btn").text("▣ 预览");
+                }
+            });
+            /*
+            * 运行全部
+            */
+            $("#runall-btn").bind("click", function () {
+                for (let key in objEmd) {
+                    $("#out" + key).html(objEmd[key].getHTML());
+                    $("#out" + key).show();
+                }
+            });
+
+            /**
+             * 创建Cell
+             */
+            function createCell(root) {
+                let eid = "Block" + i;
+                let div = '<div id="div' + eid + '" class="md-div">'+
+                    '<div id="' + eid + '" class="md-editor"></div>' +
+                    '<div id="btns' + eid + '" class="btns md-btn">' +
+                    '<button id="id-' + eid + '">#' + eid + ' </button>' +
+                    '<button id="type-' + eid + '">∇ Code/Go </button>' +
+                    '<button id="remove-' + eid + '"  title="删除本区块"> ✖ 删除 </button>' +
+                    '<button id="up-' + eid + '" title="上移"> ⇑ </button>' +
+                    '<button id="down-' + eid + '" title="下移"> ⇓ </button>' +
+                    '<button id="create-' + eid + '" title="在下方添加新区块"> ✙ 添加 </button>' +
+                    '<button id="run-' + eid + '" title="运行"> ▷ 运行 </button>' +
+                    '<button id="unselect-' + eid + '" title="退出编辑状态"> ⏎ 退出 </button>' +
+                    '</div><div id="out' + eid + '" class="md-out markdown-body editormd-preview-container"></div>'+
+                    '</div>';
+                root.after(div);
+                theEmd = editormd(eid, {
+                    width: "100%",
+                    height: 120,
+                    autoHeight: true,
+                    watch: false,
+                    toolbar: false,
+                    codeFold: true,
+                    searchReplace: true,
+                    markdown: "\n\n\n\n",//i + "\n\n\n\n",
+                    syncScrolling: "single",
+                    emoji: true,
+                    taskList: true,
+                    tocm: true, // Using [TOCM]
+                    //tex : true, // 开启科学公式TeX语言支持
+                    flowChart: true, // 开启流程图支持
+                    sequenceDiagram: true, // 开启时序/序列图支持
+                    saveHTMLToTextarea: true,
+                    //mode: (localStorage.mode) ? localStorage.mode : "text/html",
+                    path: 'editor/lib/',
+                    onload: function () {
+                        let that = this;
+                        objEmd[that.id] = that;
+                        $("#display-btn").show();
+                        $("#runall-btn").show();
+                        $("#btns" + eid).hide();
+                        $("#out" + eid).hide();
+                        currCell(that, objEmd);
+                        //选中当前Cell
+                        $("#" + eid).mousedown(function () {
+                            currCell(that, objEmd);
+                        });
+                        //添加
+                        $("#create-" + eid).click(function () {
+                            createCell($("#div" + eid));
+                        });
+                        //删除
+                        $("#remove-" + eid).click(function () {
+                            delCell(that);
+                        });
+                        //向上移动
+                        $("#up-" + eid).click(function () {
+                            let $tr = $("#div" + eid);
+                            if ($tr.index() != 0) {
+                                //$tr.fadeOut().fadeIn(); 
+                                $tr.prev().before($tr);
+                            }
+                        });
+                        //向下移动
+                        $("#down-" + eid).click(function () {
+                            let $tr = $("#div" + eid);
+                            if ($tr.index() != 0) {
+                                //$tr.fadeOut().fadeIn(); 
+                                $tr.next().after($tr);
+                            }
+                        });
+                        //运行当前Cell
+                        $("#run-" + eid).click(function () {
+                            $("#out" + eid).html(theEmd.getHTML());
+                            $("#out" + eid).show();
+                        });
+                        //退出当前选择Cell
+                        $("#unselect-" + eid).click(function () {
+                            let key = eid;
+                            $("#btns" + key).hide();
+                            that.unwatch();
+                            $("#" + key).css({ "border": "1px solid #ddd" });
+                            $("#div" + key).css({ "background": "#fff" });
+                        });
+
+
+                    }
+                });
+                i++;
+            }
+
+            /**
+             * 选中当前Cell
+             */
+            function currCell(that, objs) {
+                theEmd = that;
+                let eid = that.id;
+                for (let key in objs) {
+                    let obj = objs[key];
+                    if (key.indexOf(eid) != -1) {
+                        //当前编辑器(可编辑状态)
+                        $("#btns" + key).show();
+                        //obj.showToolbar();
+                        //obj.watch();
+                        $("#" + key).css({ "border": "3px solid orange", "z-index": "10001" });
+                        $("#div" + key).css({ "background": "#ffffcc" });
+                    } else {
+                        //其他编辑器(预览状态)
+                        $("#btns" + key).hide();
+                        //obj.hideToolbar();
+                        obj.unwatch();
+                        $("#" + key).css({ "border": "1px solid #ddd", "z-index": "1" });
+                        $("#div" + key).css({ "background": "#fff" });
+                    }
+                }
+                $("#unselect-btn").show();
+            }
+            /**
+             * 删除当前Cell
+             */
+            function delCell(that) {
+                if (confirm("确定要删除吗？")) {
+                    let obj = objEmd[that.id];
+                    //删除编辑器
+                    obj.editor.remove();
+                    $("#div" + that.id).remove();
+                    //从数组删除
+                    delete objEmd[that.id];
+                    console.log(objEmd);
+                }
+            }
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

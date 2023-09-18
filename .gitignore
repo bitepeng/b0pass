@@ -3,3 +3,7 @@
 tmp
 *.log
 boot/resource.go
+main/files/*
+zdoc/*.zip
+zdoc/*/b0pass
+zdoc/*/b0pass.exe

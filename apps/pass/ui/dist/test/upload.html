@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>上传文件</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-upload" style="padding:15px" hidden>
+    <button type="button" class="layui-btn layui-btn-normal" id="selList">选择文件(1)</button> 
+    <div class="layui-progress layui-progress-big" lay-filter="progress-files">
+      <div class="layui-progress-bar" lay-percent=""></div>
+    </div>
+</div> 
+
+<div class="layui-upload" style="padding:15px" >
+    <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button> 
+    <div class="layui-upload-list">
+      <table class="layui-table">
+        <colgroup>
+          <col>
+          <col width="100">
+          <col width="240">
+          <col width="100">
+        </colgroup>
+        <thead>
+          <tr><th>文件名</th>
+          <th>大小</th>
+          <th>进度</th>
+          <th>提示</th>
+        </tr></thead>
+        <tbody id="fileList"></tbody>
+      </table>
+    </div>
+    <button type="button" class="layui-btn" id="submitAct" hidden>提交上传</button>
+</div> 
+
+
+<script src="../assets/layui/layui.js"></script>
+
+<script>
+layui.use(['upload', 'element', 'layer'], function(){
+  var $ = layui.jquery
+  ,upload = layui.upload
+  ,element = layui.element
+  ,layer = layui.layer;
+
+  //大文件上传1
+  var uploadListIns = upload.render({
+    elem: '#selList'
+    ,url: '/pass/file-upload' 
+    ,accept: 'file'
+    ,multiple: true
+    ,number: 100
+    ,auto: true
+    ,before: function(obj){
+      layer.load(); 
+      console.log(obj)
+    }
+    ,choose: function(obj){
+      //将每次选择的文件追加到文件队列
+      var files = obj.pushFile();
+      console.log(files);
+      for (let key in files) {
+        console.log(files[key]);
+      }
+    }
+    ,done: function(res, index, upload){
+      var that = this;
+      this.error(index, upload);
+    }
+    ,allDone: function(obj){
+        layer.closeAll('loading');
+        layer.msg("上传完成");
+        console.log(obj)
+    }
+    ,error: function(index, upload){
+      layer.closeAll('loading');
+      var that = this;
+    }
+    ,progress: function(n, elem, e, index){
+      element.progress('progress-files', n + '%'); 
+    }
+  });
+  
+  
+  //多文件列表2
+  $(".layui-upload-list").hide();
+  $("#submitAct").hide();
+  var file_names = ":";
+  var uploadListIns = upload.render({
+    elem: '#selectFile'
+    ,elemList: $('#fileList')
+    ,url: '/pass/file-upload' 
+    ,accept: 'file'
+    ,multiple: true
+    ,number: 0
+    ,auto: false
+    ,bindAction: '#submitAct'
+    ,choose: function(obj){  
+      var that = this;
+      //将每次选择的文件追加到文件队列
+      that.files = obj.pushFile(); 
+      console.log(that.files);
+      //显示文件列表
+      $(".layui-upload-list").show();
+      $("#submitAct").show();
+      
+      //读取本地文件
+      that.elemList.html("");
+      for (var index in that.files) {
+          var file=that.files[index];
+          //人性化Size
+          var fsize=file.size;
+          var fsize_m=fsize/1024/1024;
+          if(fsize_m>=1024){
+            fsize=(fsize_m/1024).toFixed(1)+'G';
+          }else if((fsize/1024)>=1024){
+            fsize=fsize_m.toFixed(1)+'M';
+          }else{
+            fsize=(fsize/1024).toFixed(1)+'K';
+          }
+          //文件列表
+          var tr = $(['<tr id="upload-'+ index +'">'
+            ,'<td>'+ file.name +'</td>'
+            ,'<td>'+ fsize +'</td>'
+            ,'<td><div class="layui-progress" lay-filter="progress-file-'+ index +'">'
+            ,'<div class="layui-progress-bar" lay-percent=""></div></div></td>'
+            ,'<td>'
+            ,'<button class="layui-btn layui-btn-xs act-reload layui-hide">重传</button>'
+            ,'<button class="layui-btn layui-btn-xs layui-btn-danger act-delete">移除</button>'
+            ,'</td>'
+          ,'</tr>'].join(''));
+           //单个重传
+          tr.find('.act-reload').on('click', function(e){
+            var tr_ = e.currentTarget.parentElement.parentElement;
+            var index_ = (tr_.id).replace("upload-","");
+            obj.upload(index_, file);
+          });
+          //移除文件
+          tr.find('.act-delete').on('click', function(e){
+            var tr_ = e.currentTarget.parentElement.parentElement;
+            var index_ = (tr_.id).replace("upload-","");
+            delete that.files[index_];
+            tr_.remove();
+            uploadListIns.config.elem.next()[0].value = ''; 
+          });
+          //插入DOM
+          that.elemList.append(tr);
+          element.render('progress');
+      };
+    }
+    ,before: function(obj){
+        layer.load();
+        $("#submitAct").hide();
+    }
+    ,done: function(res, index, upload){
+        var that = this;
+        var tr = that.elemList.find('tr#upload-'+ index)
+        ,tds = tr.children();
+        //删除文件队列已经上传成功的文件
+        delete that.files[index]; 
+        return;
+        that.error(index, upload);
+    }
+    ,allDone: function(obj){ 
+        layer.closeAll('loading');
+        layer.msg("上传完成");
+        console.log(obj)
+    }
+    ,error: function(index, upload){
+        layer.closeAll('loading');
+        var that = this;
+        var tr = that.elemList.find('tr#upload-'+ index)
+        ,tds = tr.children();
+        //显示重传
+        tds.eq(3).find('.file-reload').removeClass('layui-hide'); 
+    }
+    ,progress: function(n, elem, e, index){
+      var that = this;
+      var tds = that.elemList.find('tr#upload-'+ index).children();
+      tds.eq(3).html(n + '%'); 
+      element.progress('progress-file-'+ index, n + '%'); 
+    }
+  });
+  
+  
+});
+</script>
+
+</body>
+</html>

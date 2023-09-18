@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>百灵快传 V2.0</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="assets/lib/layui/css/layui.css"/>
+  <link rel="stylesheet" href="assets/css/main.css?v2.04"/>
+</head>
+<body>
+    <div class="main-div layui-layout-admin">
+        <div class="layui-header">
+          <ul class="layui-nav layui-bg-blue main-div" lay-bar="disabled">
+              <li class="layui-nav-item logo">百灵快传<span class="layui-badge layui-bg-gray">v2.0</span></li>
+              <li class="layui-nav-item pull-right"><a href="help.html?v2" title="获取帮助"><i class="layui-icon layui-icon-rate"></i> 帮助</a></li>
+              <li class="layui-nav-item pull-right layui-this"><a href="#" title="支持超大文件秒传" ><i class="layui-icon layui-icon-release"></i> 文件</a></li>
+          </ul> 
+        </div>
+
+        <div class="main-banner layui-hide-xs">
+          <img src="assets/img/banner-min.png" width="450" />
+          <p><span class="title-big">百灵快传(B0Pass) - 电脑手机大文件传输工具</span></p>
+          <p class="btns"></p>
+        </div>
+        <div class="main-banner layui-hide-sm layui-hide-md">
+          <p class="title-xs">百灵快传(B0Pass) - 电脑手机大文件传输工具</p>
+        </div>
+
+        <div class="layui-bg-gray">
+            <div class="layui-row layui-col-space15" style="padding: 15px;min-height: 55vh;">
+              <div class="layui-col-xs12 layui-col-sm4 layui-col-md3">
+                <div class="layui-card">
+                  <div class="layui-card-header">
+                    目录
+                    <div class="pull-right"><div class="layui-btn-group">
+                      <button type="button" class="layui-btn layui-btn-primary" id="btn_left_open" title="用浏览器打开">
+                        <i class="layui-icon layui-icon-chart-screen"></i>浏览</button>
+                      <button type="button" class="layui-btn layui-btn-primary" id="btn_left_dir" title="用资源管理器打开">
+                        <i class="layui-icon layui-icon-layouts"></i>打开</button>
+                      <button type="button" class="layui-btn layui-btn-primary layui-hide-sm layui-hide-md btn_main_new" title="新建目录">
+                        <i class="layui-icon layui-icon-add-circle-fine"></i>新建</button>
+                    </div></div>
+                  </div>
+                  <div class="layui-card-body">
+                    <div id="tree-left"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-xs12 layui-col-sm8 layui-col-md9">
+                <div class="layui-card main-right">
+                  <div class="layui-card-header">
+                    <div id="crrPath" style="float:left ;font-weight: bolder;"></div>
+                    <div class="pull-right"><div class="layui-btn-group">
+                        <button type="button" class="layui-btn layui-btn-normal" id="link_phone" title="复制网址或手机扫码">
+                        <i class="layui-icon layui-icon-cellphone-fine"></i>扫码</button>
+                        <button type="button" class="layui-btn layui-btn-warm" id="btn_main_upload" title="支持超大文件秒传">
+                          <i class="layui-icon layui-icon-upload-drag"></i>上传</button>
+                        <button type="button" class="layui-btn layui-btn-primary layui-hide-xs btn_main_new" title="新建目录">
+                          <i class="layui-icon layui-icon-add-circle-fine"></i>新建</button>
+                        <button class="layui-btn layui-btn-primary" id="show-type">
+                          <span id="show-type-label">图文</span>
+                          <i class="layui-icon layui-icon-down layui-font-12"></i>
+                        </button>
+                    </div></div>
+                  </div>
+                  <div class="layui-card-body table-list" style="clear:both;">
+                    <table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+                    <script type="text/html" id="barDT">
+                      <a class="layui-btn layui-btn-xs layui-bg-gray" lay-event="more"><i class="layui-icon layui-icon-spread-left"></i></a>
+                    </script> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+
+    </div>
+
+    <!-- 页面弹框 Start -->
+    <div id="node-add" style="display: none;">
+      <!--文档新建界面-->
+      <form class="layui-form">
+      <div class="layui-form-item">
+        <label class="layui-form-label" id="node-add-path">目录名称</label>
+        <div class="layui-input-block">
+          <input type="input" name="doc-add-input" required  lay-verify="required" " autocomplete="off" placeholder="请输入路径" class="layui-input" style="width:90%;">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="node-add-form">确认</button>
+          <button type="button" class="layui-btn layui-btn-primary" onclick="layer.closeAll()">取消</button>
+        </div>
+      </div>
+      </form>
+    </div>
+    <!-- 页面弹框 End -->
+    <!-- 页面弹框 Start -->
+    <div id="node-rename" style="display: none;">
+      <!--文档新建界面-->
+      <form class="layui-form">
+      <div class="layui-form-item">
+        <label class="layui-form-label" id="node-name-path">修改名称</label>
+        <div class="layui-input-block">
+          <input type="input" name="doc-name-src" value="$$" hidden>
+          <input type="input" name="doc-name-input" required  lay-verify="required" " value="$$" placeholder="请输入路径" class="layui-input" style="width:90%;">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="node-rename-form">确认</button>
+          <button type="button" class="layui-btn layui-btn-primary" onclick="layer.closeAll()">取消</button>
+        </div>
+      </div>
+      </form>
+    </div>
+    <!-- 页面弹框 End -->
+
+    <script src="assets/lib/layui/layui.js"></script>
+    <script src="assets/js/index.js?v2.04"></script>
+
+</body>
+</html>
