@@ -11,4 +11,4 @@ go build -o ../zdoc/b0pass-linux/b0pass .
 SET CGO_ENABLED=0
 set GOOS=windows
 set GOARCH=amd64
-go build -o ../zdoc/b0apss-win/b0pass.exe .
+go build -o ../zdoc/b0pass-win/b0pass.exe .
