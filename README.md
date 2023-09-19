@@ -6,7 +6,7 @@ LAN large file transfer tool。
 
 只需一个文件（exe）双击开启。
 
-## 1. V2主要功能
+## 1. 主要功能
 
 ### 1.1 功能描述
 
