@@ -47,6 +47,9 @@ var (
 	// Addr
 	Addr string
 
+	// Domain
+	Domain string
+
 	// Gin框架控制引擎
 	Gin *gin.Engine
 )

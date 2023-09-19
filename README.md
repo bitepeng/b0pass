@@ -18,8 +18,11 @@ LAN large file transfer tool。
 - [x] 共享文件在线管理界面（可删除、主电脑打开、图片浏览器等）
 - [x] 更简洁高效的操作界面
 - [x] 使用自研的 <a href="//github.com/bitepeng/b0boot-go">B0Boot-Go</a> 框架重构代码，更简洁、更模块化
+- [x] 文件上传界面支持多次选择（PC端支持拖拽上传）
+- [x] 大文件分片上传（大文件上传更丝滑，不卡顿）
 - [x] 支持Windows、Linux、MacOS操作系统
 - [x] 支持端口（port）自定义配置
+- [x] 支持域名（domain）自定义配置
 - [ ] 支持安全代码（code）自定义配置（增强安全性控制）
 - [ ] 发布安卓APK版本
 - [ ] 自动检查更新版本
@@ -34,7 +37,7 @@ LAN large file transfer tool。
 </td>
 <td width="33%">
     <img src="zdoc/_images/pc/02.png" width="100%"/>
-    <p>主界面（列表模式、文件菜单）</p>
+    <p>主界面（图文模式、文件菜单）</p>
 </td>
 <td width="33%">
     <img src="zdoc/_images/pc/03.png" width="100%"/>
@@ -99,9 +102,10 @@ LAN large file transfer tool。
 -  如果要自定义端口等配置，请修改`config.ini`文件
 ```
 [gateway]
-ListenAddr = ":8888"  # 配置IP和端口
+ListenAddr = ":8888"      # 配置IP和端口
+Domain = "test.com:8888"  # （可选配置）使用域名访问（如果有使用nginx等代理或使用80端口，可忽略域名后的端口）
 [pass]
-Path = "files"        # 配置文件管理根目录
+Path = "files"            # 文件管理根目录
 ```
 
 ### 最新版下载地址

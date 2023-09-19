@@ -17,6 +17,7 @@ import (
 
 type AppConfig struct {
 	ListenAddr string
+	Domain     string
 	Live       bool
 }
 
@@ -68,6 +69,7 @@ func run() {
 
 	//启动httpd服务
 	engine.Addr = config.ListenAddr
+	engine.Domain = config.Domain
 	engine.Gin.Run(config.ListenAddr)
 }
 

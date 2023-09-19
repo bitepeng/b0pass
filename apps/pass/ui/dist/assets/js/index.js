@@ -134,7 +134,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
             title: "文件扫码",
             type: 2,
             area: areaSmall,
-            content: 'qrcode.html?f='+servIP+servPort+"/files"+encodeURIComponent(obj.data.path)
+            content: 'qrcode.html?f='+servIP+servPort+"/files/"+encodeURIComponent(obj.data.path)
         });
       }
       // 下载操作
@@ -439,20 +439,11 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       }else{
         tableRender(currPath);
       }
-      $.ajax({
-        url: "/pass/read-ip",
-        method: "get",
-        data: {},
-        success: function(res) {
-          servIP=res.data;
-          console.log("::ServIP::",servIP);
-        }
-      });
+      
       $.ajax({
         url: "/gateway/config",
-        method: "get",
-        data: {},
         success: function(res) {
+          console.log("::Config::",res.data);
           ips=(res.data.ListenAddr).split(":")
           if(ips[0]!=""){
             if(ips[0]="127.0.0.1"){
@@ -461,8 +452,21 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
             servIP=ips[0];
             console.log("::ServIP::",servIP);
           }
-          servPort=":"+(res.data.ListenAddr).split(":")[1];
-          console.log("::ServPort::",servPort);
+          //兼容域名情况
+          if(res.data.Domain!=""){
+            servIP=res.data.Domain;servPort="";
+            console.log("::ServIP::",servIP);
+          }else{
+            $.ajax({
+              url: "/pass/read-ip",
+              success: function(res) {
+                servIP=res.data;
+                console.log("::ServIP::",servIP);
+              }
+            });
+            servPort=":"+(res.data.ListenAddr).split(":")[1];
+            console.log("::ServPort::",servPort);
+          }
         }
       });
 

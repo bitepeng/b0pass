@@ -21,7 +21,7 @@ func main() {
 	* 检查配置
 	 */
 	configFile := "config.ini"
-	defaultConfig := "[gateway]\nListenAddr = \":8888\"\n\n[pass]\nPath = \"files\"\n"
+	defaultConfig := "[gateway]\nListenAddr = \":8888\"\nDomain=\n\n[pass]\nPath = \"files\"\n"
 	ok, _ := files.PathExists(configFile)
 	if !ok {
 		os.WriteFile(configFile, []byte(defaultConfig), 0666)
@@ -38,19 +38,26 @@ func main() {
 		time.Sleep(waitTime)
 		//检查ListenAddr
 		ip := nets.GetOutBoundIP()
-		ports := strings.Split(engine.Addr, ":")
-		if len(ports) != 2 {
-			time.Sleep(waitTime)
+		serverUrl := ""
+		if strings.Trim(engine.Domain, "") != "" {
+			serverUrl = engine.Domain
+		} else {
+			ports := strings.Split(engine.Addr, ":")
+			if len(ports) != 2 {
+				time.Sleep(waitTime)
+			}
+			if ports[0] != "" {
+				ip = ports[0]
+			}
+			serverUrl = ip + ":" + ports[1]
 		}
-		if ports[0] != "" {
-			ip = ports[0]
-		}
+
 		engine.Print(aurora.BrightBlue("端口配置为：" + engine.Addr))
-		engine.Print(aurora.BrightBlue("主电脑参数：" + ip + ":" + ports[1]))
-		engine.Print(aurora.BrightBlue("访问主电脑： http://" + ip + ":" + ports[1]))
+		engine.Print(aurora.BrightBlue("主电脑参数：" + serverUrl))
+		engine.Print(aurora.BrightBlue("访问主电脑： http://" + serverUrl))
 		engine.Print(aurora.Green("需特别注意：本机【防火墙】设为：允许访问"))
 		engine.Print(aurora.Black("--------------------------------------------"))
-		cmd.Open("http://" + ip + ":" + ports[1])
+		cmd.Open("http://" + serverUrl)
 	}()
 	time.Sleep(5000 * time.Microsecond)
 	engine.Run(configFile)
