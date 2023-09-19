@@ -20,7 +20,7 @@ LAN large file transfer tool。
 - [x] 使用自研的 <a href="//github.com/bitepeng/b0boot-go" target="_blank">B0Boot-Go</a> 框架重构代码，更简洁、更模块化
 - [x] 文件上传界面支持多次选择（PC端支持拖拽上传）
 - [x] 大文件上传过程分片处理（上传更丝滑，不卡顿）
-- [x]] 支持路径有空格或中文的情况
+- [x] 支持路径有空格或中文的情况
 - [x] 支持Windows、Linux、MacOS操作系统
 - [x] 支持端口（port）自定义配置
 - [x] 支持域名（domain）自定义配置
