@@ -17,7 +17,6 @@ import (
 )
 
 func main() {
-	version := "2.0.2"
 	/**
 	* 检查配置
 	 */
@@ -34,7 +33,7 @@ func main() {
 	go func() {
 		//Version
 		engine.Print(aurora.Black("--------------------------------------------"))
-		engine.Print(aurora.BgGreen(aurora.Black("          百灵快传主电脑端 B0Pass V" + version + "           ")))
+		engine.Print(aurora.BgGreen(aurora.Black("          百灵快传主电脑端 B0Pass             ")))
 		waitTime := 100000 * time.Microsecond
 		time.Sleep(waitTime)
 		//检查ListenAddr

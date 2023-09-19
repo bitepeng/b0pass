@@ -14,7 +14,7 @@ import (
 
 var (
 	// Version 引擎版本号
-	Version = "2.0.1"
+	Version = "2.0.2"
 	// EngineInfo 引擎信息
 	EngineInfo = &struct {
 		Version          *string
