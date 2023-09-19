@@ -93,7 +93,10 @@ func NodeAdd(c *gin.Context) {
 		engine.ERR("路径不能为空:(f = 结尾带“/”为创建目录,否则为创建文件)", c)
 		return
 	}
-	err := files.NodeAdd(RootPath + f)
+	filePath := RootPath + f
+	filePath = strings.ReplaceAll(filePath, "//", "/")
+	log.Println("::NodeAdd::", filePath)
+	err := files.NodeAdd(filePath)
 	if err != nil {
 		engine.ERR(err.Error(), c)
 	}

@@ -19,11 +19,15 @@ LAN large file transfer tool。
 - [x] 更简洁高效的操作界面
 - [x] 使用自研的 <a href="//github.com/bitepeng/b0boot-go" target="_blank">B0Boot-Go</a> 框架重构代码，更简洁、更模块化
 - [x] 文件上传界面支持多次选择（PC端支持拖拽上传）
-- [x] 大文件分片上传（大文件上传更丝滑，不卡顿）
+- [x] 大文件上传过程分片处理（上传更丝滑，不卡顿）
+- [x]] 支持路径有空格或中文的情况
 - [x] 支持Windows、Linux、MacOS操作系统
 - [x] 支持端口（port）自定义配置
 - [x] 支持域名（domain）自定义配置
 - [ ] 支持安全代码（code）自定义配置（增强安全性控制）
+- [ ] 支持文件夹改名
+- [ ] 支持对上传的压缩包在线解压
+- [ ] 支持上传文件夹
 - [ ] 发布安卓APK版本
 - [ ] 自动检查更新版本
 
@@ -97,9 +101,10 @@ LAN large file transfer tool。
 ## 2. 发行版下载使用
 
 ### 下载前请阅读
--  已编译好***Mac OS、Windows、Linux amd64***等平台的可执行文件
+-  已编译好***Windows、MacOS、Linux***等平台的可执行文件
 -  只需下载到电脑，双击开启即可使用
--  如果要自定义端口等配置，请修改`config.ini`文件
+-  注意1：建议不要安装到“C:\Program Files (x86)”等系统目录，否则需要右键“以管理员身份运行”
+-  注意2：如果要自定义端口等配置，请修改`config.ini`文件
 ```
 [gateway]
 ListenAddr = ":8888"      # 配置IP和端口
@@ -131,14 +136,14 @@ Path = "files"            # 文件管理根目录
 
 - ***更多使用场景***
 
-    也可以用作“家庭影音中心”、“办公室文件共享”、“产品原型服务器”等。总之走局域网的HTTP协议，和是不是iPhone、iOS、安卓、虚拟机等都没有关系，跨平台共享文件。
+    也可以用作“家庭影音中心”、“办公室文件共享”、“产品原型服务器”等。走局域网HTTP协议，Windows、MacOS、虚拟机、安卓、iPhone等都可以跨平台共享文件。
 
 ## 5. 源码编译
 ```
-# 下载代码，推荐使用go mod模式管理依赖
+# 下载代码
 git clone https://github.com/bitepeng/b0pass.git
 
-# 配置Goland支持go mod，更新依赖
+# 使用go mod更新依赖
 go mod tidy
 
 # 开发运行

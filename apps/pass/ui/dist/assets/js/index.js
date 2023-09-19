@@ -377,7 +377,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
 
       //tools----------------------------------------//
 
-      $(".logo").on("click",function(){
+      $(".reload").on("click",function(){
         layer.msg("刷新中");
         window.location.reload(true);
       })

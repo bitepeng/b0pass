@@ -1,6 +1,7 @@
 package files
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -35,6 +36,7 @@ func NodeTree(rootpath, f string) FileNode {
 // 添加节点
 func NodeAdd(fPath string) error {
 	dir, file := filepath.Split(fPath)
+	log.Println("::NodeAdd-> dir=", dir, "file=", file)
 	if err := os.MkdirAll(dir, 0666); err != nil {
 		return err
 	}
