@@ -103,7 +103,7 @@ LAN large file transfer tool。
 ```
 [gateway]
 ListenAddr = ":8888"      # 配置IP和端口
-Domain = "test.com:8888"  # （可选配置）使用域名访问（如果有使用nginx等代理或使用80端口，可忽略域名后的端口）
+Domain = "test.com:8888"  # 可选配置，配置访问域名（若使用80端口或nginx代理，可忽略端口）
 [pass]
 Path = "files"            # 文件管理根目录
 ```
