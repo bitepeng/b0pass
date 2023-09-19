@@ -17,11 +17,12 @@ import (
 )
 
 func main() {
+	version := "2.0.2"
 	/**
 	* 检查配置
 	 */
 	configFile := "config.ini"
-	defaultConfig := "[gateway]\nListenAddr = \":8888\"\nDomain=\n\n[pass]\nPath = \"files\"\n"
+	defaultConfig := "[gateway]\nListenAddr = \":8888\"\nDomain=\"\"\n\n[pass]\nPath = \"files\"\n"
 	ok, _ := files.PathExists(configFile)
 	if !ok {
 		os.WriteFile(configFile, []byte(defaultConfig), 0666)
@@ -33,7 +34,7 @@ func main() {
 	go func() {
 		//Version
 		engine.Print(aurora.Black("--------------------------------------------"))
-		engine.Print(aurora.BgGreen(aurora.Black("          百灵快传主电脑端 B0PassPC         ")))
+		engine.Print(aurora.BgGreen(aurora.Black("          百灵快传主电脑端 B0Pass V" + version + "           ")))
 		waitTime := 100000 * time.Microsecond
 		time.Sleep(waitTime)
 		//检查ListenAddr

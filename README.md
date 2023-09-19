@@ -17,7 +17,7 @@ LAN large file transfer tool。
 - [x] 二维码扫码界面（支持手机传输，支持其它电脑输入网址）
 - [x] 共享文件在线管理界面（可删除、主电脑打开、图片浏览器等）
 - [x] 更简洁高效的操作界面
-- [x] 使用自研的 <a href="//github.com/bitepeng/b0boot-go">B0Boot-Go</a> 框架重构代码，更简洁、更模块化
+- [x] 使用自研的 <a href="//github.com/bitepeng/b0boot-go" target="_blank">B0Boot-Go</a> 框架重构代码，更简洁、更模块化
 - [x] 文件上传界面支持多次选择（PC端支持拖拽上传）
 - [x] 大文件分片上传（大文件上传更丝滑，不卡顿）
 - [x] 支持Windows、Linux、MacOS操作系统
