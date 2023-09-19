@@ -32,43 +32,43 @@ LAN large file transfer tool。
 <table width="100%">
 <tr>
 <td width="33%">
-    <img src="zdoc/_images/pc/01.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/01.png" width="100%"/>
     <p>主界面（功能说明）</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/pc/02.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/02.png" width="100%"/>
     <p>主界面（图文模式、文件菜单）</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/pc/03.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/03.png" width="100%"/>
     <p>主界面（列表模式）</p>
 </td>
 </tr>
 <tr>
 <td width="33%">
-    <img src="zdoc/_images/pc/04-1.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/04-1.png" width="100%"/>
     <p>手机扫码（到主界面）</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/pc/04-2.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/04-2.png" width="100%"/>
     <p>手机扫码（到某个文件）</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/pc/05.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/05.png" width="100%"/>
     <p>大文件上传（选择文件）</p>
 </td>
 </tr>
 <tr>
 <td width="33%">
-    <img src="zdoc/_images/pc/06.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/06.png" width="100%"/>
     <p>大文件上传（上传完成）</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/pc/07-1.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/07-1.png" width="100%"/>
     <p>图片浏览器</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/pc/07-2.png" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/pc/07-2.png" width="100%"/>
     <p>Html文件 Web服务</p>
 </td>
 </tr>
@@ -79,15 +79,15 @@ LAN large file transfer tool。
 <table width="100%">
 <tr>
 <td width="33%">
-    <img src="zdoc/_images/phone/01.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/phone/01.jpg" width="100%"/>
     <p>主界面</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/phone/02.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/phone/02.jpg" width="100%"/>
     <p>上传文件</p>
 </td>
 <td width="33%">
-    <img src="zdoc/_images/phone/03.jpg" width="100%"/>
+    <img src="https://gitee.com/b0cloud/b0pass/raw/master/zdoc/_images/phone/03.jpg" width="100%"/>
     <p>文件操作</p>
 </td>
 </tr>
