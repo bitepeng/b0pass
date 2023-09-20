@@ -161,7 +161,7 @@ func FileDownload(c *gin.Context) {
 func FileUpload(c *gin.Context) {
 	lens, _ := strconv.Atoi(c.Request.Header["Content-Length"][0])
 	log.Println("FileUpload::::", lens)
-	if lens > 1024 {
+	if lens > 4096 {
 		FileUploadBig(c)
 	} else {
 		FileUploadTiny(c)
