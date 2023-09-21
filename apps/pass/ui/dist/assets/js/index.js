@@ -64,11 +64,6 @@ if(pageWidth>=1280){areaBig = ['1280px','90%'];areaSmall = ['480px','500px'];
   ];
 }
 
-window.onresize=function(){
-  console.log("::resizeWindow::",document.body.clientWidth);
-  window.location.reload(false);
-}
-
 /**
  * LayUI APP
  */
@@ -95,18 +90,31 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       }
       // 删除操作
       var NodeDelete=function(obj){
-        layer.confirm('真的要删除吗？', function(index){
-            obj.del();
-            $.ajax({
-              url: "/pass/node-delete?f="+obj.data.path,
-              method: "get",
-              data: {},
-              success: function(res) {
-                layer.msg(obj.data.path+" 删除完成");
-              }
-            });
-            layer.close(index);
+        $.ajax({
+          url: "/pass/file-list?f="+obj.data.path,
+          method: "get",
+          data: {},
+          success: function(res) {
+            if(res.data){
+              layer.msg("请先删除文件夹下所有文件");
+            }else{
+              layer.confirm('真的要删除吗？', function(index){
+                  obj.del();
+                  $.ajax({
+                    url: "/pass/node-delete?f="+obj.data.path,
+                    method: "get",
+                    data: {},
+                    success: function(res) {
+                      layer.msg(obj.data.path+" 删除完成");
+                    }
+                  });
+                  layer.close(index);
+              });
+            }
+          },
         });
+        return ;
+        
       }
       // 浏览器打开
       var BrowserFile=function(obj){

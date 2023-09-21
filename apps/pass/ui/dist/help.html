@@ -35,6 +35,24 @@
                     <p> 使用局域网HTTP协议，理论传输速度取决于局域网拓扑结构和网卡性能。</p>
                   </div>
               </div>
+
+              <div class="layui-card">
+                <div class="layui-card-header"><b>使用步骤</b></div>
+                <div class="layui-card-body">
+                  <p>❶ 下载：根据您的操作系统下载对应版本</p>
+                  <p>❷ 执行：下载到电脑，双击即可开始使用</p>
+                  <p>注意①：建议不安装到“C:\Program Files (x86)”等目录，否则需“以管理员身份运行”</p>
+                  <p>注意②：自定义配置，修改config.ini文件</p>
+                  <pre>
+
+[gateway]
+ListenAddr = ":88"     # 配置IP和端口
+Domain = "test.com:88" # 可选/访问域名
+[pass]
+Path = "files"         # 文件管理根目录
+                  </pre>
+              </div>
+              </div>
               
                 <div class="layui-card">
                   <div class="layui-card-header"><b>使用场景</b></div>
@@ -56,7 +74,7 @@
                       <p> 百灵快传（B0Pass） —— 追求极致简洁的共享工具软件。</p> 
                       <p> 自2019年开源至今，已经发布数十的版本，并持续更新优化中。</p>
                       <p> 企业级信息化或效率工具开发需求，请联系 li@4bit.cn。</p>
-                      <p> 百灵快传官网：<a href="http://4bit.cn/p/b0pass" target="_blank">http://4bit.cn/p/b0pass （新版本可直接下载） </a></p>
+                      <p> 百灵快传官网：<a href="http://4bit.cn/p/b0pass" target="_blank">http://4bit.cn/p/b0pass （直接下载） </a></p>
                       <p> 开源中国专题：<a href="https://www.oschina.net/p/b0pass" target="_blank">https://www.oschina.net/p/b0pass</a></p>
                       <p> 开源地址（GitHub）：<a href="http://github.com/bitepeng/b0pass" target="_blank">http://github.com/bitepeng/b0pass</a></p>
                       <p> 开源地址（GitEE）：<a href="http://gitee.com/b0cloud/b0pass" target="_blank">http://gitee.com/b0cloud/b0pass</a></p>
