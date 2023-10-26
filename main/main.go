@@ -55,6 +55,7 @@ func main() {
 		engine.Print(aurora.BrightBlue("端口配置为：" + engine.Addr))
 		engine.Print(aurora.BrightBlue("主电脑参数：" + serverUrl))
 		engine.Print(aurora.BrightBlue("访问主电脑： http://" + serverUrl))
+		engine.Print(aurora.BrightBlue("官网下载APP：  https://4bit.cn/p/b0pass"))
 		engine.Print(aurora.Green("需特别注意：本机【防火墙】设为：允许访问"))
 		engine.Print(aurora.Black("--------------------------------------------"))
 		cmd.Open("http://" + serverUrl)
