@@ -24,7 +24,7 @@ LAN large file transfer tool。
 - [x] 支持端口（port）自定义配置
 - [x] 支持域名（domain）自定义配置
 - [x] 支持安卓手机APK应用（Uniapp开发的手机端）
-- [x] 支持连接主电脑的手机和电脑发送键盘和鼠标命令（支持windows/mac）
+- [x] 支持连接主电脑的手机和电脑发送键盘和鼠标命令（支持windows）
 - [ ] 提升项目安全性（debug模式）
 - [ ] JWT安全控制（配置Pread:只读|Pupload:上传|Padmin:管理，Token验证）
 - [ ] 支持对文件多选和全选操作
