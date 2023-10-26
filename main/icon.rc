@@ -1,0 +1,2 @@
+//windres -o main.syso icon.rc
+IDI_ICON1 ICON "icon.ico"

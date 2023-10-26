@@ -477,7 +477,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
         success: function(res) {
           console.log("::Config::",res.data);
           //linux操作系统禁用一些功能
-          if(res.data.Password=="linux"){
+          if(res.data.Password!="windows"){
             domid("btn_left_key").style.display="none";
             domid("btn_left_dir").style.display="none";
           }

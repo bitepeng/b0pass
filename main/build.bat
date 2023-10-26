@@ -1,4 +1,4 @@
-SET CGO_ENABLED=1
+SET CGO_ENABLED=0
 SET GOOS=darwin
 SET GOARCH=amd64
 go build -o ../zdoc/b0pass-mac/b0pass .
