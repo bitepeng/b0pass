@@ -64,7 +64,7 @@ body{
 .main-banner .title-xs{
     font-weight: 500;
     font-size: 1em;color: #fff;
-    padding-top: 10px;padding-bottom: 10px;
+    padding-top: 5px;padding-bottom: 20px;
 }
 .layui-form-checked[lay-skin=primary] i{
     background-color:#1e9fff;
@@ -178,7 +178,8 @@ body{
   box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.75);
   transition: .2s;
   transform: scale(1);
-
+  -webkit-user-select:none;
+  user-select:none;
 }
 li.oli{
     background-color: orange;
