@@ -24,8 +24,11 @@ LAN large file transfer tool。
 - [x] 支持端口（port）自定义配置
 - [x] 支持域名（domain）自定义配置
 - [x] 支持安卓手机APK应用（Uniapp开发的手机端）
-- [ ] 支持安全代码（code）自定义配置（增强安全性控制）
+- [x] 支持连接主电脑的手机和电脑发送键盘和鼠标命令（支持windows/mac）
+- [ ] 提升项目安全性（debug模式）
+- [ ] JWT安全控制（配置Pread:只读|Pupload:上传|Padmin:管理，Token验证）
 - [ ] 支持对文件多选和全选操作
+- [ ] 支持对PDF文件在线预览
 - [ ] 支持对上传的压缩包在线解压
 - [ ] 支持上传整个文件夹
 - [ ] 自动检查更新版本
@@ -113,7 +116,8 @@ Path = "files"            # 文件管理根目录
 ```
 
 ### 最新版下载地址
-- https://4bit.cn/p/b0pass    (项目官网，直接下载)
+- https://4bit.cn/p/b0pass    （百灵快传官网，直接下载）
+- https://www.oschina.net/p/b0pass （开源中国版本发布专题）
 
 ## 3. 代码仓库
 - https://github.com/bitepeng/b0pass   GitHub（主库）   欢迎star支持

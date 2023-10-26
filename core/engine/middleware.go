@@ -35,7 +35,7 @@ func CorsMiddleware() gin.HandlerFunc {
 
 var (
 	TokenExpire = time.Hour * 24
-	TokenSecret = []byte("00xda0d8f6x9n1x8")
+	TokenSecret = []byte("01xda2d8f6x9n4x8")
 )
 
 type MyClaims struct {

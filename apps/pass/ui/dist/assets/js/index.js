@@ -8,11 +8,13 @@ var areaSmall = ['100%','100%'];
 var currPath = "/";
 var showType = localStorage.getItem("showType") || 1;
 var showTypes = ["图文","列表"];
+var showMode = "pc";
+var domid = function(id){ return document.getElementById(id); }
 
 /**
  * 初始化布局
  */
-document.getElementById("show-type-label").innerText=showTypes[showType];
+domid("show-type-label").innerText=showTypes[showType];
 var showIco = {field:'name', title: '文件名', minWidth: 180, sort: true, templet: function(res){
   return '<i class="layui-icon layui-icon-right"></i>&nbsp; '+res.name;
 }};
@@ -45,6 +47,7 @@ var uploadhtm = "upload.html";
 if(pageWidth>=1280){areaBig = ['1280px','90%'];areaSmall = ['480px','500px'];
 }else if(pageWidth>=900){areaBig = ['900px','90%'];areaSmall = ['480px','500px'];
 }else if(pageWidth<900){
+  showMode="phone";
   uploadhtm = "upload_h5.html";
   areaBig = ['100%','100%'];areaSmall = ['100%','100%'];
   if(showType==0){
@@ -400,11 +403,32 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
         });
       })
 
-      //浏览按钮
+      //浏览
       $("#btn_left_open").on("click",function(){
         layer.msg("打开文件目录到浏览器");
         openPage("/files"+currPath,{});
       })
+
+      //键盘
+      $("#btn_left_key").on("click",function(){
+        layer.open({
+          title: "主电脑键盘遥控",
+          area: areaBig,
+          type: 1, 
+          content: '<div class="padding15"><div class="layui-form-item" align="center"><p><br></p></div>'+$("#send-key").html()+'</div>',
+          cancel: function () {}
+        });
+      })
+      window.sendKey=function(k){
+        $.ajax({
+          url: "/pass/cmd-key?k="+k,
+          method: "get",
+          data: {},
+          success: function(res) {
+            layer.msg("按下"+k+"键");
+          }
+        });
+      }
 
       //打开按钮
       $("#btn_left_dir").on("click",function(){
@@ -452,7 +476,12 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
         url: "/gateway/config",
         success: function(res) {
           console.log("::Config::",res.data);
-          ips=(res.data.ListenAddr).split(":")
+          //linux操作系统禁用一些功能
+          if(res.data.Password=="linux"){
+            domid("btn_left_key").style.display="none";
+            domid("btn_left_dir").style.display="none";
+          }
+          ips=(res.data.ListenAddr).split(":");
           if(ips[0]!=""){
             if(ips[0]="127.0.0.1"){
               alert("如果IP被设置为127.0.0.1，意味着只能本机使用，将无法分享文件！\n若无特殊需求，请将配置文件的'ListenAddr'设置为纯端口，如':8899'。");

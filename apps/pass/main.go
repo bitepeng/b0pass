@@ -69,10 +69,11 @@ func routeStatic(live bool) {
 
 // 注册应用路由
 func routeApi() {
-	engine.GET(appId, "/ping", "{}", "连通性测试", Ping)
+	GETX("/ping", "{}", "连通性测试", Ping)
 	engine.GET(appId, "/read-config", "{}", "读取配置", ReadConfig)
 	engine.GET(appId, "/read-ip", "{}", "读取IP", ReadIP)
 	engine.GET(appId, "/cmd-open", "{}", "命令行打开", CmdOpen)
+	engine.GET(appId, "/cmd-key", "{}", "主电脑键盘", CmdKey)
 
 	engine.GET(appId, "/node-tree", "{}", "目录树结构", NodeTree)
 	engine.GET(appId, "/node-add", "{f=相对路径(结尾带“/”为创建目录,否则为创建文件)}", "添加目录", NodeAdd)
@@ -85,4 +86,26 @@ func routeApi() {
 	engine.GET(appId, "/file-download", "{f=相对路径}", "文件列表", FileDownload)
 
 	engine.POST(appId, "/file-upload", "{post file}", "大文件上传", FileUpload)
+}
+
+/***** HttpRequest *****/
+
+// GET
+func GET(url, param, title string, handle ...gin.HandlerFunc) {
+	engine.Router(appId, "GET", url, param, title, handle...)
+}
+
+// POST
+func POST(url, param, title string, handle ...gin.HandlerFunc) {
+	engine.Router(appId, "POST", url, param, title, handle...)
+}
+
+// GETX
+func GETX(url, param, title string, handle gin.HandlerFunc) {
+	engine.Router(appId, "GET", url, param, "(Auth)"+title, engine.JWTMiddleware(), handle)
+}
+
+// POSTX
+func POSTX(url, param, title string, handle gin.HandlerFunc) {
+	engine.Router(appId, "POST", url, param, "(Auth)"+title, engine.JWTMiddleware(), handle)
 }

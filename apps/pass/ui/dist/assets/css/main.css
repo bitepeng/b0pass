@@ -17,7 +17,7 @@ body{
     background-color: #226ef1;
 }
 .logo{
-    margin-left:10px;margin-right:50px;font-weight: bold;
+    margin-right:50px;font-weight: bold;
 }
 .pull-right{
     float: right;
@@ -119,6 +119,23 @@ body{
     padding: 30px;
 }
 
+/*html**********************/
+#crrPath{
+    float:left ;font-weight: bolder;
+}
+.currMain{
+    margin: 15px;min-height: 55vh;
+}
+.input90{
+    width:90%;
+}
+.pd15{
+    padding: 15px;
+}
+.clearb{
+    clear:both;
+}
+
 /*file*******************/
 .file-div{
     text-align:center;padding:10px;
@@ -131,4 +148,41 @@ body{
 }
 .file-div textarea{
     padding:10px;
+}
+
+/*key***********************/
+.key-box {
+    text-align: center;
+    margin:0 auto;
+    max-width: 600px;
+}
+.key-box ul {
+	padding: 0;
+    margin:0 auto;
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 30% 30% 30%; 
+    grid-template-rows: 15% 15% 15% 15% 15%; 
+    grid-gap: 5%; 
+  }
+.key-box li { 
+  list-style: none;
+  text-align: center;
+  border-radius: 5px;
+  background: skyblue;
+  height: 72px;
+  line-height: 72px;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+  transition: .2s;
+  transform: scale(1);
+
+}
+li.oli{
+    background-color: orange;
+}
+.key-box li:active {
+    transform: scale(0.97);
 }

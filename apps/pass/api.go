@@ -2,6 +2,7 @@ package app
 
 import (
 	"b0go/apps/pass/lib/files"
+	"b0go/apps/pass/lib/keys"
 	"b0go/apps/pass/lib/stream"
 	"b0go/core/engine"
 	"b0go/core/tools/cmd"
@@ -43,6 +44,13 @@ func CmdOpen(c *gin.Context) {
 	} else {
 		cmd.Open(RootPath + f)
 	}
+}
+
+// CmdKey 主电脑键盘
+func CmdKey(c *gin.Context) {
+	k := c.Query("k")
+	keys.SendKey(k)
+	engine.OK("OK", nil, c)
 }
 
 // NodeTree 目录树结构

@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
-  <title>百灵快传 V2.0</title>
+  <title>百灵快传</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico"/>
   <link rel="stylesheet" href="assets/lib/layui/css/layui.css"/>
-  <link rel="stylesheet" href="assets/css/main.css?v2.04"/>
+  <link rel="stylesheet" href="assets/css/main.css?v2.16"/>
 </head>
 <body>
     <div class="main-div layui-layout-admin">
         <div class="layui-header">
           <ul class="layui-nav layui-bg-blue main-div" lay-bar="disabled">
-              <li class="layui-nav-item logo"><a href="http://4bit.cn/p/b0pass" target="_blank">百灵快传<span class="layui-badge layui-bg-gray">v2.0</span></a></li>
+              <li class="layui-nav-item logo">
+                <a href="http://4bit.cn/p/b0pass" target="_blank">百灵快传 <span class="layui-badge layui-bg-gray">v2.0</span></a> 
+              </li>
               <li class="layui-nav-item pull-right"><a href="help.html?v2" title="获取帮助"><i class="layui-icon layui-icon-rate"></i> 帮助</a></li>
               <li class="layui-nav-item pull-right layui-this"><a href="#" title="支持超大文件秒传" ><i class="layui-icon layui-icon-release"></i> 文件</a></li>
           </ul> 
         </div>
 
         <div class="main-banner layui-hide-xs">
-          <img src="assets/img/banner-min.png" width="450" />
+          <img src="assets/img/banner-min.png" width="450"  title="b0pass"/>
           <p><span class="title-big reload">百灵快传(B0Pass) - 电脑手机大文件传输工具</span></p>
           <p class="btns"></p>
         </div>
@@ -30,7 +32,7 @@
         </div>
 
         <div class="layui-bg-gray">
-            <div class="layui-row" style="margin: 15px;min-height: 55vh;">
+            <div class="layui-row currMain">
               <div class="layui-col-xs12 layui-col-sm4 layui-col-md3">
                 <div class="layui-card">
                   <div class="layui-card-header">
@@ -38,7 +40,9 @@
                     <div class="pull-right"><div class="layui-btn-group">
                       <button type="button" class="layui-btn layui-btn-primary" id="btn_left_open" title="用浏览器打开">
                         <i class="layui-icon layui-icon-chart-screen"></i>浏览</button>
-                      <button type="button" class="layui-btn layui-btn-primary" id="btn_left_dir" title="用资源管理器打开">
+                      <button type="button" class="layui-btn layui-btn-primary" id="btn_left_key" title="主电脑：键盘">
+                          <i class="layui-icon layui-icon-windows"></i>键盘</button>
+                      <button type="button" class="layui-btn layui-btn-primary" id="btn_left_dir" title="主电脑：打开">
                         <i class="layui-icon layui-icon-layouts"></i>打开</button>
                       <button type="button" class="layui-btn layui-btn-primary layui-hide-sm layui-hide-md btn_main_new" title="新建目录">
                         <i class="layui-icon layui-icon-add-circle-fine"></i>新建</button>
@@ -52,7 +56,7 @@
               <div class="layui-col-xs12 layui-col-sm8 layui-col-md9">
                 <div class="layui-card main-right">
                   <div class="layui-card-header">
-                    <div id="crrPath" style="float:left ;font-weight: bolder;"></div>
+                    <div id="crrPath"></div>
                     <div class="pull-right"><div class="layui-btn-group">
                         <button type="button" class="layui-btn layui-btn-normal" id="link_phone" title="复制网址或手机扫码">
                         <i class="layui-icon layui-icon-cellphone-fine"></i>扫码</button>
@@ -66,7 +70,7 @@
                         </button>
                     </div></div>
                   </div>
-                  <div class="layui-card-body table-list" style="clear:both;">
+                  <div class="layui-card-body table-list clearb">
                     <table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
                     <script type="text/html" id="barDT">
                       <a class="layui-btn layui-btn-xs layui-bg-gray" lay-event="more"><i class="layui-icon layui-icon-spread-left"></i></a>
@@ -80,13 +84,42 @@
     </div>
 
     <!-- 页面弹框 Start -->
-    <div id="node-add" style="display: none;">
+    <div id="send-key" hidden>
+
+      <div class="key-box">
+        <ul>
+          <li onclick="window.sendKey('esc')">ESC</li>
+          <li onclick="window.sendKey('up')" class="oli"><i class="layui-icon layui-icon-up"></i>键盘</li>
+          <li onclick="window.sendKey('tab')">TAB</li>
+          <li onclick="window.sendKey('left')" class="oli"><i class="layui-icon layui-icon-left"></i>键盘</li>
+          <li onclick="window.sendKey('enter')">ENTER</li>
+          <li onclick="window.sendKey('right')" class="oli"><i class="layui-icon layui-icon-right"></i>键盘</li>
+          <li onclick="window.sendKey('f5')">F5</li>
+          <li onclick="window.sendKey('down')" class="oli"><i class="layui-icon layui-icon-down"></i>键盘</li>
+          <li onclick="window.sendKey('f11')">F11</li>
+
+          <li onclick="window.sendKey('wintab')">WIN+TAB</li>
+          <li onclick="window.sendKey('mouse_up')" class="oli"><i class="layui-icon layui-icon-up"></i>鼠标</li>
+          <li onclick="window.sendKey('audio_mute')">静音切换</li>
+          <li onclick="window.sendKey('mouse_left')" class="oli"><i class="layui-icon layui-icon-left"></i>鼠标</li>
+          <li onclick="window.sendKey('mouse_click')">鼠标点击</li>
+          <li onclick="window.sendKey('mouse_right')" class="oli"><i class="layui-icon layui-icon-right"></i>鼠标</li>
+          <li onclick="window.sendKey('audio_vol_up')"><i class="layui-icon layui-icon-addition"></i>音量</li>
+          <li onclick="window.sendKey('mouse_down')" class="oli"><i class="layui-icon layui-icon-down"></i>鼠标</li>
+          <li onclick="window.sendKey('audio_vol_down')"><i class="layui-icon layui-icon-subtraction"></i>音量</li>
+        </ul>
+      </div>
+
+    </div>
+    <!-- 页面弹框 End -->
+     <!-- 页面弹框 Start -->
+     <div id="node-add" hidden>
       <!--文档新建界面-->
       <form class="layui-form">
       <div class="layui-form-item">
         <label class="layui-form-label" id="node-add-path">目录名称</label>
         <div class="layui-input-block">
-          <input type="input" name="doc-add-input" placeholder="请输入路径" class="layui-input" style="width:90%;">
+          <input type="input" name="doc-add-input" placeholder="请输入路径" class="layui-input input90">
         </div>
       </div>
       <div class="layui-form-item">
@@ -104,14 +137,14 @@
     </div>
     <!-- 页面弹框 End -->
     <!-- 页面弹框 Start -->
-    <div id="node-rename" style="display: none;">
+    <div id="node-rename" hidden>
       <!--文档新建界面-->
       <form class="layui-form">
       <div class="layui-form-item">
         <label class="layui-form-label" id="node-name-path">修改名称</label>
         <div class="layui-input-block">
           <input type="input" name="doc-name-src" value="$$" hidden>
-          <input type="input" name="doc-name-input" required  lay-verify="required" " value="$$" placeholder="请输入路径" class="layui-input" style="width:90%;">
+          <input type="input" name="doc-name-input" required  lay-verify="required" " value="$$" placeholder="请输入路径" class="layui-input input90">
         </div>
       </div>
       <div class="layui-form-item">
@@ -130,7 +163,7 @@
     <!-- 页面弹框 End -->
 
     <script src="assets/lib/layui/layui.js"></script>
-    <script src="assets/js/index.js?230921-1"></script>
+    <script src="assets/js/index.js?230921-18"></script>
 
 </body>
 </html>

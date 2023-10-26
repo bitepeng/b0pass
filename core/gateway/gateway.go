@@ -6,9 +6,10 @@ import (
 	"embed"
 	"fmt"
 	"io/fs"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
+	"runtime"
 
 	"github.com/BurntSushi/toml"
 	"github.com/gin-gonic/gin"
@@ -18,7 +19,9 @@ import (
 type AppConfig struct {
 	ListenAddr string
 	Domain     string
+	Password   string //密码
 	Live       bool
+	Debug      bool
 }
 
 var (
@@ -65,7 +68,9 @@ func run() {
 
 	//动态路由挂载
 	engine.GET(appId, "/config", "{}", "read config", ReadConfig)
-	engine.Gin.GET("/dev/api", getApp)
+	if config.Debug {
+		engine.Gin.GET("/dev/api", getApp)
+	}
 
 	//启动httpd服务
 	engine.Addr = config.ListenAddr
@@ -75,6 +80,8 @@ func run() {
 
 // 读取配置信息
 func ReadConfig(c *gin.Context) {
+	config_ := config
+	config_.Password = runtime.GOOS
 	engine.OK("OK", config, c)
 }
 
@@ -86,16 +93,20 @@ func addAppStaticRoute(live bool) {
 		engine.Gin.HandleContext(c)
 	})*/
 	if live {
-		//docs
-		engine.Gin.Static("/dev/doc", docsPath)
+		if config.Debug {
+			//docs
+			engine.Gin.Static("/dev/doc", docsPath)
+		}
 		//app/appid
 		for name, config := range engine.App {
 			engine.Gin.Static(fmt.Sprintf("/app/%s", name), config.UIDir)
 		}
 	} else {
-		//docs
-		docDist, _ := fs.Sub(docsPathFS, "doc/dist")
-		engine.Gin.StaticFS("/dev/doc", http.FS(docDist))
+		if config.Debug {
+			//docs
+			docDist, _ := fs.Sub(docsPathFS, "doc/dist")
+			engine.Gin.StaticFS("/dev/doc", http.FS(docDist))
+		}
 		//app/appid
 		for name, config := range engine.App {
 			engine.Gin.StaticFS(fmt.Sprintf("/app/%s", name), http.FS(config.UIFS))
@@ -129,7 +140,7 @@ func getApp(c *gin.Context) {
 			app.Version,
 			app.Router,
 		}
-		if bytes, err := ioutil.ReadFile(filepath.Join(app.Dir, "README.md")); err == nil {
+		if bytes, err := os.ReadFile(filepath.Join(app.Dir, "README.md")); err == nil {
 			p.ReadMe = string(bytes[0:100])
 		}
 		var out bytes.Buffer
