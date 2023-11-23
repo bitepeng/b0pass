@@ -37,11 +37,13 @@ func Open(uri string) error {
 	uri = strings.ReplaceAll(uri, "\\", div)
 	uri = strings.ReplaceAll(uri, "/", div)
 	//exec.Command
-	run = run + uri
+	//run = run + uri
 	cmds := strings.Split(run, " ")
+	cmds = append(cmds, uri)
+	//cmd := exec.Command(cmds[0], cmds[1:]...)
 	cmd := exec.Command(cmds[0], cmds[1:]...)
 	//cmd.Start
-	log.Println("[CommandAs]", cmds)
+	log.Println("[CommandAs]", run, uri)
 	//windows cmd不出现黑框
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	return cmd.Start()

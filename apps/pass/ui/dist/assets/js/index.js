@@ -56,7 +56,7 @@ if(pageWidth>=1280){areaBig = ['1280px','90%'];areaSmall = ['480px','500px'];
       if(res.type=="dir"){str+= '<img src="assets/img/dir.png"  width="48" height="48">&nbsp; '+res.name
       }else if(res.type=="pdf"){str+='<img src="assets/img/pdf.png"  width="32" height="32">&nbsp; '+res.name
       }else if(res.type=="img"){str+= '<img src="/files'+res.path+'"  width="200" height="150"><br>'+res.name
-      }else if(res.type=="vod"){str+='<video id="video" controls="controls" width="200" height="150"><source  src="/files'+res.path+'"></video><br>'+res.name
+      }else if(res.type=="vod"){str+='<video controls="controls" width="200" height="150" src="/files'+res.path+'"><source  src="/files'+res.path+'"></video><br>'+res.name
       }else{str+= '<img src="assets/img/file.png"  width="32" height="32">&nbsp; '+res.name
       }
       return str;

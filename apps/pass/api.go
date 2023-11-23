@@ -35,8 +35,9 @@ func ReadIP(c *gin.Context) {
 
 // CmdOpen 使用命令行打开
 func CmdOpen(c *gin.Context) {
-	RootPath := config.Path
+	RootPath := strings.ReplaceAll(config.Path, "\\", "/")
 	f := c.Query("f")
+	f = strings.ReplaceAll(f, "\\", "/")
 	ext := strings.ToUpper(path.Ext(f))
 	engine.Println(ext)
 	if ext == ".BAT" || ext == ".CMD" || ext == ".EXE" {
