@@ -3,8 +3,8 @@
  */
 var fpath = window.location.href.split("=")[1];
 var servIP,servPort;
-var areaBig = ['100%','100%'];
-var areaSmall = ['100%','100%'];
+var areaBig = ['1280px','90%'];
+var areaSmall = ['480px','500px'];
 var currPath = "/";
 var showType = localStorage.getItem("showType") || 1;
 var showTypes = ["图文","列表"];
