@@ -4,12 +4,12 @@
 package keys
 
 import (
-	//"github.com/go-vgo/robotgo"
+	"github.com/go-vgo/robotgo"
 )
 
 // SendKey 主电脑键盘
 func SendKey(k string) {
-	/*
+
 	switch k {
 	case "esc":
 		robotgo.KeyTap(`esc`)
@@ -50,5 +50,5 @@ func SendKey(k string) {
 	default:
 		robotgo.KeyTap(k)
 	}
-	*/
+
 }

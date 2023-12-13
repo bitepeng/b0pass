@@ -12,25 +12,37 @@
 </head>
 <body>
     <div class="main-div layui-layout-admin">
-        <div class="layui-header">
-          <ul class="layui-nav layui-bg-blue main-div" lay-bar="disabled">
+        <div class="layui-header layui-hide-xs">
+          <ul class="layui-nav layui-bg-blue main-div">
               <li class="layui-nav-item logo">
-                <a href="http://4bit.cn/p/b0pass" target="_blank">百灵快传 <span class="layui-badge layui-bg-gray">v2.0</span></a> 
+                <span id="logo"><a href="http://4bit.cn/p/b0pass" target="_blank">百灵快传 <span class="layui-badge layui-bg-gray">v2</span></a></span>
               </li>
               <li class="layui-nav-item pull-right"><a href="help.html?v2" title="获取帮助"><i class="layui-icon layui-icon-rate"></i> 帮助</a></li>
+              <li class="layui-nav-item pull-right"><a href="text.html" title="多端文本传输" ><i class="layui-icon layui-icon-list"></i> 文本</a></li>
               <li class="layui-nav-item pull-right layui-this"><a href="#" title="支持超大文件秒传" ><i class="layui-icon layui-icon-release"></i> 文件</a></li>
+              <li class="layui-nav-item pull-right"><a href="qrcode.html" title="扫码连接" ><i class="layui-icon layui-icon-cols"></i> 连接</a></li>
           </ul>
         </div>
-
         <div class="main-banner layui-hide-xs">
           <img src="assets/img/banner-min.png" title="b0pass"/>
           <p><span class="title-big reload">百灵快传(B0Pass) - 电脑手机大文件传输工具</span></p>
           <p class="btns"></p>
         </div>
+
+        <!-- 小屏幕 s-->
+        <div class="layui-header layui-hide-md">
+          <ul class="layui-nav layui-bg-blue main-div text-center">
+            <li class="layui-nav-item"><a href="qrcode.html" title="扫码连接" ><i class="layui-icon layui-icon-cols"></i> 连接</a></li>
+            <li class="layui-nav-item layui-this"><a href="#" title="支持超大文件秒传" ><i class="layui-icon layui-icon-release"></i> 文件</a></li>
+            <li class="layui-nav-item"><a href="text.html" title="多端文本传输" ><i class="layui-icon layui-icon-list"></i> 文本</a></li>
+            <li class="layui-nav-item"><a href="help.html?v2" title="获取帮助"><i class="layui-icon layui-icon-rate"></i> 帮助</a></li> 
+          </ul>
+        </div>
         <div class="main-banner layui-hide-sm layui-hide-md">
           <img src="assets/img/banner-min.png" width="60%"  title="b0pass"/>
           <p class="title-xs">电脑手机大文件传输工具</p>
         </div>
+        <!-- 小屏幕 e-->
 
         <div class="layui-bg-gray">
             <div class="layui-row currMain">
@@ -41,8 +53,6 @@
                     <div class="pull-right"><div class="layui-btn-group">
                       <button type="button" class="layui-btn layui-btn-primary" id="btn_left_open" title="用浏览器打开">
                         <i class="layui-icon layui-icon-chart-screen"></i>浏览</button>
-                      <!--<button type="button" class="layui-btn layui-btn-primary" id="btn_left_key" title="主电脑：键盘">
-                          <i class="layui-icon layui-icon-windows"></i>键盘</button>-->
                       <button type="button" class="layui-btn layui-btn-primary" id="btn_left_dir" title="主电脑：打开">
                         <i class="layui-icon layui-icon-layouts"></i>打开</button>
                       <button type="button" class="layui-btn layui-btn-primary layui-hide-sm layui-hide-md btn_main_new" title="新建目录">
@@ -59,8 +69,8 @@
                   <div class="layui-card-header">
                     <div id="crrPath"></div>
                     <div class="pull-right"><div class="layui-btn-group">
-                        <button type="button" class="layui-btn layui-btn-normal" id="link_phone" title="复制网址或手机扫码">
-                        <i class="layui-icon layui-icon-cellphone-fine"></i>扫码</button>
+                        <!-- <button type="button" class="layui-btn layui-btn-normal" id="link_phone" title="复制网址或手机扫码">
+                        <i class="layui-icon layui-icon-cellphone-fine"></i>扫码</button> -->
                         <button type="button" class="layui-btn layui-btn-warm" id="btn_main_upload" title="支持超大文件秒传">
                           <i class="layui-icon layui-icon-upload-drag"></i>上传</button>
                         <button type="button" class="layui-btn layui-btn-primary layui-hide-xs btn_main_new" title="新建目录">
@@ -85,35 +95,6 @@
 
     </div>
 
-    <!-- 页面弹框 Start -->
-    <div id="send-key" hidden>
-
-      <div class="key-box">
-        <ul>
-          <li onclick="window.sendKey('esc')">ESC</li>
-          <li onclick="window.sendKey('up')" class="oli"><i class="layui-icon layui-icon-up"></i>键盘</li>
-          <li onclick="window.sendKey('tab')">TAB</li>
-          <li onclick="window.sendKey('left')" class="oli"><i class="layui-icon layui-icon-left"></i>键盘</li>
-          <li onclick="window.sendKey('enter')">ENTER</li>
-          <li onclick="window.sendKey('right')" class="oli"><i class="layui-icon layui-icon-right"></i>键盘</li>
-          <li onclick="window.sendKey('f5')">F5</li>
-          <li onclick="window.sendKey('down')" class="oli"><i class="layui-icon layui-icon-down"></i>键盘</li>
-          <li onclick="window.sendKey('f11')">F11</li>
-
-          <li onclick="window.sendKey('wintab')">WIN+TAB</li>
-          <li onclick="window.sendKey('mouse_up')" class="oli"><i class="layui-icon layui-icon-up"></i>鼠标</li>
-          <li onclick="window.sendKey('audio_mute')">静音切换</li>
-          <li onclick="window.sendKey('mouse_left')" class="oli"><i class="layui-icon layui-icon-left"></i>鼠标</li>
-          <li onclick="window.sendKey('mouse_click')">鼠标点击</li>
-          <li onclick="window.sendKey('mouse_right')" class="oli"><i class="layui-icon layui-icon-right"></i>鼠标</li>
-          <li onclick="window.sendKey('audio_vol_up')"><i class="layui-icon layui-icon-addition"></i>音量</li>
-          <li onclick="window.sendKey('mouse_down')" class="oli"><i class="layui-icon layui-icon-down"></i>鼠标</li>
-          <li onclick="window.sendKey('audio_vol_down')"><i class="layui-icon layui-icon-subtraction"></i>音量</li>
-        </ul>
-      </div>
-
-    </div>
-    <!-- 页面弹框 End -->
      <!-- 页面弹框 Start -->
      <div id="node-add" hidden>
       <!--文档新建界面-->
@@ -166,6 +147,7 @@
 
     <script src="assets/lib/layui/layui.js"></script>
     <script src="assets/js/index.js?230921-19"></script>
+    <script>//if(document.body.clientWidth<=900){document.querySelector("#logo").style.display="none";}</script>
 
 </body>
 </html>

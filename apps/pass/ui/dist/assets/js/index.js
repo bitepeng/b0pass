@@ -409,26 +409,6 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
         openPage("/files"+currPath,{});
       })
 
-      //键盘
-      $("#btn_left_key").on("click",function(){
-        layer.open({
-          title: "主电脑键盘遥控",
-          area: areaBig,
-          type: 1, 
-          content: '<div class="padding15"><div class="layui-form-item" align="center"><p><br></p></div>'+$("#send-key").html()+'</div>',
-          cancel: function () {}
-        });
-      })
-      window.sendKey=function(k){
-        $.ajax({
-          url: "/pass/cmd-key?k="+k,
-          method: "get",
-          data: {},
-          success: function(res) {
-            layer.msg("按下"+k+"键");
-          }
-        });
-      }
 
       //打开按钮
       $("#btn_left_dir").on("click",function(){
@@ -478,7 +458,6 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           console.log("::Config::",res.data);
           //linux操作系统禁用一些功能
           if(res.data.Password!="windows"){
-            domid("btn_left_key").style.display="none";
             domid("btn_left_dir").style.display="none";
           }
           ips=(res.data.ListenAddr).split(":");

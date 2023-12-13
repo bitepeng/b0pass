@@ -19,6 +19,7 @@ body{
 }
 .logo{
     margin-right:50px;font-weight: bold;
+    text-align: left;
 }
 .pull-right{
     float: right;

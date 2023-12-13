@@ -8,7 +8,11 @@ import (
 
 // GetOutBoundIP 使用UDP获取IP地址
 func GetOutBoundIP() string {
-	conn, _ := net.Dial("udp", "8.8.8.8:53")
+	conn, err := net.Dial("udp", "8.8.8.8:53")
+	if err != nil {
+		fmt.Printf("【错误】您的网络不通，请检查！ err: %s", err.Error())
+		return "127.0.0.1"
+	}
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 	return strings.Split(localAddr.String(), ":")[0]
 }

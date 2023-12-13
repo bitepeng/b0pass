@@ -1,6 +1,7 @@
 package app
 
 import (
+	"b0go/apps/pass/lib/chat"
 	"b0go/core/engine"
 	"embed"
 	"io/fs"
@@ -48,6 +49,7 @@ func run() {
 	engine.Gin.Use(engine.CorsMiddleware())
 	routeStatic(config.Live)
 	routeApi()
+	routeWs()
 }
 
 // 注册静态路由
@@ -108,4 +110,12 @@ func GETX(url, param, title string, handle gin.HandlerFunc) {
 // POSTX
 func POSTX(url, param, title string, handle gin.HandlerFunc) {
 	engine.Router(appId, "POST", url, param, "(Auth)"+title, engine.JWTMiddleware(), handle)
+}
+
+func routeWs() {
+	hub := chat.NewHub()
+	go hub.Run()
+	engine.Gin.GET("/ws", func(c *gin.Context) {
+		chat.ServeWs(hub, c)
+	})
 }
