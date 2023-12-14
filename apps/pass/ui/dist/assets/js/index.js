@@ -145,7 +145,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
             title: "文件扫码",
             type: 2,
             area: areaSmall,
-            content: 'qrcode.html?f='+servIP+servPort+"/files/"+encodeURIComponent(obj.data.path)
+            content: 'link.html?f='+servIP+servPort+"/files/"+encodeURIComponent(obj.data.path)
         });
       }
       // 下载操作
@@ -399,7 +399,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
             title: "主电脑参数",
             type: 2,
             area: areaSmall,
-            content: 'qrcode.html?f='+servIP+servPort
+            content: 'link.html?f='+servIP+servPort
         });
       })
 

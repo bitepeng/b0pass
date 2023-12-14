@@ -95,8 +95,12 @@ body{
 .layui-table img{
     max-width: 100%;
 }
+.layui-card-header-min{
+    padding: 3px 15px 0 15px;
+    border-bottom:none;
+}
 .layui-card-header{
-    padding: 10px 15px 2px 15px;
+    padding: 10px 15px 0 15px;
     border-bottom:none;
 }
 .layui-card-body{

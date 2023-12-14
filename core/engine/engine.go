@@ -2,8 +2,8 @@ package engine
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
+	"os"
 	"time"
 
 	"github.com/BurntSushi/toml"
@@ -14,7 +14,7 @@ import (
 
 var (
 	// Version 引擎版本号
-	Version = "2.0.2"
+	Version = "2.0"
 	// EngineInfo 引擎信息
 	EngineInfo = &struct {
 		Version          *string
@@ -70,14 +70,14 @@ func Run(configFile string) (err error) {
 	//停止脚本
 	/*
 		if runtime.GOOS == "windows" {
-			ioutil.WriteFile("stop.bat", []byte(fmt.Sprintf("taskkill /pid %d  -t  -f", os.Getpid())), 0777)
+			os.WriteFile("stop.bat", []byte(fmt.Sprintf("taskkill /pid %d  -t  -f", os.Getpid())), 0777)
 		} else {
-			ioutil.WriteFile("stop.sh", []byte(fmt.Sprintf("kill -9 %d", os.Getpid())), 0777)
+			os.WriteFile("stop.sh", []byte(fmt.Sprintf("kill -9 %d", os.Getpid())), 0777)
 		}
 	*/
 
 	//Config字典
-	if ConfigRaw, err = ioutil.ReadFile(configFile); err != nil {
+	if ConfigRaw, err = os.ReadFile(configFile); err != nil {
 		Print(aurora.Red("read config file error:"), err)
 		return
 	}

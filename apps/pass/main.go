@@ -5,8 +5,11 @@ import (
 	"b0go/core/engine"
 	"embed"
 	"io/fs"
+	"log"
 	"net/http"
+	"os"
 	"path/filepath"
+	"runtime"
 
 	"github.com/gin-gonic/gin"
 	"github.com/logrusorgru/aurora"
@@ -50,6 +53,7 @@ func run() {
 	routeStatic(config.Live)
 	routeApi()
 	routeWs()
+	putDll()
 }
 
 // 注册静态路由
@@ -112,10 +116,26 @@ func POSTX(url, param, title string, handle gin.HandlerFunc) {
 	engine.Router(appId, "POST", url, param, "(Auth)"+title, engine.JWTMiddleware(), handle)
 }
 
+// 注册ws路由
 func routeWs() {
 	hub := chat.NewHub()
 	go hub.Run()
 	engine.Gin.GET("/ws", func(c *gin.Context) {
 		chat.ServeWs(hub, c)
 	})
+}
+
+// 释放dll文件
+func putDll() {
+	if runtime.GOOS == "windows" && !config.Live {
+		_, errNow := os.ReadFile("zlib1.dll")
+		if errNow != nil {
+			dll, err := uiFS.ReadFile("ui/dist/dll/zlib1.dll")
+			if err != nil {
+				log.Println("zlib1.dll err:", err)
+			} else {
+				os.WriteFile("zlib1.dll", dll, 0777)
+			}
+		}
+	}
 }
