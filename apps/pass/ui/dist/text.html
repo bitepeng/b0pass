@@ -19,10 +19,11 @@
     #log ul{list-style-type:disc; list-style-position:inside;} 
     #log ol{list-style-type:decimal; list-style-position:inside;} 
     #log ul li{list-style:inside;}
+    #log ol{list-style-type:none;counter-reset:sectioncounter;width:98%;}
     #log ol li:before {content:counter(sectioncounter) ". ";counter-increment:sectioncounter;}
     .bar{
-        font-size: 11px; background-color: #eee;color: #999;padding:1px 10px;margin-bottom: 10px;
-        border-radius: 5px;
+        font-size: 11px; background-color: #eee;color: #999;padding:5px 10px;margin-bottom: 10px;
+        border-radius: 5px;line-height: 11px;
     }
     .bar span{float: right;}
     .btext{padding:1px 5px;}
@@ -69,6 +70,6 @@
     <script src="assets/lib/editor/editor.js"></script>
     <script src="assets/lib/layui/layui.js"></script>
     <script src="assets/js/page.js"></script>
-    <script src="assets/js/text.js"></script>
+    <script src="assets/js/text.js?01"></script>
 </body>
 </html>

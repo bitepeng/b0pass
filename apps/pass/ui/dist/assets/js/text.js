@@ -75,8 +75,8 @@ window.onload = function () {
     function echomsg(id,msg){
         var item = document.createElement("div");
         var nblockid = "block_"+id;
-        var barhtml =  "<div class='bar' ><i class='layui-icon layui-icon-triangle-r'></i>MSG_"+id+" "
-        barhtml = barhtml + "<span onclick=\"delb('"+nblockid+"')\"><i class='layui-icon layui-icon-close'></i> &nbsp; </span>";
+        var barhtml =  "<div class='bar' >MSG_"+id+" "
+        barhtml = barhtml + "<span onclick=\"delb('"+nblockid+"')\"> &nbsp; <i class='layui-icon layui-icon-close'></i></span>";
         barhtml = barhtml + "<span onclick=\"copyb('"+nblockid+"',0)\">【复制文字】</span>";
         barhtml = barhtml + "<span onclick=\"copyb('"+nblockid+"',1)\">【复制HTML】</span></div>";
         item.innerHTML = barhtml + "<div id='"+nblockid+"' class='btext'>"+msg+"</div><hr>"
