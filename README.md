@@ -25,8 +25,8 @@ LAN large file transfer tool。
 - [x] 支持域名（domain）自定义配置
 - [x] 支持安卓手机APK应用（Uniapp开发的手机端）
 - [x] 支持连接主电脑的手机和电脑发送键盘和鼠标命令（支持windows）
-- [ ] 提升项目安全性（debug模式）
-- [ ] JWT安全控制（配置Pread:只读|Pupload:上传|Padmin:管理，Token验证）
+- [x] 提升项目安全性（debug模式）
+- [x] JWT安全控制（配置CodeReadonly:只读|CodeReadwrite:管理，Token验证）
 - [ ] 支持对文件多选和全选操作
 - [ ] 支持对PDF文件在线预览
 - [ ] 支持对上传的压缩包在线解压
@@ -113,6 +113,9 @@ ListenAddr = ":8888"      # 配置IP和端口
 Domain = "test.com:8888"  # 可选配置，配置访问域名（若使用80端口或nginx代理，可忽略端口）
 [pass]
 Path = "files"            # 文件管理根目录
+CodeReadOnly = "123"      # 配置只读密码，为空则不启用
+CodeReadWrite = "admin"   # 配置读写密码，为空则不启用
+
 ```
 
 ### 最新版下载地址
