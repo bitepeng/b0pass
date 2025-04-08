@@ -1,53 +1,55 @@
 /**
- * 全局函数 $+layer
+ * 全局变量
+ */
+var token = localStorage.getItem('token') || '';
+var auth = localStorage.getItem('auth') || '';
+
+/**
+ * 全局函数
  */
 var $,layer;
 layui.use(['layer'], function(){
     $ = layui.jquery,layer = layui.layer;
-    $(".ver").html('v2.0.5');
+    $(".ver").html('v2.0.6');
 });
-
+var domid = function(id){ 
+    return document.getElementById(id); 
+}
 
 /**
- * 页面header(因为闪动，暂未启动)
+ * 统一API请求函数
+ * @param {string} url - 请求地址
+ * @param {string} method - GET/POST
+ * @param {object} data - 请求数据
+ * @param {function} success - 成功回调
+ * @param {function} error - 错误回调(可选)
  */
-var page_header = function(active_title){
-    let menu = [
-        ['link.html','layui-icon-cols','连接','扫码连接'],
-        ['index.html','layui-icon-release','文件','支持超大文件秒传'],
-        ['text.html','layui-icon-list','文本','多端文本传输'],
-        ['help.html','layui-icon-rate','帮助','获取帮助'],
-    ];
-    let ver = "2.0.5";li_big="",li_small="";
-    for(let i=menu.length;i>0;i--){
-        let key=i-1;
-        let val=menu[key];
-        let active=(active_title==menu[key])?"layui-this":"";
-        li_big+=`
-        <li class="layui-nav-item pull-right ${active}"><a href="${val[0]}" title="${val[3]}">
-        <i class="layui-icon ${val[1]}"></i> ${val[2]}</a></li>
-        `;
-    }
-    for(let i=0;i<menu.length;i++){
-        let val=menu[i];
-        let active=(active_title==menu[i][2])?"layui-this":"";
-        li_small+=`
-        <li class="layui-nav-item pull-right ${active}"><a href="${val[0]}" title="${val[3]}">
-        <i class="layui-icon ${val[1]}"></i> ${val[2]}</a></li>
-        `;
-    }
-    return `<div class="layui-header layui-hide-xs">
-        <ul class="layui-nav layui-bg-blue main-div" lay-bar="disabled">
-            <li class="layui-nav-item logo">
-                <a href="http://4bit.cn/p/b0pass" target="_blank">百灵快传 
-                <span class="layui-badge layui-bg-gray">v${ver}</span></a> 
-            </li>
-            ${li_big}
-        </ul>
-    </div>
-    <div class="layui-header layui-hide-md">
-            <ul class="layui-nav layui-bg-blue main-div text-center">
-            ${li_small}
-            </ul>
-    </div>`;
+var api_ajax = function (url, method, data, success, error) {
+    // 从localStorage获取token
+    var token = localStorage.getItem('token') || '';
+    
+    $.ajax({
+        url: url,
+        type: method,
+        data: method === 'GET' ? data : JSON.stringify(data),
+        contentType: 'application/json',
+        headers: {
+            'token': token,
+            'Content-Type' : 'application/json;charset=utf-8'
+        },
+        success: function(res) {
+            console.log(url,res,token);
+            if (res.code === 401) {
+                // 401未授权跳转到登录页
+                layer.msg("请先登录",{icon: 5});
+                window.location.href = '/app/pass/login.html';
+                return;  
+            }
+            success && success(res);
+        },
+        error: function(xhr) {
+            error && error(xhr);
+        }
+    });
 }
+

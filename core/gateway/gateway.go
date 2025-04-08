@@ -19,7 +19,7 @@ import (
 type AppConfig struct {
 	ListenAddr string
 	Domain     string
-	Password   string //密码
+	OS         string //系统类型
 	Live       bool
 	Debug      bool
 }
@@ -81,7 +81,7 @@ func run() {
 // 读取配置信息
 func ReadConfig(c *gin.Context) {
 	config_ := config
-	config_.Password = runtime.GOOS
+	config_.OS = runtime.GOOS
 	engine.OK("OK", config, c)
 }
 

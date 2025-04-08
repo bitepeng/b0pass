@@ -19,12 +19,15 @@ import (
 
 // Ping 主电脑连通性测试
 func Ping(c *gin.Context) {
-	engine.OK("OK", true, c)
+	engine.OK("OK", "pong", c)
 }
 
 // ReadConfig 读取配置
 func ReadConfig(c *gin.Context) {
-	engine.OK("OK", config, c)
+	config_ := config
+	//config_.CodeReadOnly = ""
+	//config_.CodeReadWrite = ""
+	engine.OK("OK", config_, c)
 }
 
 // ReadIP 读取配置
@@ -193,7 +196,6 @@ func FileUploadTiny(c *gin.Context) {
 
 // FileUploadBig 大文件上传
 func FileUploadBig(c *gin.Context) {
-
 	RootPath := config.Path
 	f := c.DefaultQuery("f", "/")
 	RootPath = RootPath + f

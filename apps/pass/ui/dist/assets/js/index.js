@@ -9,7 +9,6 @@ var currPath = "/";
 var showType = localStorage.getItem("showType") || 1;
 var showTypes = ["图文","列表"];
 var showMode = "pc";
-var domid = function(id){ return document.getElementById(id); }
 
 /**
  * 初始化布局
@@ -38,6 +37,32 @@ var tableCols = [
   ,{field:'date', title:'修改时间', width: 100, sort: true}
   ,showOpt
 ];
+var fileMenus = function(obj) {
+  if(token && auth=="ro"){
+    return [
+      {title: (obj.data.ext).replace(".",""),id: '-'},
+      {title: obj.data.sizes,id: '-'},
+      {title: obj.data.date,id: '-'},{type:'-'}, 
+      {title: "浏览器打开",id: 'browser'},
+      {title: "扫码",id: 'scan'},
+      {title: "下载",id: 'down'}
+    ]
+  }else{
+    return [
+      {title: (obj.data.ext).replace(".",""),id: '-'},
+      {title: obj.data.sizes,id: '-'},
+      {title: obj.data.date,id: '-'},{type:'-'},
+      {title: "浏览器打开",id: 'browser'},
+      {title: "主电脑打开",id: 'open'},
+      {title: "扫码",id: 'scan'},
+      {title: "下载",id: 'down'},{type:'-'},
+      {title: "重命名",id: 'rename'},
+      {title: '删除',id: 'del'}
+    ]
+  }
+}
+
+
 
 /**
  * 根据浏览器宽度重新定义
@@ -93,50 +118,34 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       }
       // 删除操作
       var NodeDelete=function(obj){
-        $.ajax({
-          url: "/pass/file-list?f="+obj.data.path,
-          method: "get",
-          data: {},
-          success: function(res) {
-            if(res.data){
-              layer.msg("请先删除文件夹下所有文件");
-            }else{
-              layer.confirm('真的要删除吗？', function(index){
-                  obj.del();
-                  $.ajax({
-                    url: "/pass/node-delete?f="+obj.data.path,
-                    method: "get",
-                    data: {},
-                    success: function(res) {
-                      layer.msg(obj.data.path+" 删除完成");
-                    }
-                  });
-                  layer.close(index);
-              });
-            }
-          },
+        api_ajax("/pass/file-list?f="+obj.data.path,"GET",{},function(res){
+          if(res.data){
+            layer.msg("请先删除文件夹下所有文件");
+          }else{
+            layer.confirm('真的要删除吗？', function(index){
+                obj.del();
+                api_ajax("/pass/node-delete?f="+obj.data.path,"GET",{},function(res){
+                  layer.msg(obj.data.path+" 删除完成");
+                });
+                layer.close(index);
+            });
+          }
         });
         return ;
-        
       }
       // 浏览器打开
       var BrowserFile=function(obj){
         layer.msg("打开文件到浏览器");
-        openPage("http://"+servIP+servPort+"/files"+obj.data.path,{});
+        openPage("http://"+servIP+servPort+"/files"+obj.data.path,{"token":token});
       }
       // 主电脑打开
       var OpenFile=function(obj){
-        $.ajax({
-          url: "/pass/cmd-open?f="+obj.data.path,
-          method: "get",
-          data: {},
-          success: function(res) {
+        api_ajax("/pass/cmd-open?f="+obj.data.path,"GET",{},function(res){
             if(res){
               layer.msg(res.msg);
             }else{
               layer.msg("已在主电脑打开目录");
             }
-          }
         });
       }
       // 文件扫码
@@ -179,17 +188,11 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           doc_src=data.field['doc-name-src'];
           doc_name=data.field['doc-name-input'];
           var loading = layer.msg('正在重命名', {icon: 16, shade: 0.3, time:0});
-            $.ajax({
-                url:'/pass/node-rename?f='+currPath+'/'+doc_src+'&n='+currPath+'/'+doc_name,
-                type: 'get',
-                dataType:"json",
-                headers : {'Content-Type' : 'application/json;charset=utf-8'}, 
-                success:function(rs){
-                  layer.close(loading);
-                  if(rs.code!=0){layer.alert(rs.msg);}else{tableRender(currPath);}
-                },
-                error: function(){layer.close(loading);}
-            })
+          api_ajax('/pass/node-rename?f='+currPath+'/'+doc_src+'&n='+currPath+'/'+doc_name,"GET",{},function(res){
+              layer.close(loading);
+              if(rs.code!=0){layer.alert(rs.msg);}else{tableRender(currPath);}
+          },function(){layer.close(loading);}
+          );
           layer.closeAll();
           return false;
       });
@@ -205,19 +208,12 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       }
        //新建目录Do
        form.on('submit(node-add-form)', function(data){
-        doc_add=data.field['doc-add-input'];
-        var loading = layer.msg('正在创建', {icon: 16, shade: 0.3, time:0});
-            $.ajax({
-                url:'/pass/node-add?f='+currPath+"/"+doc_add+"/",
-                type: 'get',
-                dataType:"json",
-                headers : {'Content-Type' : 'application/json;charset=utf-8'}, 
-                success:function(rs){
-                  layer.close(loading);
-                  if(rs.code!=0){layer.alert(rs.msg);}else{tableRender(currPath);}
-                },
-                error: function(){layer.close(loading);}
-            })
+          doc_add=data.field['doc-add-input'];
+          var loading = layer.msg('正在创建', {icon: 16, shade: 0.3, time:0});
+          api_ajax('/pass/node-add?f='+currPath+"/"+doc_add+"/","GET",{},function(res){
+            layer.close(loading);
+            if(rs.code!=0){layer.alert(rs.msg);}else{tableRender(currPath);}
+          },function(){layer.close(loading);});
           layer.closeAll();
           return false;
       });
@@ -238,7 +234,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
                   content: 'detail.html?f='+obj.data.path+"|"+obj.data.type
               });
             }else{
-              openPage("/files"+obj.data.path,{});
+              openPage("/files"+obj.data.path,{"token":token});
             }
           } 
       };
@@ -263,23 +259,18 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       //tree----------------------------------------//
       //tree数据
       var treeRender=function(f){
-          $.ajax({
-            url: "/pass/node-tree?f="+f,
-            method: "get",
-            data: {},
-            success: function(res) {
-                console.log("::treeRender::","/pass/node-tree?f="+f);//,res.data
-                tree.render({
-                    elem: '#tree-left'
-                    ,data: [res.data]
-                    ,accordion: true 
-                    ,isJump: true
-                    ,click: function(obj){
-                        tableRender(obj.data.path);
-                    }
-                });
-            },
-          });
+        api_ajax("/pass/node-tree?f="+f,"GET",{},function(res){
+            console.log("::treeRender::","/pass/node-tree?f="+f);//,res.data
+            tree.render({
+                elem: '#tree-left'
+                ,data: [res.data]
+                ,accordion: true 
+                ,isJump: true
+                ,click: function(obj){
+                    tableRender(obj.data.path);
+                }
+            });
+        });
       }
 
       //table----------------------------------------//
@@ -293,9 +284,11 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           treeRender(currPath);
           $("#crrPath").html(f);
           //data
+          var token = localStorage.getItem('token') || '';
           table.render({
               elem: '#dataTable'
               ,url:'/pass/file-list?f='+f
+              ,headers:{token:token}
               ,height: 'full'
               ,cellMinWidth: 80
               ,initSort: {
@@ -332,18 +325,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
               dropdown.render({
                 elem: that
                 ,show: true //外部事件触发即显示
-                ,data: 
-              [/*{title: '详情',id: 'datail'}, */
-                {title: (obj.data.ext).replace(".",""),id: '-'},
-                {title: obj.data.sizes,id: '-'},
-                {title: obj.data.date,id: '-'},{type:'-'},
-                {title: "浏览器打开",id: 'browser'},
-                {title: "主电脑打开",id: 'open'},
-                {title: "扫码",id: 'scan'},
-                {title: "下载",id: 'down'},{type:'-'},
-                {title: "重命名",id: 'rename'},
-                {title: '删除',id: 'del'}
-              ]
+                ,data:fileMenus(obj)
                 ,click: function(data, othis){
                   //根据 id 做出不同操作
                   if(data.id === 'datail'){     //详情
@@ -412,13 +394,8 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
 
       //打开按钮
       $("#btn_left_dir").on("click",function(){
-        $.ajax({
-          url: "/pass/cmd-open?f="+currPath,
-          method: "get",
-          data: {},
-          success: function(res) {
-            layer.msg("已在主电脑打开目录");
-          }
+        api_ajax("/pass/cmd-open?f="+currPath,"GET",{},function(res){
+          layer.msg("已在主电脑打开目录");
         });
       })
 
@@ -452,39 +429,41 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
         tableRender(currPath);
       }
       
-      $.ajax({
-        url: "/gateway/config",
-        success: function(res) {
-          console.log("::Config::",res.data);
-          //linux操作系统禁用一些功能
-          if(res.data.Password!="windows"){
-            domid("btn_left_dir").style.display="none";
+      api_ajax("/gateway/config","GET",{},function(res){
+        console.log("::Config::",res.data);
+        //linux操作系统禁用一些功能
+        if(res.data.OS!="windows"){
+          domid("btn_left_dir").style.display="none";
+        }
+        ips=(res.data.ListenAddr).split(":");
+        if(ips[0]!=""){
+          if(ips[0]="127.0.0.1"){
+            alert("如果IP被设置为127.0.0.1，意味着只能本机使用，将无法分享文件！\n若无特殊需求，请将配置文件的'ListenAddr'设置为纯端口，如':8899'。");
           }
-          ips=(res.data.ListenAddr).split(":");
-          if(ips[0]!=""){
-            if(ips[0]="127.0.0.1"){
-              alert("如果IP被设置为127.0.0.1，意味着只能本机使用，将无法分享文件！\n若无特殊需求，请将配置文件的'ListenAddr'设置为纯端口，如':8899'。");
-            }
-            servIP=ips[0];
+          servIP=ips[0];
+          console.log("::ServIP::",servIP);
+        }
+        //兼容域名情况
+        if(res.data.Domain!=""){
+          servIP=res.data.Domain;servPort="";
+          console.log("::ServIP::",servIP);
+        }else{
+          api_ajax("/pass/read-ip","GET",{},function(res){
+            servIP=res.data;
             console.log("::ServIP::",servIP);
-          }
-          //兼容域名情况
-          if(res.data.Domain!=""){
-            servIP=res.data.Domain;servPort="";
-            console.log("::ServIP::",servIP);
-          }else{
-            $.ajax({
-              url: "/pass/read-ip",
-              success: function(res) {
-                servIP=res.data;
-                console.log("::ServIP::",servIP);
-              }
-            });
-            servPort=":"+(res.data.ListenAddr).split(":")[1];
-            console.log("::ServPort::",servPort);
-          }
+          });
+          servPort=":"+(res.data.ListenAddr).split(":")[1];
+          console.log("::ServPort::",servPort);
         }
       });
+
+      //ro权限隐藏rw菜单
+      if(token && auth=="ro"){
+        $(".btn_main_new").hide();
+        $("#btn_main_upload").hide();
+        $("#btn_left_dir").hide();
+        $("#btn_left_open").hide(); 
+      }
 
       //----------------------------------------------//
 

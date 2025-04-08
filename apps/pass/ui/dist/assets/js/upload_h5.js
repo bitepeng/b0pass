@@ -16,12 +16,14 @@ layui.use(['upload', 'element'], function(){
     
     
     //多文件列表
+    var token = localStorage.getItem('token') || '';
     $(".layui-upload-list").hide();
     $("#submitAct").hide();
     var uploadListIns = upload.render({
       elem: '#selectFile'
       ,elemList: $('#fileList')
       ,url: '/pass/file-upload?f='+fpath
+      ,headers:{token:token}
       ,accept: 'file'
       ,multiple: true
       ,number: 100

@@ -20,13 +20,13 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label" id="node-add-path">密 码</label>
                           <div class="layui-input-block">
-                            <input type="input" name="doc-add-input" required  lay-verify="required" " autocomplete="off" placeholder="请输入主电脑的配置密码" class="layui-input" style="width:90%;">
+                            <input type="input" id="code" required  lay-verify="required" " autocomplete="off" placeholder="请输入CODE" class="layui-input" style="width:90%;">
                           </div>
                         </div>
                        
                         <div class="layui-form-item">
                           <div class="layui-input-block">
-                            <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="node-add-form">提交确认</button>
+                            <button id="login" type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="node-add-form">提交确认</button>
                           </div>
                         </div>
                     </form>
@@ -36,7 +36,9 @@
         </div>
     </div>
 
-    
+    <script src="assets/lib/layui/layui.js"></script>
+    <script src="assets/js/page.js""></script> 
+    <script src="assets/js/login.js""></script> 
     
 </body>
 </html>

@@ -43,6 +43,20 @@ type MyClaims struct {
 	jwt.StandardClaims
 }
 
+// GenerateToken 生成JWT Token
+func GenerateToken(user string) (string, error) {
+	claims := MyClaims{
+		User: user,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(TokenExpire).Unix(), // 过期时间
+			IssuedAt:  time.Now().Unix(),                  // 签发时间
+			Issuer:    "b0pass",                           // 签发者
+		},
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString(TokenSecret)
+}
+
 // ParseToken 解析JWT
 func ParseToken(tokenString string) (*MyClaims, error) {
 	//解析token
@@ -64,7 +78,7 @@ func ParseToken(tokenString string) (*MyClaims, error) {
 func JWTMiddleware() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// 客户端携带Token方式 1.请求头 2.请求体 3.URI
-		// Token放在Header的xtoken中
+		// Token放在Header的token中
 		authHeader := c.Request.Header.Get("token")
 		if authHeader == "" {
 			c.JSON(http.StatusOK, gin.H{"code": 401, "msg": "请求缺少token信息"})

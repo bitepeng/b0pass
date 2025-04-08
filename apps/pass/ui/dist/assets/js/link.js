@@ -4,12 +4,10 @@ layui.use(['layer'], function(){
 
     function getIP(){
         var servIP;
-        $.ajax({
-            url: "/gateway/config",
-            success: function(res) {
+        api_ajax("/gateway/config","GET",{},function(res){
             console.log("::Config::",res.data);
             //linux操作系统禁用一些功能
-            if(res.data.Password!="windows"){
+            if(res.data.OS!="windows"){
                 domid("btn_send_key").style.display="none";
             }
             ips=(res.data.ListenAddr).split(":");
@@ -27,19 +25,17 @@ layui.use(['layer'], function(){
                 servIP=res.data.Domain;servPort="";
                 setTextValue("http://"+servIP+servPort);
                 console.log("::ServIP::",servIP);
-            }else{
-                $.ajax({
-                url: "/pass/read-ip",
-                success: function(res) {
+            }
+            if(!servIP){
+                api_ajax("/pass/read-ip", "GET", {}, function(res) {
                     servIP=res.data;
                     setTextValue("http://"+servIP+servPort);
                     console.log("::ServIP::",servIP);
-                }
                 });
             }
-            }
-        });
-    }
+
+        })
+    };
 
     window.onload=function () {
         document.getElementById('text').style.display="";
@@ -52,7 +48,10 @@ layui.use(['layer'], function(){
             makeCode();
         }else{
             getIP();
-        }  
+        }
+        if(!localStorage.getItem('token')){
+            $("#btn_logout").hide();
+        }
     };
 
     function args(name) {
@@ -72,15 +71,17 @@ layui.use(['layer'], function(){
         });
     })
     window.sendKey=function(k){
-    $.ajax({
-        url: "/pass/cmd-key?k="+k,
-        method: "get",
-        data: {},
-        success: function(res) {
-        layer.msg("按下"+k+"键");
-        }
-    });
+        api_ajax("/pass/cmd-key?k="+k,"GET",{},function(res){
+            layer.msg("按下"+k+"键");
+        })
     }
+
+    //登录-退出
+    $("#btn_logout").on("click",function(){
+        localStorage.removeItem('token');
+        localStorage.removeItem('auth');
+        window.location.href = '/app/pass/login.html';
+    })
 
  });
  function setTextValue(v){
