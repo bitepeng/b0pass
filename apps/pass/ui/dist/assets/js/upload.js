@@ -102,6 +102,7 @@ layui.use(['upload', 'element', 'layer'], function(){
       }
       ,error: function(index, upload){
           layer.closeAll('loading');
+          layer.msg(index.msg);
           var that = this;
           var tr = that.elemList.find('tr#upload-'+ index)
           ,tds = tr.children();

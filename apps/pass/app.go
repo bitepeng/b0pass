@@ -118,13 +118,17 @@ func cleanPath(p string) string {
 }
 
 // 干净连接路径
-func cleanPathJoin(p, f string) string {
-	p = cleanPath(p)
-	f = cleanPath(f)
-	if strings.HasSuffix(p, "/") {
-		return cleanPath(p + f)
+func cleanPathJoin(root, f string) string {
+	p1 := cleanPath(root)
+	p2 := cleanPath(f)
+	log.Printf("cleanPathJoin-1: %s, %s\n", p1, p2)
+	if strings.HasPrefix(p2, p1+"/") {
+		log.Printf("cleanPathJoin-2: %s, %s\n", p1, p2)
+		return p2
 	}
-	return cleanPath(p + "/" + f)
+	joined := path.Join(p1, p2)
+	log.Printf("cleanPathJoin-3: %s, %s %s\n", p1, p2, cleanPath(joined))
+	return cleanPath(joined)
 }
 
 // 检查路径是否在锁定上传目录内

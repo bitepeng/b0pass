@@ -96,7 +96,7 @@ func Run(configFile string) (err error) {
 			if config.Run != nil {
 				//执行run函数
 				//time.Sleep(10000 * time.Microsecond)
-				go config.Run() //go
+				config.Run() //go
 			}
 		}
 	} else {
