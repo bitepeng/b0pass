@@ -1,40 +1,16 @@
 package app
 
 import (
-	"b0go/apps/pass/lib/chat"
 	"b0go/core/engine"
 	"log"
 	"net/http"
 	"os"
+	"path"
 	"runtime"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 )
-
-// 注册ws路由
-func routeWs() {
-	hub := chat.NewHub()
-	go hub.Run()
-	engine.Gin.GET("/ws", func(c *gin.Context) {
-		chat.ServeWs(hub, c)
-	})
-}
-
-// 释放dll文件
-func putDll() {
-	if runtime.GOOS == "windows" && !config.Live {
-		_, errNow := os.ReadFile("zlib1.dll")
-		if errNow != nil {
-			dll, err := uiFS.ReadFile("ui/dist/dll/zlib1.dll")
-			if err != nil {
-				log.Println("zlib1.dll err:", err)
-			} else {
-				os.WriteFile("zlib1.dll", dll, 0777)
-			}
-		}
-	}
-}
 
 // 获取token/login
 // 权限code: ro, rw
@@ -99,11 +75,11 @@ func JWTMiddleware(mode string) func(c *gin.Context) {
 			// 权限检查
 			user := mc.User
 			if mode == "ro" && !(strings.HasPrefix(user, "ro:") || strings.HasPrefix(user, "rw:")) {
-				c.JSON(http.StatusOK, gin.H{"code": 401, "msg": "只读权限不足"})
+				c.JSON(http.StatusOK, gin.H{"code": 403, "msg": "只读权限不足"})
 				c.Abort()
 				return
 			} else if mode == "rw" && !strings.HasPrefix(user, "rw:") {
-				c.JSON(http.StatusOK, gin.H{"code": 401, "msg": "读写权限不足"})
+				c.JSON(http.StatusOK, gin.H{"code": 403, "msg": "读写权限不足"})
 				c.Abort()
 				return
 			}
@@ -114,4 +90,52 @@ func JWTMiddleware(mode string) func(c *gin.Context) {
 			c.Next()
 		}
 	}
+}
+
+// 释放dll文件
+func putDll() {
+	if runtime.GOOS == "windows" && !config.Live {
+		_, errNow := os.ReadFile("zlib1.dll")
+		if errNow != nil {
+			dll, err := uiFS.ReadFile("ui/dist/dll/zlib1.dll")
+			if err != nil {
+				log.Println("zlib1.dll err:", err)
+			} else {
+				os.WriteFile("zlib1.dll", dll, 0777)
+			}
+		}
+	}
+}
+
+// 干净安全的路径
+func cleanPath(p string) string {
+	p = path.Clean(p)
+	p = strings.ReplaceAll(p, "\\", "/")
+	p = strings.ReplaceAll(p, "..", "")
+	p = strings.ReplaceAll(p, "/./", "/")
+	p = strings.ReplaceAll(p, "//", "/")
+	return p
+}
+
+// 干净连接路径
+func cleanPathJoin(p, f string) string {
+	p = cleanPath(p)
+	f = cleanPath(f)
+	if strings.HasSuffix(p, "/") {
+		return cleanPath(p + f)
+	}
+	return cleanPath(p + "/" + f)
+}
+
+// 检查路径是否在锁定上传目录内
+func checkLockUploadDir(f string, c *gin.Context) bool {
+	RootPath := cleanPath(config.Path)
+	lockUploadDir := cleanPathJoin(RootPath, config.LockUploadDir)
+	if config.LockUploadDir != "" {
+		if !strings.HasPrefix(f, lockUploadDir) {
+			engine.ERR("该目录不能操作", c)
+			return false
+		}
+	}
+	return true
 }

@@ -9,6 +9,7 @@ layui.use(['tree', 'table', 'carousel', 'util'], function(){
           for(var key in param) {
           form += '<input name="'+key+'" value="'+param[key]+'"/>';
           }
+          form += '<input name="token" value="'+token+'"/>';
           form += '</form>';
           $('body').append(form);
           $('#windowOpen').submit();
@@ -73,7 +74,7 @@ layui.use(['tree', 'table', 'carousel', 'util'], function(){
 
     $("#open_blank").on("click",function(){
       //alert("x");
-      openPage("http://"+window.location.host+"/files/"+f+"&token="+token);
+      openPage("http://"+window.location.host+"/files/"+f);
     });
 
 

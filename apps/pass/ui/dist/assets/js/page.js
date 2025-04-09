@@ -39,13 +39,19 @@ var api_ajax = function (url, method, data, success, error) {
         },
         success: function(res) {
             console.log(url,res,token);
-            if (res.code === 401) {
+            if(res.code === 400 || res.code === 403){
+                layer.msg(res.msg,{icon: 5});
+                return;
+            }else if (res.code === 401) {
                 // 401未授权跳转到登录页
+                localStorage.removeItem('token'); // 清除token
+                localStorage.removeItem('auth'); // 清除auth
                 layer.msg("请先登录",{icon: 5});
                 window.location.href = '/app/pass/login.html';
                 return;  
+            }else{
+                success && success(res);
             }
-            success && success(res);
         },
         error: function(xhr) {
             error && error(xhr);

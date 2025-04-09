@@ -124,7 +124,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           }else{
             layer.confirm('真的要删除吗？', function(index){
                 obj.del();
-                api_ajax("/pass/node-delete?f="+obj.data.path,"GET",{},function(res){
+                api_ajax("/pass/node-delete?f="+obj.data.path,"POST",{},function(res){
                   layer.msg(obj.data.path+" 删除完成");
                 });
                 layer.close(index);
@@ -140,7 +140,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       }
       // 主电脑打开
       var OpenFile=function(obj){
-        api_ajax("/pass/cmd-open?f="+obj.data.path,"GET",{},function(res){
+        api_ajax("/pass/cmd-open?f="+obj.data.path,"POST",{},function(res){
             if(res){
               layer.msg(res.msg);
             }else{
@@ -160,7 +160,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       // 下载操作
       var DownLoad=function(obj){
         //openPage("/pass/file-download",{"f":obj.data.path});
-        var url = '/pass/file-download?f='+obj.data.path, fileName = '未知文件';
+        var url = '/pass/file-download?f='+obj.data.path+"&token="+token, fileName = '未知文件';
 	      const a = document.createElement('a');
 	      a.style.display = 'none';
 	      a.setAttribute('target', '_blank');
@@ -188,7 +188,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           doc_src=data.field['doc-name-src'];
           doc_name=data.field['doc-name-input'];
           var loading = layer.msg('正在重命名', {icon: 16, shade: 0.3, time:0});
-          api_ajax('/pass/node-rename?f='+currPath+'/'+doc_src+'&n='+currPath+'/'+doc_name,"GET",{},function(res){
+          api_ajax('/pass/node-rename?f='+currPath+'/'+doc_src+'&n='+currPath+'/'+doc_name,"POST",{},function(rs){
               layer.close(loading);
               if(rs.code!=0){layer.alert(rs.msg);}else{tableRender(currPath);}
           },function(){layer.close(loading);}
@@ -210,7 +210,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
        form.on('submit(node-add-form)', function(data){
           doc_add=data.field['doc-add-input'];
           var loading = layer.msg('正在创建', {icon: 16, shade: 0.3, time:0});
-          api_ajax('/pass/node-add?f='+currPath+"/"+doc_add+"/","GET",{},function(res){
+          api_ajax('/pass/node-add?f='+currPath+"/"+doc_add+"/","POST",{},function(rs){
             layer.close(loading);
             if(rs.code!=0){layer.alert(rs.msg);}else{tableRender(currPath);}
           },function(){layer.close(loading);});
@@ -280,6 +280,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           currPath = f;
           currPath=currPath.replace("//","/");
           currPath=currPath.replace("#","");
+          console.log("::currPath::",currPath);
           updateUrl("f",currPath) 
           treeRender(currPath);
           $("#crrPath").html(f);
@@ -394,7 +395,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
 
       //打开按钮
       $("#btn_left_dir").on("click",function(){
-        api_ajax("/pass/cmd-open?f="+currPath,"GET",{},function(res){
+        api_ajax("/pass/cmd-open?f="+currPath,"POST",{},function(res){
           layer.msg("已在主电脑打开目录");
         });
       })

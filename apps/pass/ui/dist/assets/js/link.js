@@ -49,8 +49,12 @@ layui.use(['layer'], function(){
         }else{
             getIP();
         }
-        if(!localStorage.getItem('token')){
+        if(!token){
             $("#btn_logout").hide();
+        }
+         //ro权限隐藏rw菜单
+        if(token && auth=="ro"){
+            $("#btn_send_key").hide();
         }
     };
 
@@ -71,7 +75,7 @@ layui.use(['layer'], function(){
         });
     })
     window.sendKey=function(k){
-        api_ajax("/pass/cmd-key?k="+k,"GET",{},function(res){
+        api_ajax("/pass/cmd-key?k="+k,"POST",{},function(res){
             layer.msg("按下"+k+"键");
         })
     }

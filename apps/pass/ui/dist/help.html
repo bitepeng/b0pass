@@ -57,10 +57,14 @@
                   <p>注意①：建议不安装到“C:\Program Files (x86)”等目录，否则需“以管理员身份运行”</p>
                   <p>注意②：自定义配置，修改config.ini文件</p>
 <pre>[gateway]
-ListenAddr = ":88"     # 配置IP和端口
-Domain = "test.com:88" # 可选/访问域名
+ListenAddr = ":88"       # 配置IP和端口
+Domain = "test.com:88"   # 可选/访问域名
 [pass]
-Path = "files"         # 文件管理根目录</pre>
+Path = "files"           # 文件管理根目录
+CodeReadOnly = "123"     # 配置只读密码，不配置则不限制
+CodeReadWrite = "admin"  # 配置读写密码，不配置则不限制
+LockUploadDir = "upload" #锁定上传目录，设置后界面上只能上传到此目录
+</pre>
               </div>
               </div>
               
