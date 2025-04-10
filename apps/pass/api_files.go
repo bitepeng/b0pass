@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -43,7 +44,7 @@ func FileList(c *gin.Context) {
 	RootPath := cleanPath(config.Path)
 	f := c.Query("f")
 	t := c.DefaultQuery("t", "")
-	if f == "/" {
+	if f == "/" || !filepath.IsAbs(f) {
 		f = cleanPathJoin(RootPath, f)
 	}
 	listMap := files.GetDirTree(RootPath, f, "", t)
