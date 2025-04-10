@@ -171,7 +171,7 @@ func NodeAdd(c *gin.Context) {
 		return
 	}
 
-	err := files.NodeAdd(f)
+	err := files.NodeAdd(f + "/")
 	if err != nil {
 		engine.ERR(err.Error(), c)
 	}

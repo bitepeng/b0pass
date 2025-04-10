@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="assets/lib/layui/css/layui.css"/>
     <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
-<body>
+<body class="main-bg">
     <div class="main-div layui-layout-admin">
         <div class="div-box">
             <div class="layui-card">
                 <div class="layui-card-header">安全验证</div>
                 <div class="layui-card-body">
                 
-                    <form class="layui-form">
+                    <div class="layui-form">
                         <div class="layui-form-item">
-                          <label class="layui-form-label" id="node-add-path">密 码</label>
+                          <label class="layui-form-label" id="node-add-path">密码</label>
                           <div class="layui-input-block">
                             <input type="input" id="code" required  lay-verify="required" " autocomplete="off" placeholder="请输入CODE" class="layui-input" style="width:90%;">
                           </div>
@@ -29,7 +29,7 @@
                             <button id="login" type="button" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="node-add-form">提交确认</button>
                           </div>
                         </div>
-                    </form>
+                      </div>
 
                 </div>
             </div>

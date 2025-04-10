@@ -36,7 +36,7 @@ layui.use(['tree', 'table', 'carousel', 'util'], function(){
             console.log("imglist::"+key+"|"+res.data[key].path+"|"+f);
             let fpath=res.data[key].path
             fpath=fpath.replace(currPathRoot,"");
-            str+='<div><img src="/files'+fpath+'?token='+token+'" style="max-width:100%;max-height:95vh;" onclick="openPage(\'http://'+window.location.host+'/files'+res.data[key].path+'\')"></div>';
+            str+='<div><img src="/files'+fpath+'?token='+token+'" style="max-width:100%;max-height:95vh;" onclick="openPage(\'http://'+window.location.host+'/files'+fpath+'\')"></div>';
           }
           str+="</div></div>";
           $("#content").html(str);

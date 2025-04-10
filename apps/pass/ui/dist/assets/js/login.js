@@ -46,6 +46,12 @@ layui.use(['layer'], function(){
     domid("login").onclick=function(){
         login(); 
     }
+    //回车登录
+    document.onkeydown = function(e) {
+        if (e && e.key === 'Enter') {
+            domid("login").click();
+        }
+    }
 
     window.onload=function () {
         var token = localStorage.getItem('token') || '';
@@ -55,5 +61,6 @@ layui.use(['layer'], function(){
             }
         },1000);
     };
+    
 
 });
