@@ -5,6 +5,7 @@ import (
 	"b0go/core/engine"
 	"io/fs"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +25,10 @@ func routeStatic(live bool) {
 	})
 	//files静态
 	//engine.Gin.StaticFS("/files", http.Dir(config.Path))
+	//目录不存在则创建
+	if _, err := os.Stat(config.Path); err != nil {
+		os.MkdirAll(config.Path, 0777)
+	}
 	// files静态路由添加JWT校验
 	filesGroup := engine.Gin.Group("/files")
 	filesGroup.Use(JWTMiddleware("ro")) // 使用只读权限校验

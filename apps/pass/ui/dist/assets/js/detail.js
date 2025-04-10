@@ -1,7 +1,8 @@
 layui.use(['tree', 'table', 'carousel', 'util'], function(){
     var layer = layui.layer
     ,carousel = layui.carousel
-    ,$=layui.jquery
+    ,$=layui.jquery;
+    var currPathRoot = "";  
 
     //Func----------------------------------------//
     openPage=function (url, param) {
@@ -32,7 +33,10 @@ layui.use(['tree', 'table', 'carousel', 'util'], function(){
               findex=key;
               //console.log("imglist::"+findex+"|"+res.data[key].path+"|"+f);
             }
-            str+='<div><img src="/files'+res.data[key].path+'?token='+token+'" style="max-width:100%;max-height:95vh;" onclick="openPage(\'http://'+window.location.host+'/files'+res.data[key].path+'\')"></div>';
+            console.log("imglist::"+key+"|"+res.data[key].path+"|"+f);
+            let fpath=res.data[key].path
+            fpath=fpath.replace(currPathRoot,"");
+            str+='<div><img src="/files'+fpath+'?token='+token+'" style="max-width:100%;max-height:95vh;" onclick="openPage(\'http://'+window.location.host+'/files'+res.data[key].path+'\')"></div>';
           }
           str+="</div></div>";
           $("#content").html(str);
@@ -70,6 +74,11 @@ layui.use(['tree', 'table', 'carousel', 'util'], function(){
     if(f!="" && f!='undefined'){
       showFile(f,t);
     }
+
+    api_ajax("/pass/read-config","GET",{},function(res){
+        console.log("::read-config::",res);
+        currPathRoot=res.data.Path;
+    })
 
 
     $("#open_blank").on("click",function(){

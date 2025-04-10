@@ -38,7 +38,7 @@ var api_ajax = function (url, method, data, success, error) {
             'Content-Type' : 'application/json;charset=utf-8'
         },
         success: function(res) {
-            console.log(url,res,token);
+            //console.log(url,res,token);
             if(res.code === 400 || res.code === 403){
                 layer.msg(res.msg,{icon: 5});
                 return;

@@ -6,6 +6,7 @@ var servIP,servPort;
 var areaBig = ['1280px','90%'];
 var areaSmall = ['480px','500px'];
 var currPath = "/";
+var currPathRoot = "/";
 var showType = localStorage.getItem("showType") || 1;
 var showTypes = ["图文","列表"];
 var showMode = "pc";
@@ -136,11 +137,15 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       // 浏览器打开
       var BrowserFile=function(obj){
         layer.msg("打开文件到浏览器");
-        openPage("http://"+servIP+servPort+"/files"+obj.data.path,{"token":token});
+        let fpath=obj.data.path;
+        fpath=fpath.replace(currPathRoot,"/");
+        openPage("http://"+servIP+servPort+"/files"+fpath,{"token":token});
       }
       // 主电脑打开
       var OpenFile=function(obj){
-        api_ajax("/pass/cmd-open?f="+obj.data.path,"POST",{},function(res){
+        let fpath=obj.data.path;
+        fpath=fpath.replace(currPathRoot,"/");
+        api_ajax("/pass/cmd-open?f="+fpath,"POST",{},function(res){
             if(res){
               layer.msg(res.msg);
             }else{
@@ -224,7 +229,9 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
           if(obj.data.type=="dir"){
             tableRender(obj.data.path);
           }else{
-            var type = obj.data.type;
+            let type = obj.data.type;
+            let fpath=obj.data.path;
+            fpath=fpath.replace(currPathRoot,"");
             if(type=="img" || type=="html" || type=="code"){
                 layer.open({
                   title: obj.data.name,
@@ -234,7 +241,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
                   content: 'detail.html?f='+obj.data.path+"|"+obj.data.type
               });
             }else{
-              openPage("/files"+obj.data.path,{"token":token});
+              openPage("/files"+fpath,{"token":token});
             }
           } 
       };
@@ -388,6 +395,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
 
       //浏览
       $("#btn_left_open").on("click",function(){
+        currPath=currPath.replace(currPathRoot,"/");
         layer.msg("打开文件目录到浏览器");
         openPage("/files"+currPath,{});
       })
@@ -395,6 +403,7 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
 
       //打开按钮
       $("#btn_left_dir").on("click",function(){
+        currPath=currPath.replace(currPathRoot,"/");
         api_ajax("/pass/cmd-open?f="+currPath,"POST",{},function(res){
           layer.msg("已在主电脑打开目录");
         });
@@ -423,7 +432,13 @@ layui.use(['tree', 'table','form','dropdown','util'], function(){
       //----------------------------------------------//
 
       //刷新重载页面数据
-      console.log("::currPath::",fpath);
+
+      api_ajax("/pass/read-config","GET",{},function(res){
+          console.log("::read-config::",res);
+          currPathRoot=res.data.Path;
+      })
+
+      console.log("::currPath-reload::",fpath,currPath);
       if(fpath!="" && fpath!=undefined){
         tableRender(decodeURI(fpath));
       }else{

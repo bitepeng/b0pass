@@ -122,7 +122,7 @@ func cleanPathJoin(root, f string) string {
 	p1 := cleanPath(root)
 	p2 := cleanPath(f)
 	log.Printf("cleanPathJoin-1: %s, %s\n", p1, p2)
-	if strings.HasPrefix(p2, p1+"/") {
+	if strings.HasPrefix(p2, p1) {
 		log.Printf("cleanPathJoin-2: %s, %s\n", p1, p2)
 		return p2
 	}

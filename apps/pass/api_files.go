@@ -43,8 +43,10 @@ func FileList(c *gin.Context) {
 	RootPath := cleanPath(config.Path)
 	f := c.Query("f")
 	t := c.DefaultQuery("t", "")
-	//f = cleanPathJoin(RootPath, f)
-	listMap := files.GetDirTree(RootPath, RootPath+f, "", t)
+	if f == "/" {
+		f = cleanPathJoin(RootPath, f)
+	}
+	listMap := files.GetDirTree(RootPath, f, "", t)
 	engine.OK("OK", listMap, c)
 }
 
