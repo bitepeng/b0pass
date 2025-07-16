@@ -205,7 +205,7 @@ func FileUploadTiny(RootPath string, c *gin.Context) {
 	log.Println("FileUploadTiny:::", RootPath)
 	//上传文件
 	file, _ := c.FormFile("file")
-	c.SaveUploadedFile(file, RootPath+file.Filename)
+	c.SaveUploadedFile(file, cleanPathJoin(RootPath, file.Filename))
 	//上传成功
 	engine.OK("上传成功", "", c)
 }
