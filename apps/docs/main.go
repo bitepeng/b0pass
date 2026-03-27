@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -68,7 +69,15 @@ func md(c *gin.Context) {
 	name = strings.ReplaceAll(name, "-", "/")
 	mdpath := strings.Replace(name, ".html", ".md", -1)
 	engine.Printf("name =%s; ext=%s; mdfile =%s", name, ext, "md/"+mdpath)
-	data, err := os.ReadFile("docs/" + mdpath)
+
+	// Prevent path traversal: ensure the resolved path stays under docs/
+	fullPath := filepath.Join("docs", filepath.Clean(mdpath))
+	if !strings.HasPrefix(fullPath, "docs") {
+		c.String(http.StatusBadRequest, "invalid path")
+		return
+	}
+
+	data, err := os.ReadFile(fullPath)
 	if err != nil {
 		engine.Printf("%s", err)
 	}
